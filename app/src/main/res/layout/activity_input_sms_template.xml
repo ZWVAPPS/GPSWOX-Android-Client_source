@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.gpswox.android.InputSmsTemplateActivity"
+    android:background="#ffffff">
+
+    <RelativeLayout
+        android:id="@+id/action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#f1f0f0">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="34dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon_back"
+            android:background="@drawable/whitebutton"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:layout_marginLeft="7dp"
+            android:scaleType="fitCenter"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/action_bar_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/addNewSmsTemplate"
+            android:textColor="#777777"
+            android:layout_toRightOf="@+id/back"
+            android:layout_toEndOf="@+id/back"
+            android:gravity="center"
+            android:layout_marginRight="41dp"/>
+
+    </RelativeLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/title"
+        android:ems="10"
+        android:id="@+id/title"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/darkinput"
+        android:paddingLeft="10dp"
+        android:paddingTop="2dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="2dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/message"
+        android:ems="10"
+        android:id="@+id/message"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/darkinput"
+        android:paddingLeft="10dp"
+        android:paddingTop="2dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="2dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+
+    <Button
+        android:id="@id/addNew"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="@string/add_new"
+        android:background="@drawable/button_green"
+        android:textColor="#ffffff"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"/>
+
+</LinearLayout>

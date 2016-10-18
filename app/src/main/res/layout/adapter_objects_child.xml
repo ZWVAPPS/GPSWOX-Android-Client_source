@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="5dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/shadow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/shadow_top"
+        android:scaleType="fitXY"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#777777"
+            android:button="@drawable/checkbox"
+            android:layout_marginLeft="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/title"
+            android:textColor="#202020"
+            android:layout_alignParentTop="false"
+            android:layout_toRightOf="@+id/onlineImageView"
+            android:layout_toEndOf="@+id/onlineImageView"
+            android:layout_alignBottom="@+id/checkbox"
+            android:layout_alignTop="@+id/checkbox"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/date"
+            android:textColor="#757575"
+            android:layout_below="@+id/onlineImageView"
+            android:layout_alignLeft="@+id/onlineImageView"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/onlineImageView"
+            android:src="@drawable/grey_dot"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/checkbox"
+            android:layout_toEndOf="@+id/checkbox"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:layout_alignBottom="@+id/checkbox"
+            android:layout_alignTop="@+id/checkbox"/>
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:id="@+id/gear"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/gear"
+            android:background="@drawable/grey_round_stroke"
+            android:padding="8dp"
+            android:layout_marginRight="15dp"
+            android:adjustViewBounds="false"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/speed"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/gear"
+            android:layout_toStartOf="@+id/gear"
+            android:layout_alignBottom="@+id/gear"
+            android:background="@drawable/grey_round_rect"
+            android:textColor="#777777"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginRight="5dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:id="@+id/additionalLayout"
+        android:visibility="gone"
+        android:background="@drawable/box_border"
+        android:paddingLeft="40dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="@string/altitude"
+            android:id="@+id/altitude"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="#555555"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/altitudeValue"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/altitude"
+            android:layout_toEndOf="@+id/altitude"
+            android:textColor="#555555"
+            android:layout_marginLeft="40dp"/>
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="@string/protocol"
+            android:id="@+id/protocol"
+            android:layout_below="@id/altitude"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="#555555"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/protocolValue"
+            android:layout_below="@id/altitude"
+            android:layout_toRightOf="@+id/protocol"
+            android:layout_toEndOf="@+id/protocol"
+            android:textColor="#555555"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="@string/driver"
+            android:id="@+id/driver"
+            android:layout_below="@id/protocol"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="#555555"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/driverValue"
+            android:layout_below="@id/protocol"
+            android:layout_toRightOf="@+id/protocol"
+            android:layout_toEndOf="@+id/protocol"
+            android:textColor="#555555"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="@string/position"
+            android:id="@+id/position"
+            android:layout_below="@id/driver"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="#555555"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/positionValue"
+            android:layout_below="@id/driver"
+            android:layout_toRightOf="@+id/position"
+            android:layout_toEndOf="@+id/position"
+            android:textColor="#555555"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"/>
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:id="@+id/info"
+            android:src="@drawable/info_off"
+            android:background="@drawable/grey_round_stroke"
+            android:layout_below="@+id/position"
+            android:layout_marginTop="10dp"
+            android:padding="8dp"/>
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:id="@+id/location"
+            android:src="@drawable/location"
+            android:background="@drawable/grey_round_stroke"
+            android:layout_alignTop="@+id/info"
+            android:layout_toRightOf="@+id/info"
+            android:layout_toEndOf="@+id/info"
+            android:layout_marginLeft="5dp"
+            android:padding="8dp"/>
+    </RelativeLayout>
+</LinearLayout>

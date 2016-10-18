@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gpswox.android.POIActivity">
+
+    <RelativeLayout
+        android:id="@+id/action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#f1f0f0">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="34dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon_back"
+            android:background="@drawable/whitebutton"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:layout_marginLeft="7dp"
+            android:scaleType="fitCenter"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/action_bar_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/poi"
+            android:textColor="#777777"
+            android:layout_toRightOf="@+id/back"
+            android:layout_toEndOf="@+id/back"
+            android:gravity="center"
+            android:layout_marginRight="41dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/action_bar"
+        android:layout_above="@+id/separator"
+        android:background="#ffffff"
+        android:visibility="gone">
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:groupIndicator="@null"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/shadow_bottom"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/loading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/action_bar"
+        android:layout_above="@+id/separator"
+        android:background="#ffffff"
+        android:visibility="gone"
+        android:gravity="center">
+        <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:indeterminate="true"
+            style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/nodata_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/action_bar"
+        android:layout_above="@+id/separator"
+        android:background="#ffffff"
+        android:visibility="gone"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/noPOIData"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/addMarker"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/icon_plus"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:background="@drawable/button_green"
+            android:padding="7dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/addMarker"
+            android:textColor="#007773"
+            android:layout_marginLeft="10dp"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#cecccc"
+        android:layout_above="@id/addMarker"/>
+
+</RelativeLayout>

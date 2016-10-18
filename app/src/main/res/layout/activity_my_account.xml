@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gpswox.android.MyAccountActivity"
+    android:background="#ffffff">
+
+    <RelativeLayout
+        android:id="@+id/action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#f1f0f0">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="34dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon_back"
+            android:background="@drawable/whitebutton"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:layout_marginLeft="7dp"
+            android:scaleType="fitCenter"
+            android:padding="10dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_centerInParent="true">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/toolbar_icon_myaccount"
+                android:layout_marginTop="13dp"
+                android:layout_marginBottom="13dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/myAccount"
+                android:textColor="#777777"
+                android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e1dfdf"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+    <ExpandableListView
+        android:id="@+id/expandable_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/action_bar"
+        android:layout_above="@+id/linearLayout"
+        android:groupIndicator="@null"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:id="@+id/loading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/action_bar"
+        android:layout_above="@+id/linearLayout"
+        android:background="#ffffff"
+        android:visibility="gone"
+        android:gravity="center">
+        <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:indeterminate="true"
+            style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/mapbg"
+        android:src="@drawable/login_mapbg"
+        android:adjustViewBounds="true"
+        android:layout_alignParentBottom="true"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_marginBottom="25dp"
+        android:id="@+id/linearLayout">
+        <ImageView
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/support"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="#000000"
+            android:text="@string/needHelp"
+            android:textStyle="bold"
+            android:textIsSelectable="false"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="#404040"
+            android:text="@string/belowNeedHelp"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"/>
+
+        <Button
+            android:id="@+id/getSupport"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:text="@string/getSupport"
+            android:background="@drawable/button_green"
+            android:textColor="#ffffff"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:layout_marginTop="10dp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

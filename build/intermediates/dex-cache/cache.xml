@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.0.1\b34c1f2d993044656e87f88970b6818e99e886ba\okhttp-3.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="b34c1f2d993044656e87f88970b6818e99e886ba">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\okhttp-3.0.1_68b6866ff1033d9eda8e149a13ce6bc329b15e53\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.google.maps.android\android-maps-utils\0.4.4\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="6f57b76211a1d7b0c1f18873af59faad95664681">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.maps.android-android-maps-utils-0.4.4_7061e4190844c0821c5cafab8c311904d1a68531\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-23.1.1_b90fd856d7acc5c94560b53973c459c02bc011cd\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\.gradle\caches\modules-2\files-2.1\com.mapzen.android\lost\1.0.1\5f807d0be6ca894f6ae0007e884099793b2c8633\lost-1.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="5f807d0be6ca894f6ae0007e884099793b2c8633">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\lost-1.0.1_554fff363737361972cab0ff3cc0490b8099ddd2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\libs\retrofit-1.9.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="a681c044244d9fc375198588297a39ba78028423">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\2\retrofit-1.9.0_25028c2dd0e83dc1fbdeb59bad579b620e94fadc\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.mapbox.mapboxsdk\mapbox-android-sdk\3.1.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="d0fa12efc32d795cea71c66f1def6fccea85338a">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.mapbox.mapboxsdk-mapbox-android-sdk-3.1.0_dde68f27349260b117f8675b803a5f71c3df7b45\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\org.osmdroid\osmdroid-android\5.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="a8bbd365ad0844126f3c3714700fbd888b36cfda">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\org.osmdroid-osmdroid-android-5.1_4d5ce2f744b42ee07aa6f126e2fbb5e8f6871a69\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\libs\gson-2.3.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\2\gson-2.3.1_31f51b7273d9ba7de502fc1139625207081075d1\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\9.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="e711046a40e1562d85854ee09cd0a05254cb6463">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-base-9.0.1_ac7bcaf0d534007ed1092d813640ccc94b6919ea\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\9.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="13270ae22369a0d50cb6c560aeca4056f025cae6">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-tasks-9.0.1_5419fb1c9f85bd5c0922b50ee51c34ddae3ec2a8\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.crashlytics.sdk.android\crashlytics\2.5.2\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="0c7f9fb9a729166c69fa585e01be2fe8fab4f45c">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.crashlytics.sdk.android-crashlytics-2.5.2_d5c11601871588a4fef6c75d63bd413a6f49976e\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="7c07c67e442b24de83118bfc6db070ab58b6d492">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_4e782d6de422b1277f0a01b5f4b8f9e6bdcb3713\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\libs\internal_impl-23.1.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-23.1.1_051443364409bc3d092ba752e14a3475cd231228\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\9.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="e51f4e3317456544915089185a40f4883addbdf1">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-maps-9.0.1_066f15d7571f088d21d01b851d3b6ad716cfa684\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="21e5b6b442c5dbc0a621d93a2b599fa33897614e">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_1053b49a16e85b25fe5064ce640b34f84d35fd1d\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\9.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="a3ebac72ca6befe2e900427505dbb3dd58a5ebbf">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-basement-9.0.1_c6cb2c9e328142e8289751d0de732295ed93023d\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\io.fabric.sdk.android\fabric\1.3.6\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="fc82596d7f7683c8b3a7e5715a2ed5295c586887">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\io.fabric.sdk.android-fabric-1.3.6_5f017c75272401f3b24d01aa3d2240add31b70ab\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\me.zhanghai.android.materialprogressbar\library\1.1.4\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="2a24cba08e1d865a79e61335f5a1bd64d520106d">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\me.zhanghai.android.materialprogressbar-library-1.1.4_3b8fb75ad7af706e61b597f685ecbdc85708247c\classes.dex" />
+    </item>
+    <item
+        jar="D:\Users\plesi\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.1.1\support-annotations-23.1.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-23.1.1_b5e422e594287fda528df94035983e00bc2b714f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.crashlytics.sdk.android\answers\1.3.2\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="e99413cdc93bd7b001d312a4a33d25ac21042f69">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.crashlytics.sdk.android-answers-1.3.2_39220913c03af402cda87d88f2078fc24eb8a4bc\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\osmbonuspack_v5.5\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="1a8331a654948c36111f76f992fd3c1160e21cbe">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\intermediates-exploded-aar-osmbonuspack_v5.5_b329f077c42d8ced8b23f43395afad766f52c800\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-23.1.1_d5a2f4be89e7a643af26d0cc5334955bdd38f6df\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\libs\picasso-2.5.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\2\picasso-2.5.2_2c174079edbfc330954beb08a379451e877ea9a5\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.crashlytics.sdk.android\answers\1.3.2\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="e99413cdc93bd7b001d312a4a33d25ac21042f69">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.crashlytics.sdk.android-answers-1.3.2_39220913c03af402cda87d88f2078fc24eb8a4bc\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Users\plesi\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.1.1\support-annotations-23.1.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-23.1.1_b5e422e594287fda528df94035983e00bc2b714f\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\libs\butterknife-7.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="d5d13ea991eab0252e3710e5df3d6a9d4b21d461">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\2\butterknife-7.0.1_f22ed75022b431d4e552f943954861572d6348b9\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\org.osmdroid\osmdroid-android\5.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="a8bbd365ad0844126f3c3714700fbd888b36cfda">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\org.osmdroid-osmdroid-android-5.1_4d5ce2f744b42ee07aa6f126e2fbb5e8f6871a69\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-23.1.1_b90fd856d7acc5c94560b53973c459c02bc011cd\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\libs\retrofit-1.9.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="a681c044244d9fc375198588297a39ba78028423">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\2\retrofit-1.9.0_25028c2dd0e83dc1fbdeb59bad579b620e94fadc\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.crashlytics.sdk.android\crashlytics\2.5.2\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="0c7f9fb9a729166c69fa585e01be2fe8fab4f45c">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.crashlytics.sdk.android-crashlytics-2.5.2_d5c11601871588a4fef6c75d63bd413a6f49976e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.crashlytics.sdk.android\beta\1.1.3\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="b7a78990c10481f43cb4909f535ef4f11e60f1ab">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.crashlytics.sdk.android-beta-1.1.3_116933df9575a4fb2b7165b12b8f846a99da48e6\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.6.0\98476622f10715998eacf9240d6b479f12c66143\okio-1.6.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="98476622f10715998eacf9240d6b479f12c66143">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\okio-1.6.0_f2679ad1bb384d46026e535249ca76ca5a98e553\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-23.1.1_1d74969db570a6aa534ad02f583bf3a428df4ebb\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\libs\internal_impl-23.1.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-23.1.1_051443364409bc3d092ba752e14a3475cd231228\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\.gradle\caches\modules-2\files-2.1\com.github.PhilJay\MPAndroidChart\v2.1.6\b036abbb61656165da99cf44898e4b9123687e65\MPAndroidChart-v2.1.6.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="b036abbb61656165da99cf44898e4b9123687e65">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\MPAndroidChart-v2.1.6_3e0892bda6ee7e2e29c95df2e56b53de802a560f\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.google.firebase\firebase-common\9.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="ffc3c6fc861f04d45835c9eac5cec10acc180d55">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-common-9.0.1_d93660279aeb04bc873588e2d90b736f37a93772\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.android.support\design\23.1.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-23.1.1_583e8d539b0bdc4f01f914c0014e4c66cb143cd7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\9.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="e51f4e3317456544915089185a40f4883addbdf1">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-maps-9.0.1_066f15d7571f088d21d01b851d3b6ad716cfa684\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="326e3b0562a67190076c70b56bb38b6e0e4c1c53">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_1053b49a16e85b25fe5064ce640b34f84d35fd1d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="39c022aed0bc622b3d1b96d968af3a261c11b0a9">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_4e782d6de422b1277f0a01b5f4b8f9e6bdcb3713\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\9.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="a3ebac72ca6befe2e900427505dbb3dd58a5ebbf">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-basement-9.0.1_c6cb2c9e328142e8289751d0de732295ed93023d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\io.fabric.sdk.android\fabric\1.3.6\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="fc82596d7f7683c8b3a7e5715a2ed5295c586887">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\io.fabric.sdk.android-fabric-1.3.6_5f017c75272401f3b24d01aa3d2240add31b70ab\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\me.zhanghai.android.materialprogressbar\library\1.1.4\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="2a24cba08e1d865a79e61335f5a1bd64d520106d">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\me.zhanghai.android.materialprogressbar-library-1.1.4_3b8fb75ad7af706e61b597f685ecbdc85708247c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.6.0\98476622f10715998eacf9240d6b479f12c66143\okio-1.6.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="98476622f10715998eacf9240d6b479f12c66143">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\okio-1.6.0_f2679ad1bb384d46026e535249ca76ca5a98e553\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.crashlytics.sdk.android\crashlytics-core\2.3.5\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="d18ba1d0eff55680fdf9a35f70a6091e4bc1adcb">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.crashlytics.sdk.android-crashlytics-core-2.3.5_23ff05a6cd4b8b92cb7b34c312dd3d0bef49a920\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\.gradle\caches\modules-2\files-2.1\com.mapzen.android\lost\1.0.1\5f807d0be6ca894f6ae0007e884099793b2c8633\lost-1.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="5f807d0be6ca894f6ae0007e884099793b2c8633">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\lost-1.0.1_554fff363737361972cab0ff3cc0490b8099ddd2\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\osmbonuspack_v5.5\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="1a8331a654948c36111f76f992fd3c1160e21cbe">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\intermediates-exploded-aar-osmbonuspack_v5.5_b329f077c42d8ced8b23f43395afad766f52c800\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.google.maps.android\android-maps-utils\0.4.4\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="6f57b76211a1d7b0c1f18873af59faad95664681">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.maps.android-android-maps-utils-0.4.4_7061e4190844c0821c5cafab8c311904d1a68531\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\libs\gson-2.3.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\2\gson-2.3.1_31f51b7273d9ba7de502fc1139625207081075d1\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.mapbox.mapboxsdk\mapbox-android-sdk\3.1.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="d0fa12efc32d795cea71c66f1def6fccea85338a">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.mapbox.mapboxsdk-mapbox-android-sdk-3.1.0_dde68f27349260b117f8675b803a5f71c3df7b45\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\libs\picasso-2.5.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\2\picasso-2.5.2_2c174079edbfc330954beb08a379451e877ea9a5\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\9.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="e711046a40e1562d85854ee09cd0a05254cb6463">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-base-9.0.1_ac7bcaf0d534007ed1092d813640ccc94b6919ea\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\libs\butterknife-7.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="d5d13ea991eab0252e3710e5df3d6a9d4b21d461">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\2\butterknife-7.0.1_f22ed75022b431d4e552f943954861572d6348b9\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.crashlytics.sdk.android\crashlytics-core\2.3.5\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="d18ba1d0eff55680fdf9a35f70a6091e4bc1adcb">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.crashlytics.sdk.android-crashlytics-core-2.3.5_23ff05a6cd4b8b92cb7b34c312dd3d0bef49a920\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.google.firebase\firebase-common\9.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="ffc3c6fc861f04d45835c9eac5cec10acc180d55">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-common-9.0.1_d93660279aeb04bc873588e2d90b736f37a93772\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.crashlytics.sdk.android\beta\1.1.3\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="b7a78990c10481f43cb4909f535ef4f11e60f1ab">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.crashlytics.sdk.android-beta-1.1.3_116933df9575a4fb2b7165b12b8f846a99da48e6\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-23.1.1_1d74969db570a6aa534ad02f583bf3a428df4ebb\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\.gradle\caches\modules-2\files-2.1\com.github.PhilJay\MPAndroidChart\v2.1.6\b036abbb61656165da99cf44898e4b9123687e65\MPAndroidChart-v2.1.6.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="b036abbb61656165da99cf44898e4b9123687e65">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\MPAndroidChart-v2.1.6_3e0892bda6ee7e2e29c95df2e56b53de802a560f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-23.1.1_d5a2f4be89e7a643af26d0cc5334955bdd38f6df\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.0.1\b34c1f2d993044656e87f88970b6818e99e886ba\okhttp-3.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="b34c1f2d993044656e87f88970b6818e99e886ba">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\okhttp-3.0.1_68b6866ff1033d9eda8e149a13ce6bc329b15e53\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.android.support\design\23.1.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-23.1.1_583e8d539b0bdc4f01f914c0014e4c66cb143cd7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\9.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="13270ae22369a0d50cb6c560aeca4056f025cae6">
+        <dex dex="C:\Users\plesi\AndroidStudioProjects\Gpswox-Android-Client\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-tasks-9.0.1_5419fb1c9f85bd5c0922b50ee51c34ddae3ec2a8\classes.dex" />
+    </item>
+
+</items>

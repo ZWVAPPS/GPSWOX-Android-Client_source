@@ -1,0 +1,126 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="#ffffff">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/mapbg"
+        android:src="@drawable/login_mapbg"
+        android:adjustViewBounds="true"
+        android:layout_alignParentBottom="true"/>
+    <ImageView
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/icon"
+        android:src="@drawable/icon"
+        android:adjustViewBounds="true"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="25dp"/>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="120dp"
+        android:id="@+id/logoimg"
+        android:src="@drawable/logo"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="@string/email"
+        android:ems="10"
+        android:id="@+id/username"
+        android:layout_below="@+id/logoimg"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/darkinput"
+        android:paddingLeft="10dp"
+        android:paddingTop="2dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="2dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:hint="@string/password"
+        android:ems="10"
+        android:id="@+id/password"
+        android:layout_below="@+id/username"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/darkinput"
+        android:paddingLeft="10dp"
+        android:paddingTop="2dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="2dp"/>
+
+    <RelativeLayout
+        android:id="@+id/spinnerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_below="@+id/password"
+        android:layout_marginTop="10dp">
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner"
+            android:background="@drawable/darkinput"
+            android:paddingLeft="10dp"
+            android:paddingTop="2dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="2dp"/>
+        <ImageView
+            android:id="@+id/spinner_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:src="@drawable/spinner_right"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/spinnerLayout"
+        android:weightSum="2"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:enabled="false"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/register"
+            android:id="@+id/register"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_grey"
+            android:textColor="#ffffff"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/signIn"
+            android:id="@+id/signin"
+            android:layout_weight="1"
+            android:background="@drawable/button_green"
+            android:textColor="#ffffff"/>
+    </LinearLayout>
+</RelativeLayout>
+
+
+</RelativeLayout>

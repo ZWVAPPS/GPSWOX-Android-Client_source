@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="com.gpswox.android"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key"/>
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".DashboardActivity">
+        </activity>
+        <activity android:name=".ObjectsActivity">
+        </activity>
+        <activity android:name=".EditObjectActivity">
+        </activity>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="e85e3173f655da3471a78d2149e4da3dd21888db"/>
+
+        <activity android:name=".ObjectInfoActivity">
+        </activity>
+        <activity
+            android:name=".MyAccountActivity"
+            android:label="@string/title_activity_my_account"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity android:name=".ReportsActivity">
+        </activity>
+        <activity android:name=".InputReportActivity">
+        </activity>
+        <activity android:name=".ToolsActivity">
+        </activity>
+        <activity android:name=".AddDeviceActivity">
+        </activity>
+        <activity android:name=".EventsActivity">
+        </activity>
+        <activity android:name=".SetupActivity">
+        </activity>
+        <activity android:name=".MapActivity">
+        </activity>
+        <activity android:name=".ShowPointActivity">
+        </activity>
+        <activity android:name=".InputSmsTemplateActivity">
+        </activity>
+        <activity android:name=".InputGprsTemplateActivity">
+        </activity>
+        <activity android:name=".SendCommandActivity">
+        </activity>
+        <activity android:name=".HistoryActivity">
+        </activity>
+        <activity android:name=".SendTestSmsActivity">
+        </activity>
+        <activity android:name=".AddDriverActivity">
+        </activity>
+        <activity android:name=".AddCustomEventActivity">
+        </activity>
+        <activity android:name=".POIActivity">
+        </activity>
+        <activity android:name=".AddPOIMarkerActivity">
+        </activity>
+        <activity android:name=".RulerActivity">
+        </activity>
+        <activity android:name=".GeofencingActivity">
+        </activity>
+        <activity android:name=".AddGeofenceActivity">
+        </activity>
+        <activity android:name=".AlertsActivity">
+        </activity>
+        <activity
+            android:name=".InputAlertActivity"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity android:name=".HistoryItemCoordDetailsActivity">
+        </activity>
+        <activity android:name=".HistoryItemDetailsActivity">
+        </activity>
+        <activity android:name=".ViewHistoryChartActivity">
+        </activity>
+    </application>
+
+</manifest>
