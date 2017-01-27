@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -13,15 +14,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gpswox.android.adapters.AwesomeAdapter;
+import com.gpswox.android.api.API;
+import com.gpswox.android.api.ApiInterface;
+import com.gpswox.android.models.Device;
 import com.gpswox.android.utils.DataSaver;
+import com.gpswox.android.utils.Lang;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class DashboardActivity extends AppCompatActivity
 {
+    private final String TAG = this.getClass().getSimpleName();
     private class DashboardItem
     {
         public int titleResId;
@@ -116,6 +125,34 @@ public class DashboardActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto",getResources().getString(R.string.support_email), null));
                 startActivity(Intent.createChooser(emailIntent, getString(R.string.sendEmail)));
+            }
+        });
+
+        final String api_key = (String) DataSaver.getInstance(this).load("api_key");
+        API.getApiInterface(this).getDevices(api_key, Lang.getCurrentLanguage(), new Callback<ArrayList<ApiInterface.GetDevicesItem>>()
+        {
+            @Override
+            public void success(final ArrayList<ApiInterface.GetDevicesItem> getDevicesItems, Response response)
+            {
+                Log.d(TAG, "success: loaded devices array");
+                final ArrayList<Device> allDevices = new ArrayList<>();
+                if(getDevicesItems != null)
+                    for(ApiInterface.GetDevicesItem item : getDevicesItems)
+                        allDevices.addAll(item.items);
+                if(allDevices.size() > 0)
+                {
+                    Device device = allDevices.get(0);
+                    DataSaver.getInstance(DashboardActivity.this).save("unit_of_distance_hour", device.distance_unit_hour);
+                    DataSaver.getInstance(DashboardActivity.this).save("unit_of_distance", device.unit_of_distance);
+                    DataSaver.getInstance(DashboardActivity.this).save("unit_of_capacity", device.unit_of_capacity);
+                    DataSaver.getInstance(DashboardActivity.this).save("unit_of_altitude", device.unit_of_altitude);
+                }
+                Log.d(TAG, "success: loaded devices array");
+            }
+            @Override
+            public void failure(RetrofitError retrofitError)
+            {
+                Log.d(TAG, "failure: loaded devices array");
             }
         });
     }

@@ -393,7 +393,9 @@ public class MapActivity extends AppCompatActivity
 
                                         }
                                         final Device device = markerIdDevices.get(marker.getId());
+
                                         View view = getLayoutInflater().inflate(R.layout.layout_map_infowindow, null);
+                                        view.bringToFront();
                                         view.findViewById(R.id.close).setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
@@ -403,13 +405,13 @@ public class MapActivity extends AppCompatActivity
                                         TextView device_name = (TextView) view.findViewById(R.id.device_name);
                                         device_name.setText(device.name);
                                         TextView altitude = (TextView) view.findViewById(R.id.altitude);
-                                        altitude.setText(String.valueOf(device.altitude));
+                                        altitude.setText(String.valueOf(device.altitude) + " " + device.unit_of_altitude);
                                         TextView time = (TextView) view.findViewById(R.id.time);
                                         time.setText(device.time);
                                         TextView stopTimev = (TextView) view.findViewById(R.id.stopTime);
                                         stopTimev.setText(stopTime);
                                         TextView speed = (TextView) view.findViewById(R.id.speed);
-                                        speed.setText(device.speed + " kph");
+                                        speed.setText(device.speed + " " + device.distance_unit_hour);
                                         TextView address = (TextView) view.findViewById(R.id.address);
                                         address.setText(device.address);
 

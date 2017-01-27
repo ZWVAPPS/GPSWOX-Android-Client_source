@@ -250,9 +250,8 @@ public class HistoryActivity extends AppCompatActivity
                             if(getHistoryResult.sensors == null)
                                 getHistoryResult.sensors = new ArrayList<HistorySensor>();
 
-                            getHistoryResult.sensors.add(0, new HistorySensor("speed", "Speed", "kph"));
-                            getHistoryResult.sensors.add(1, new HistorySensor("altitude", "Altitude", "m"));
-
+                            getHistoryResult.sensors.add(0, new HistorySensor("speed", "Speed", " " + DataSaver.getInstance(HistoryActivity.this).load("unit_of_distance_hour")));
+                            getHistoryResult.sensors.add(1, new HistorySensor("altitude", "Altitude", " " + DataSaver.getInstance(HistoryActivity.this).load("unit_of_altitude")));
 
                             historyItemCoords = new ArrayList<>();
                             for (HistoryItem item : getHistoryResult.items)

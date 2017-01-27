@@ -36,7 +36,7 @@ public class MapMarkerInfoWindow extends InfoWindow
         TextView time = (TextView) view.findViewById(R.id.time);
         time.setText(device.time);
         TextView speed = (TextView) view.findViewById(R.id.speed);
-        speed.setText(device.speed + " kph");
+        speed.setText(device.speed + " aaaaa");
         TextView address = (TextView) view.findViewById(R.id.address);
         address.setText(device.address);
 

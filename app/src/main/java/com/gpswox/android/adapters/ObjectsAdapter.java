@@ -107,15 +107,20 @@ public class ObjectsAdapter extends BaseExpandableListAdapter
         convertView = inflater.inflate(R.layout.adapter_objects_child, null);
 
         final Device item = getChild(groupPosition, childPosition);
+
+        DataSaver.getInstance(context).save("unit_of_distance", item.distance_unit_hour);
+        DataSaver.getInstance(context).save("unit_of_capacity", item.unit_of_capacity);
+        DataSaver.getInstance(context).save("unit_of_altitude", item.unit_of_altitude);
+
         TextView title = (TextView) convertView.findViewById(R.id.title);
         title.setText(item.name);
         TextView date = (TextView) convertView.findViewById(R.id.date);
         if(item.timestamp != 0)
             date.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date(item.timestamp * 1000)));
         TextView speed = (TextView) convertView.findViewById(R.id.speed);
-        speed.setText(item.speed + " kph");
+        speed.setText(item.speed + " " + item.distance_unit_hour);
         TextView altitudeValue = (TextView) convertView.findViewById(R.id.altitudeValue);
-        altitudeValue.setText(item.altitude+"m");
+        altitudeValue.setText(item.altitude+ " " + DataSaver.getInstance(context).load("unit_of_altitude"));
         TextView protocolValue = (TextView) convertView.findViewById(R.id.protocolValue);
         protocolValue.setText(item.protocol);
         TextView driverValue = (TextView) convertView.findViewById(R.id.driverValue);

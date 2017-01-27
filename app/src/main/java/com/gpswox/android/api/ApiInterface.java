@@ -27,7 +27,6 @@ import com.gpswox.android.models.HistorySensor;
 import com.gpswox.android.models.MapIcon;
 import com.gpswox.android.models.ObjectGroup;
 import com.gpswox.android.models.POIMarker;
-import com.gpswox.android.models.Permission;
 import com.gpswox.android.models.Report;
 import com.gpswox.android.models.ReportFormat;
 import com.gpswox.android.models.ReportStop;
@@ -47,7 +46,6 @@ import com.gpswox.android.models.UnitOfDistance;
 import com.gpswox.android.models.UserGprsTemplate;
 import com.gpswox.android.models.UserSmsTemplate;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import retrofit.Callback;
@@ -111,7 +109,6 @@ public interface ApiInterface {
         public ArrayList<Timezone> timezones;
         public String error;
     }
-
 
     @FormUrlEncoded
     @POST("/add_device")
@@ -614,12 +611,15 @@ public interface ApiInterface {
     public static class SendGprsCommandResult {
     }
 
+    @FormUrlEncoded
     @POST("/send_sms_command")
-    void sendSmsCommand(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang,
-                        @Query("frequency") int frequency,
-                        @Query("unit") String unit,
-                        @Query("devices") String devices_array,
-                        @Query("message") String message, Callback<SendSmsCommandResult> cb);
+    void sendSmsCommand(@Field("user_api_hash") String user_api_hash,
+                        @Field("lang") String lang,
+                        @Field("frequency") int frequency,
+                        @Field("unit") String unit,
+                        @Field("message") String message,
+                        @Field("devices[]") String devices_array,
+                         Callback<SendSmsCommandResult> cb);
 
     public static class SendSmsCommandResult {
     }

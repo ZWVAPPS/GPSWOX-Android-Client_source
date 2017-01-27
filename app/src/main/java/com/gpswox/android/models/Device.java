@@ -24,6 +24,9 @@ public class Device
     public ArrayList<Service> services;
     public Driver driver_data;
     public String distance_unit_hour;
+    public String unit_of_distance;
+    public String unit_of_altitude;
+    public String unit_of_capacity;
     public ArrayList<TailItem> tail;
 
     public DeviceData device_data;
@@ -67,6 +70,9 @@ public class Device
             this.services.add(new Service(service));
         this.driver_data = new Driver(another.driver_data);
         this.device_data = new DeviceData(another.device_data);
+        this.unit_of_distance = another.unit_of_distance;
+        this.unit_of_altitude = another.unit_of_altitude;
+        this.unit_of_capacity = another.unit_of_capacity;
         this.distance_unit_hour = another.distance_unit_hour;
         this.tail = new ArrayList<>();
         for(TailItem item : another.tail)
