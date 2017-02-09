@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -41,7 +42,8 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class AddGeofenceActivity extends AppCompatActivity {
+public class AddGeofenceActivity extends AppCompatActivity implements OnMapReadyCallback
+{
     private static final String TAG = "AddGeofenceActivity";
     private Integer activeDevices = 0;
     @Bind(R.id.back) View back;
@@ -96,7 +98,9 @@ public class AddGeofenceActivity extends AppCompatActivity {
             }
         });
 
-        map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
         zoom_in.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -255,4 +259,9 @@ public class AddGeofenceActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onMapReady(GoogleMap googleMap)
+    {
+        map = googleMap;
+    }
 }

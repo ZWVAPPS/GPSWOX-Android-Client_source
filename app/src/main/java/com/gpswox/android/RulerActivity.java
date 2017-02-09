@@ -4,15 +4,22 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.gpswox.android.api.API;
@@ -22,15 +29,6 @@ import com.gpswox.android.utils.DataSaver;
 import com.gpswox.android.utils.Lang;
 import com.gpswox.android.utils.Utils;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -39,7 +37,8 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class RulerActivity extends AppCompatActivity {
+public class RulerActivity extends AppCompatActivity implements OnMapReadyCallback
+{
     private static final String TAG = "RulerActivity";
     @Bind(R.id.back) View back;
     @Bind(R.id.distance) TextView distance;
@@ -70,7 +69,9 @@ public class RulerActivity extends AppCompatActivity {
             }
         });
 
-        map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
         zoom_in.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,5 +181,11 @@ public class RulerActivity extends AppCompatActivity {
         int meterConversion = 1609;
 
         return (float) (dist * meterConversion);
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap)
+    {
+        map = googleMap;
     }
 }

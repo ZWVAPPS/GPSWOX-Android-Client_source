@@ -1,7 +1,6 @@
 package com.gpswox.android;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
@@ -9,7 +8,6 @@ import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -18,12 +16,12 @@ import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.gpswox.android.adapters.AwesomeAdapter;
@@ -32,7 +30,6 @@ import com.gpswox.android.models.HistorySensor;
 import com.gpswox.android.models.HistorySensorData;
 import com.gpswox.android.utils.Utils;
 
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -40,7 +37,6 @@ import org.xml.sax.InputSource;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +46,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class HistoryItemCoordDetailsActivity extends AppCompatActivity
+public class HistoryItemCoordDetailsActivity extends AppCompatActivity implements OnMapReadyCallback
 {
     private GoogleMap map;
     @Bind(R.id.back) View back;
@@ -128,7 +124,9 @@ public class HistoryItemCoordDetailsActivity extends AppCompatActivity
             }
         });
 
-        map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
         zoom_in.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -189,5 +187,11 @@ public class HistoryItemCoordDetailsActivity extends AppCompatActivity
                 }
             }
         });
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap)
+    {
+        map = googleMap;
     }
 }

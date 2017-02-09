@@ -32,6 +32,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.YAxisValueFormatter;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -72,7 +73,7 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class HistoryActivity extends AppCompatActivity
+public class HistoryActivity extends AppCompatActivity implements OnMapReadyCallback
 {
     private static final String TAG = "HistoryActivity";
     @Bind(R.id.back) View back;
@@ -123,7 +124,9 @@ public class HistoryActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
         ButterKnife.bind(this);
-        map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -698,5 +701,11 @@ public class HistoryActivity extends AppCompatActivity
                 Log.d(TAG, "onPostExecute: icons downloaded and added to map, total markers: " + items.size());
             }
         }.execute();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap)
+    {
+        map = googleMap;
     }
 }

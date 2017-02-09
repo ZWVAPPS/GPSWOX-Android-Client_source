@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
@@ -42,7 +43,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class HistoryItemDetailsActivity extends AppCompatActivity
+public class HistoryItemDetailsActivity extends AppCompatActivity implements OnMapReadyCallback
 {
     @Bind(R.id.back)
     View back;
@@ -61,7 +62,9 @@ public class HistoryItemDetailsActivity extends AppCompatActivity
         setContentView(R.layout.activity_history_item_coord_details);
         ButterKnife.bind(this);
 
-        map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -213,5 +216,11 @@ public class HistoryItemDetailsActivity extends AppCompatActivity
                 }
             }
         });
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap)
+    {
+        map = googleMap;
     }
 }
