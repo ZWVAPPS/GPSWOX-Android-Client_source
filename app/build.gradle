@@ -20,15 +20,15 @@ repositories {
 
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '23.0.2'
+    compileSdkVersion 24
+    buildToolsVersion '24.0.0'
 
     defaultConfig {
         applicationId "com.gpswox.android"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 42
-        versionName "1.6.10"
+        versionCode 43
+        versionName "1.6.11"
     }
     signingConfigs {
         release {

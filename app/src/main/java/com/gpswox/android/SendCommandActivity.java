@@ -154,7 +154,7 @@ public class SendCommandActivity extends AppCompatActivity
                 }
                 if (groupPosition == 0)
                 {
-                    convertView = getLayoutInflater().inflate(R.layout.adapter_sendcommand_gprs, parent);
+                    convertView = getLayoutInflater().inflate(R.layout.adapter_sendcommand_gprs, parent, false);
                     Spinner device = (Spinner) convertView.findViewById(R.id.device);
                     final ArrayAdapter<SendCommandDevice> deviceAdapter = new ArrayAdapter<>(SendCommandActivity.this, R.layout.spinner_item, data.devices_gprs);
                     device.setAdapter(deviceAdapter);
