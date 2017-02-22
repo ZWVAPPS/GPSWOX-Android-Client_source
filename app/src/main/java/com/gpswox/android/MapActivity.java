@@ -121,7 +121,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        refresh();
 
         autozoom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,7 +176,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     }
                 });
             }
-        }, 0, 1 * 1000);
+        }, 0, 1000);
     }
 
     @Override
@@ -508,6 +507,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap)
     {
         map = googleMap;
+        refresh();
     }
 
     /*private void updateSmallMarkerData(ArrayList<Device> allDevices)
