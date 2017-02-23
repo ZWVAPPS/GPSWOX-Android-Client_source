@@ -116,7 +116,7 @@
                 android:id="@+id/autozoom"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/autozoom_disabled"
+                android:src="@drawable/autozoom_enabled"
                 android:layout_marginTop="5dp"/>
         </LinearLayout>
 

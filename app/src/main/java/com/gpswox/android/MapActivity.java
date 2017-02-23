@@ -8,6 +8,7 @@ import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -59,18 +60,27 @@ import retrofit.client.Response;
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 {
     private static final String TAG = "MapActivity";
-    @Bind(R.id.back) View back;
-    @Bind(R.id.zoom_in) View zoom_in;
-    @Bind(R.id.zoom_out) View zoom_out;
-    @Bind(R.id.updatetimer) TextView updatetimer;
-    @Bind(R.id.autozoom) ImageView autozoom;
-    @Bind(R.id.showtails) ImageView showtails;
+    @Bind(R.id.back)
+    View back;
+    @Bind(R.id.zoom_in)
+    View zoom_in;
+    @Bind(R.id.zoom_out)
+    View zoom_out;
+    @Bind(R.id.updatetimer)
+    TextView updatetimer;
+    @Bind(R.id.autozoom)
+    ImageView autozoom;
+    @Bind(R.id.showtails)
+    ImageView showtails;
     //@Bind(R.id.map) MapView map;
     private GoogleMap map;
 
-    @Bind(R.id.content_layout) View content_layout;
-    @Bind(R.id.loading_layout) View loading_layout;
-    @Bind(R.id.nodata_layout) View nodata_layout;
+    @Bind(R.id.content_layout)
+    View content_layout;
+    @Bind(R.id.loading_layout)
+    View loading_layout;
+    @Bind(R.id.nodata_layout)
+    View nodata_layout;
     private Timer timer;
     private int autoZoomedTimes = 0;// dėl bugo osmdroid library, zoom'inam du kartus ir paskui po refresh'o nebe, nes greičiausiai user'is bus pakeitęs zoom'ą
 
@@ -78,14 +88,16 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private HashMap<String, Device> markerIdDevices;
     private HashMap<Integer, Polyline> deviceIdPolyline;
     private HashMap<Integer, LatLng> deviceIdLastLatLng;
-//    private HashMap<Integer, Marker> deviceIdSmallMarkerInfo;
+    //    private HashMap<Integer, Marker> deviceIdSmallMarkerInfo;
     private long lastRefreshTime;
-    boolean isAutoZoomEnabled;
+    boolean isAutoZoomEnabled = true;
     boolean isShowTitlesEnabled;
     boolean isShowTailsEnabled = true;
     private String stopTime;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         ButterKnife.bind(this);
@@ -93,24 +105,30 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         markerIdDevices = new HashMap<>();
         deviceIdPolyline = new HashMap<>();
         deviceIdLastLatLng = new HashMap<>();
-//        deviceIdSmallMarkerInfo = new HashMap<>();
+        //        deviceIdSmallMarkerInfo = new HashMap<>();
 
-        back.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 onBackPressed();
             }
         });
 
-        zoom_in.setOnClickListener(new View.OnClickListener() {
+        zoom_in.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 map.animateCamera(CameraUpdateFactory.zoomIn());
             }
         });
-        zoom_out.setOnClickListener(new View.OnClickListener() {
+        zoom_out.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 map.animateCamera(CameraUpdateFactory.zoomOut());
             }
         });
@@ -122,33 +140,39 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        autozoom.setOnClickListener(new View.OnClickListener() {
+        autozoom.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 isAutoZoomEnabled = !isAutoZoomEnabled;
-                if(isAutoZoomEnabled) {
+                if (isAutoZoomEnabled)
+                {
                     autozoom.setImageResource(R.drawable.autozoom_enabled);
                     Toast.makeText(MapActivity.this, R.string.autozoom_enabled, Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else
+                {
                     autozoom.setImageResource(R.drawable.autozoom_disabled);
                     Toast.makeText(MapActivity.this, R.string.autozoom_disabled, Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        showtails.setOnClickListener(new View.OnClickListener() {
+        showtails.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 isShowTailsEnabled = !isShowTailsEnabled;
-                if(isShowTailsEnabled) {
+                if (isShowTailsEnabled)
+                {
                     showtails.setImageResource(R.drawable.tail_active);
-                    for(Polyline polyline : deviceIdPolyline.values())
+                    for (Polyline polyline : deviceIdPolyline.values())
                         polyline.setVisible(true);
-                }
-                else {
+                } else
+                {
                     showtails.setImageResource(R.drawable.tail_inactive);
-                    for(Polyline polyline : deviceIdPolyline.values())
+                    for (Polyline polyline : deviceIdPolyline.values())
                         polyline.setVisible(false);
                 }
             }
@@ -157,21 +181,25 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
         timer = new Timer();
-        timer.schedule(new TimerTask() {
+        timer.schedule(new TimerTask()
+        {
             @Override
             public void run()
             {
-                runOnUiThread(new Runnable() {
+                runOnUiThread(new Runnable()
+                {
                     @Override
-                    public void run() {
+                    public void run()
+                    {
                         float timeleft = 10 - Math.round(System.currentTimeMillis() - lastRefreshTime) / 1000f;
-                        if(timeleft < 0)
+                        if (timeleft < 0)
                             timeleft = 0;
                         updatetimer.setText(String.format("%.0f", timeleft));
-                        if(System.currentTimeMillis() - lastRefreshTime >= 10 * 1000)
+                        if (System.currentTimeMillis() - lastRefreshTime >= 10 * 1000)
                             refresh();
                     }
                 });
@@ -180,55 +208,67 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     @Override
-    protected void onPause() {
+    protected void onPause()
+    {
         super.onPause();
-        try {
+        try
+        {
             timer.cancel();
             timer.purge();
-        } catch(Exception e) { e.printStackTrace(); }
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     private void refresh()
     {
         lastRefreshTime = System.currentTimeMillis();
         final String api_key = (String) DataSaver.getInstance(this).load("api_key");
-        API.getApiInterface(this).getDevices(api_key, Lang.getCurrentLanguage(), new Callback<ArrayList<ApiInterface.GetDevicesItem>>() {
+        API.getApiInterface(this).getDevices(api_key, Lang.getCurrentLanguage(), new Callback<ArrayList<ApiInterface.GetDevicesItem>>()
+        {
             @Override
             public void success(final ArrayList<ApiInterface.GetDevicesItem> getDevicesItems, Response response)
             {
                 Log.d(TAG, "success: loaded devices array");
                 final ArrayList<Device> allDevices = new ArrayList<>();
-                if(getDevicesItems != null)
-                    for(ApiInterface.GetDevicesItem item : getDevicesItems)
+                if (getDevicesItems != null)
+                    for (ApiInterface.GetDevicesItem item : getDevicesItems)
                         allDevices.addAll(item.items);
-                API.getApiInterface(MapActivity.this).getFieldsDataForEditing(api_key, Lang.getCurrentLanguage(), 1, new Callback<ApiInterface.GetFieldsDataForEditingResult>() {
+                API.getApiInterface(MapActivity.this).getFieldsDataForEditing(api_key, Lang.getCurrentLanguage(), 1, new Callback<ApiInterface.GetFieldsDataForEditingResult>()
+                {
                     @Override
                     public void success(final ApiInterface.GetFieldsDataForEditingResult getFieldsDataForEditingResult, Response response)
                     {
                         Log.d(TAG, "success: loaded icons");
-                        new AsyncTask<Void, Void, Void>() {
+                        new AsyncTask<Void, Void, Void>()
+                        {
                             ArrayList<MarkerOptions> markers;
                             ArrayList<Integer> deviceIds;
+
                             @Override
-                            protected Void doInBackground(Void... params) {
+                            protected Void doInBackground(Void... params)
+                            {
                                 // add markers
                                 int dp100 = Utils.dpToPx(MapActivity.this, 50);
                                 markers = new ArrayList<>();
                                 deviceIds = new ArrayList<>();
-                                if(getFieldsDataForEditingResult == null || getFieldsDataForEditingResult.device_icons == null) return null;
-                                for(Device item : allDevices)
+                                if (getFieldsDataForEditingResult == null || getFieldsDataForEditingResult.device_icons == null)
+                                    return null;
+                                for (Device item : allDevices)
                                 {
-                                    if(item.device_data.active == 1)
+                                    if (item.device_data.active == 1)
                                     {
                                         // ieškom ikonos masyve
                                         DeviceIcon mapIcon = null;
-                                        for(DeviceIcon icon : getFieldsDataForEditingResult.device_icons)
-                                            if(item.device_data.icon_id == icon.id)
+                                        for (DeviceIcon icon : getFieldsDataForEditingResult.device_icons)
+                                            if (item.device_data.icon_id == icon.id)
                                                 mapIcon = icon;
 
                                         String server_base = (String) DataSaver.getInstance(MapActivity.this).load("server_base");
 
-                                        try {
+                                        try
+                                        {
                                             Log.d("MapActivity", "DOWNLOADING BITMAP: " + server_base + mapIcon.path);
                                             Bitmap bmp = BitmapFactory.decodeStream(new URL(server_base + mapIcon.path).openConnection().getInputStream());
 
@@ -248,17 +288,18 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                                             MarkerOptions m = new MarkerOptions();
                                             m.position(new LatLng(item.lat, item.lng));
-//                                            marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-//                                            marker.setIcon(new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bmp, dstWidth, dstHeight, true)));
+                                            //                                            marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+                                            //                                            marker.setIcon(new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bmp, dstWidth, dstHeight, true)));
                                             m.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(bmp, dstWidth, dstHeight, true)));
 
                                             // info window
-//                                            MapMarkerInfoWindow infoWindow = new MapMarkerInfoWindow(MapActivity.this, item, R.layout.layout_map_infowindow, map);
-//                                            marker.setInfoWindow(infoWindow);
+                                            //                                            MapMarkerInfoWindow infoWindow = new MapMarkerInfoWindow(MapActivity.this, item, R.layout.layout_map_infowindow, map);
+                                            //                                            marker.setInfoWindow(infoWindow);
 
                                             markers.add(m);
                                             deviceIds.add(item.id);
-                                        } catch(Exception e) {
+                                        } catch (Exception e)
+                                        {
                                             e.printStackTrace();
                                         }
                                     }
@@ -267,31 +308,38 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                             }
 
                             @Override
-                            protected void onPostExecute(Void aVoid) {
+                            protected void onPostExecute(Void aVoid)
+                            {
                                 ArrayList<GeoPoint> points = new ArrayList<>();
 
-                                if(autoZoomedTimes < 1)
+                                if (autoZoomedTimes < 1)
                                 {
-                                    new Handler().postDelayed(new Runnable() {
+                                    new Handler().postDelayed(new Runnable()
+                                    {
                                         @Override
-                                        public void run() {
-                                            runOnUiThread(new Runnable() {
+                                        public void run()
+                                        {
+                                            runOnUiThread(new Runnable()
+                                            {
                                                 @Override
-                                                public void run() {
-                                                    if(markers.size() > 1) {
-                                                        try {
+                                                public void run()
+                                                {
+                                                    if (markers.size() > 1)
+                                                    {
+                                                        try
+                                                        {
                                                             LatLngBounds.Builder builder = new LatLngBounds.Builder();
                                                             for (MarkerOptions item : markers)
                                                                 builder.include(item.getPosition());
                                                             LatLngBounds bounds = builder.build();
-//                                int padding = 0; // offset from edges of the map in pixels
+                                                            //                                int padding = 0; // offset from edges of the map in pixels
                                                             CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, Utils.dpToPx(MapActivity.this, 50));
                                                             map.animateCamera(cu);
-                                                        } catch (Exception e) {
+                                                        } catch (Exception e)
+                                                        {
 
                                                         }
-                                                    }
-                                                    else if(markers.size() > 0)
+                                                    } else if (markers.size() > 0)
                                                     {
                                                         map.moveCamera(CameraUpdateFactory.newLatLngZoom(markers.get(0).getPosition(), 15));
                                                     }
@@ -300,22 +348,24 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                             });
                                         }
                                     }, 50);
-                                }
-                                else if(isAutoZoomEnabled) {
-                                    if(markers.size() > 1) {
-                                        try {
+                                } else if (isAutoZoomEnabled)
+                                {
+                                    if (markers.size() > 1)
+                                    {
+                                        try
+                                        {
                                             LatLngBounds.Builder builder = new LatLngBounds.Builder();
                                             for (MarkerOptions item : markers)
                                                 builder.include(item.getPosition());
                                             LatLngBounds bounds = builder.build();
-//                                int padding = 0; // offset from edges of the map in pixels
+                                            //                                int padding = 0; // offset from edges of the map in pixels
                                             CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, Utils.dpToPx(MapActivity.this, 50));
                                             map.animateCamera(cu);
-                                        } catch (Exception e) {
+                                        } catch (Exception e)
+                                        {
 
                                         }
-                                    }
-                                    else if(markers.size() > 0)
+                                    } else if (markers.size() > 0)
                                     {
                                         map.moveCamera(CameraUpdateFactory.newLatLngZoom(markers.get(0).getPosition(), 15));
                                     }
@@ -325,12 +375,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                 Log.d(TAG, "onPostExecute: icons downloaded and added to map, total markers: " + markers.size());
 
                                 loading_layout.setVisibility(View.GONE);
-                                if(markers.size() != 0)
+                                if (markers.size() != 0)
                                     content_layout.setVisibility(View.VISIBLE);
                                 else
                                     nodata_layout.setVisibility(View.VISIBLE);
 
-                                for(int i = 0; i < markers.size(); i++)
+                                for (int i = 0; i < markers.size(); i++)
                                 {
                                     MarkerOptions options = markers.get(i);
                                     int deviceId = deviceIds.get(i);
@@ -338,14 +388,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                     Marker m;
 
                                     Polyline polyline;
-                                    if(deviceIdMarkers.containsKey(deviceId)) {
+                                    if (deviceIdMarkers.containsKey(deviceId))
+                                    {
                                         Log.d("aa", "moving to" + options.getPosition());
                                         deviceIdMarkers.get(deviceId).setPosition(new LatLng(options.getPosition().latitude, options.getPosition().longitude));
                                         m = deviceIdMarkers.get(deviceId);
 
                                         polyline = deviceIdPolyline.get(deviceId);
-                                    }
-                                    else
+                                    } else
                                     {
                                         Log.d("aa", "putting new");
                                         m = map.addMarker(options);
@@ -355,14 +405,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                     }
 
                                     Device thatonedevice = null;
-                                    for(Device device : allDevices)
-                                        if(device.id == deviceId)
+                                    for (Device device : allDevices)
+                                        if (device.id == deviceId)
                                             thatonedevice = device;
                                     markerIdDevices.put(m.getId(), thatonedevice);
 
 
                                     // update marker rotation based on driving direction
-                                    if(thatonedevice != null && deviceIdLastLatLng.containsKey(deviceId))
+                                    if (thatonedevice != null && deviceIdLastLatLng.containsKey(deviceId))
                                     {
                                         double dirLat = thatonedevice.lat - deviceIdLastLatLng.get(deviceId).latitude;
                                         double dirLng = thatonedevice.lng - deviceIdLastLatLng.get(deviceId).longitude;
@@ -372,7 +422,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                     deviceIdLastLatLng.put(deviceId, new LatLng(thatonedevice.lat, thatonedevice.lng));
 
                                     List<LatLng> polylinePoints = new ArrayList<>();
-                                    for(TailItem item : thatonedevice.tail)
+                                    for (TailItem item : thatonedevice.tail)
                                         polylinePoints.add(new LatLng(Double.valueOf(item.lat), Double.valueOf(item.lng)));
                                     polyline.setPoints(polylinePoints);
                                     polyline.setWidth(Utils.dpToPx(MapActivity.this, 2));
@@ -382,25 +432,30 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                                 // else
 
-                                map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                                map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter()
+                                {
                                     @Override
-                                    public View getInfoWindow(Marker marker) {
+                                    public View getInfoWindow(Marker marker)
+                                    {
                                         return null;
                                     }
 
                                     @Override
                                     public View getInfoContents(final Marker marker)
                                     {
-                                        synchronized (this) {
+                                        synchronized (this)
+                                        {
 
                                         }
                                         final Device device = markerIdDevices.get(marker.getId());
 
                                         View view = getLayoutInflater().inflate(R.layout.layout_map_infowindow, null);
                                         view.bringToFront();
-                                        view.findViewById(R.id.close).setOnClickListener(new View.OnClickListener() {
+                                        view.findViewById(R.id.close).setOnClickListener(new View.OnClickListener()
+                                        {
                                             @Override
-                                            public void onClick(View v) {
+                                            public void onClick(View v)
+                                            {
                                                 marker.hideInfoWindow();
                                             }
                                         });
@@ -418,21 +473,24 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                         address.setText(device.address);
 
                                         final ArrayList<Sensor> showableSensors = new ArrayList<>();
-                                        for(Sensor item : device.sensors)
-                                            if(item.show_in_popup > 0)
+                                        for (Sensor item : device.sensors)
+                                            if (item.show_in_popup > 0)
                                                 showableSensors.add(item);
 
                                         ListView sensors_list = (ListView) view.findViewById(R.id.sensors_list);
                                         sensors_list.setAdapter(new AwesomeAdapter<Sensor>(MapActivity.this)
                                         {
                                             @Override
-                                            public int getCount() {
+                                            public int getCount()
+                                            {
                                                 return showableSensors.size();
                                             }
 
+                                            @NonNull
                                             @Override
-                                            public View getView(int position, View convertView, ViewGroup parent) {
-                                                if(convertView == null)
+                                            public View getView(int position, View convertView, @NonNull ViewGroup parent)
+                                            {
+                                                if (convertView == null)
                                                     convertView = getLayoutInflater().inflate(R.layout.adapter_map_sensorslist, null);
 
                                                 Sensor item = showableSensors.get(position);
@@ -445,20 +503,26 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                         });
 
                                         List<Address> addresses;
-                                        try {
+                                        try
+                                        {
                                             addresses = new Geocoder(MapActivity.this).getFromLocation(device.lat, device.lng, 1);
                                             if (addresses.size() > 0)
                                                 address.setText(addresses.get(0).getAddressLine(0));
-                                        } catch (IOException e) {
+                                        } catch (IOException e)
+                                        {
                                             e.printStackTrace();
                                         }
 
                                         return view;
                                     }
                                 });
-                                map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                                map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener()
+                                {
                                     @Override
-                                    public boolean onMarkerClick(final Marker marker) {
+                                    public boolean onMarkerClick(final Marker marker)
+                                    {
+                                        int px = Utils.dpToPx(MapActivity.this, 300);
+                                        map.setPadding(0, px, 0, 0);
                                         stopTime = "...";
                                         final Device device = markerIdDevices.get(marker.getId());
                                         API.getApiInterface(MapActivity.this).deviceStopTime((String) DataSaver.getInstance(MapActivity.this).load("api_key"), "en", device.id, new Callback<ApiInterface.DeviceStopTimeResult>()
@@ -471,33 +535,49 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                             }
 
                                             @Override
-                                            public void failure(RetrofitError retrofitError) {}
+                                            public void failure(RetrofitError retrofitError)
+                                            {
+                                                Toast.makeText(MapActivity.this, R.string.errorHappened, Toast.LENGTH_SHORT).show();
+                                            }
                                         });
 
                                         return false;
                                     }
                                 });
-                                map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                                map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener()
+                                {
                                     @Override
-                                    public void onInfoWindowClick(Marker marker) {
+                                    public void onInfoWindowClick(Marker marker)
+                                    {
                                         marker.hideInfoWindow();
                                     }
                                 });
 
-//                                updateSmallMarkerData(allDevices);
+                                map.setOnInfoWindowCloseListener(new GoogleMap.OnInfoWindowCloseListener()
+                                {
+                                    @Override
+                                    public void onInfoWindowClose(Marker marker)
+                                    {
+                                        map.setPadding(0, 0, 0, 0);
+                                    }
+                                });
+
+                                //                                updateSmallMarkerData(allDevices);
                             }
                         }.execute();
                     }
 
                     @Override
-                    public void failure(RetrofitError retrofitError) {
+                    public void failure(RetrofitError retrofitError)
+                    {
                         Toast.makeText(MapActivity.this, R.string.errorHappened, Toast.LENGTH_SHORT).show();
                     }
                 });
             }
 
             @Override
-            public void failure(RetrofitError retrofitError) {
+            public void failure(RetrofitError retrofitError)
+            {
                 Toast.makeText(MapActivity.this, R.string.errorHappened, Toast.LENGTH_SHORT).show();
             }
         });
