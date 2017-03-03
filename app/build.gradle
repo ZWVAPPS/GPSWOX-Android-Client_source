@@ -26,8 +26,8 @@ android {
         applicationId "com.gpswox.android"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 44
-        versionName "1.6.11"
+        versionCode 45
+        versionName "1.6.12"
     }
     signingConfigs {
         release {
@@ -39,7 +39,6 @@ android {
     }
     buildTypes {
         release {
-            debuggable true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
