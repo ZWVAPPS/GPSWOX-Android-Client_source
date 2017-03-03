@@ -146,7 +146,7 @@ public class AddGeofenceActivity extends AppCompatActivity implements OnMapReady
                 List<LatLng> points = polygon != null ? polygon.getPoints() : null;
                 if (points == null)
                     Toast.makeText(AddGeofenceActivity.this, R.string.noPolygonData, Toast.LENGTH_SHORT).show();
-                if (points.size() < 4)
+                else if (points.size() < 4)
                     Toast.makeText(AddGeofenceActivity.this, R.string.polygonIsntClosed, Toast.LENGTH_SHORT).show();
                 else if (name.getText().toString().equals(""))
                     Toast.makeText(AddGeofenceActivity.this, R.string.nameMustBeSet, Toast.LENGTH_SHORT).show();

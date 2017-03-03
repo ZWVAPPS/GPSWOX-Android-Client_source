@@ -2,7 +2,11 @@ package com.gpswox.android;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
@@ -28,6 +32,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polygon;
+import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.gpswox.android.adapters.AwesomeAdapter;
@@ -35,12 +41,15 @@ import com.gpswox.android.api.API;
 import com.gpswox.android.api.ApiInterface;
 import com.gpswox.android.models.Device;
 import com.gpswox.android.models.DeviceIcon;
+import com.gpswox.android.models.Geofence;
 import com.gpswox.android.models.Sensor;
 import com.gpswox.android.models.TailItem;
 import com.gpswox.android.utils.DataSaver;
 import com.gpswox.android.utils.Lang;
 import com.gpswox.android.utils.Utils;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.osmdroid.util.GeoPoint;
 
 import java.io.IOException;
@@ -50,12 +59,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+
+import static android.graphics.Paint.FontMetrics;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 {
@@ -94,6 +107,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     boolean isShowTitlesEnabled;
     boolean isShowTailsEnabled = true;
     private String stopTime;
+
+    ApiInterface.GetGeofencesResult geofencesResult;
+    List<Polygon> polygons = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -136,10 +152,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         loading_layout.setVisibility(View.VISIBLE);
         content_layout.setVisibility(View.GONE);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-
         autozoom.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -177,8 +189,59 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 }
             }
         });
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
     }
 
+    private void decomposeGeofenceCoordinates()
+    {
+        for (int i = 0; i < geofencesResult.items.geofences.size(); i++)
+        {
+            if (geofencesResult.items.geofences.get(i).active == 1)
+            {
+                String coordinatesJSON = geofencesResult.items.geofences.get(i).coordinates;
+                List<LatLng> coordinatesList = new ArrayList<>();
+                List<String> coordsListJSON = new ArrayList<String>();
+                try
+                {
+                    JSONArray jsonArray = new JSONArray(coordinatesJSON);
+                    for (int j = 0; j < jsonArray.length(); j++)
+                    {
+                        coordsListJSON.add(jsonArray.getString(j));
+                    }
+                    //Log.d("coordsListget0", coordsListJSON.get(0));
+                } catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
+
+                Log.d("coordinates", coordinatesJSON);
+                for (String item : coordsListJSON)
+                {
+                    double lat = 0;
+                    double lng = 0;
+                    Pattern pattern = Pattern.compile("[+-]?\\d*\\.?\\d+");
+                    Matcher matcher = pattern.matcher(item);
+                    int matcherCount = 0;
+                    while (matcher.find())
+                    {
+                        if (matcherCount == 0)
+                        {
+                            lng = Double.parseDouble(matcher.group());
+                            matcherCount = 1;
+                        } else
+                        {
+                            lat = Double.parseDouble(matcher.group());
+                        }
+                    }
+                    coordinatesList.add(new LatLng(lat, lng));
+                    geofencesResult.items.geofences.get(i).coordinatesList = coordinatesList;
+                }
+            }
+        }
+    }
 
     @Override
     protected void onResume()
@@ -588,8 +651,89 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     {
         map = googleMap;
         refresh();
+        Polygon polygon = map.addPolygon(new PolygonOptions()
+                .add(new LatLng(0, 0), new LatLng(0, 5), new LatLng(3, 5), new LatLng(0, 0))
+                .strokeColor(Color.RED)
+                .fillColor(Color.BLUE));
+
+        API.getApiInterface(this).getGeofences((String) DataSaver.getInstance(this).load("api_key"), Lang.getCurrentLanguage(), new Callback<ApiInterface.GetGeofencesResult>()
+        {
+            @Override
+            public void success(ApiInterface.GetGeofencesResult getGeofencesResult, Response response)
+            {
+                geofencesResult = getGeofencesResult;
+                decomposeGeofenceCoordinates();
+                for (Geofence geofence : geofencesResult.items.geofences)
+                {
+                    if (geofence.active == 1)
+                    {
+                        polygons.add(map.addPolygon(new PolygonOptions()
+                                .addAll(geofence.coordinatesList)
+                                .strokeColor(Color.parseColor(geofence.polygon_color))
+                                .fillColor(Color.parseColor("#59" + geofence.polygon_color.substring(1))))
+                        );
+                     /*text*/
+                        String strText = geofence.name;
+
+                        FontMetrics fm = new FontMetrics();
+                        Paint paintText = new Paint();
+                        paintText.setColor(Color.parseColor(geofence.polygon_color));
+                        paintText.setTextAlign(Paint.Align.CENTER);
+                        paintText.setTextSize(25);
+                        paintText.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+                        paintText.getFontMetrics(fm);
+
+                        Rect rectText = new Rect();
+                        paintText.getTextBounds(strText, 0, strText.length(),
+                                rectText);
+                        Bitmap.Config conf = Bitmap.Config.ARGB_8888;
+                        Bitmap bmpText = Bitmap.createBitmap(rectText.width(),
+                                rectText.height(), conf);
+                        Canvas canvas = new Canvas(bmpText);
+                        canvas.drawText(strText, canvas.getWidth() / 2,
+                                canvas.getHeight() - rectText.bottom, paintText);
+                        MarkerOptions markerOptions = new MarkerOptions()
+                                .position(centroid(geofence.coordinatesList))
+                                .icon(BitmapDescriptorFactory.fromBitmap(bmpText))
+                                .anchor(0.5f, 1);
+                        map.addMarker(markerOptions);
+                    /*text*/
+                    }
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError retrofitError)
+            {
+                if (retrofitError.getResponse().getStatus() == 403)
+                {
+                    Toast.makeText(MapActivity.this, R.string.dontHavePermission, Toast.LENGTH_SHORT).show();
+                } else
+                {
+                    Toast.makeText(MapActivity.this, retrofitError.getResponse().getStatus(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 
+
+    private LatLng centroid(List<LatLng> points)
+    {
+        double[] centroid = {0.0, 0.0};
+
+        for (int i = 0; i < points.size(); i++)
+        {
+            centroid[0] += points.get(i).latitude;
+            centroid[1] += points.get(i).longitude;
+        }
+
+        int totalPoints = points.size();
+        centroid[0] = centroid[0] / totalPoints;
+        centroid[1] = centroid[1] / totalPoints;
+
+        return new LatLng(centroid[0], centroid[1]);
+    }
     /*private void updateSmallMarkerData(ArrayList<Device> allDevices)
     {
         for(Device device : allDevices)

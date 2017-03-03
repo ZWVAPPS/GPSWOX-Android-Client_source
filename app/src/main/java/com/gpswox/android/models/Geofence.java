@@ -1,5 +1,9 @@
 package com.gpswox.android.models;
 
+import com.google.android.gms.maps.model.LatLng;
+
+import java.util.List;
+
 /**
  * Created by gintas on 05/12/15.
  */
@@ -9,4 +13,5 @@ public class Geofence
     public String name;
     public String coordinates;
     public String polygon_color;
+    public List<LatLng> coordinatesList;
 }
