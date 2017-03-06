@@ -222,20 +222,16 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 {
                     double lat = 0;
                     double lng = 0;
-                    Pattern pattern = Pattern.compile("[+-]?\\d*\\.?\\d+");
-                    Matcher matcher = pattern.matcher(item);
-                    int matcherCount = 0;
-                    while (matcher.find())
-                    {
-                        if (matcherCount == 0)
-                        {
-                            lng = Double.parseDouble(matcher.group());
-                            matcherCount = 1;
-                        } else
-                        {
-                            lat = Double.parseDouble(matcher.group());
-                        }
-                    }
+                    Pattern patternLat = Pattern.compile("(?:(?!\"lat\":).)\"lat\":([+-]?\\d*\\.?\\d+)");
+                    Pattern patternLng = Pattern.compile("(?:(?!\"lng\":).)\"lng\":([+-]?\\d*\\.?\\d+)");
+
+                    Matcher matcherLat = patternLat.matcher(item);
+                    Matcher matcherLng = patternLng.matcher(item);
+                    while (matcherLat.find())
+                    lat = Double.parseDouble(matcherLat.group(1));
+                    while (matcherLng.find())
+                    lng = Double.parseDouble(matcherLng.group(1));
+
                     coordinatesList.add(new LatLng(lat, lng));
                     geofencesResult.items.geofences.get(i).coordinatesList = coordinatesList;
                 }
@@ -651,10 +647,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     {
         map = googleMap;
         refresh();
-        Polygon polygon = map.addPolygon(new PolygonOptions()
-                .add(new LatLng(0, 0), new LatLng(0, 5), new LatLng(3, 5), new LatLng(0, 0))
-                .strokeColor(Color.RED)
-                .fillColor(Color.BLUE));
 
         API.getApiInterface(this).getGeofences((String) DataSaver.getInstance(this).load("api_key"), Lang.getCurrentLanguage(), new Callback<ApiInterface.GetGeofencesResult>()
         {
@@ -679,7 +671,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         Paint paintText = new Paint();
                         paintText.setColor(Color.parseColor(geofence.polygon_color));
                         paintText.setTextAlign(Paint.Align.CENTER);
-                        paintText.setTextSize(25);
+                        paintText.setTextSize(getResources().getDimension(R.dimen.text_size));
                         paintText.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
                         paintText.getFontMetrics(fm);
 
