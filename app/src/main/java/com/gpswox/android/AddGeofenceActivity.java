@@ -77,6 +77,7 @@ public class AddGeofenceActivity extends AppCompatActivity implements OnMapReady
     private Polygon polygon;
     private boolean clickedOnFirstMarker = false;
     private Marker marker;
+    LatLngBounds mapBounds = null;
     final ArrayList<Device> allDevices = new ArrayList<>();
 
     @Override
@@ -259,7 +260,7 @@ public class AddGeofenceActivity extends AppCompatActivity implements OnMapReady
                             for (ApiInterface.GetDevicesItem item : getDevicesItems)
                                 allDevices.addAll(item.items);
 
-                        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                        /*LatLngBounds.Builder builder = new LatLngBounds.Builder();
                         for (Device item : allDevices)
                         {
                             if (item.device_data.active == 1)
@@ -269,7 +270,17 @@ public class AddGeofenceActivity extends AppCompatActivity implements OnMapReady
                             }
                         }
 
-                        final LatLngBounds bounds = builder.build();
+                        final LatLngBounds bounds = builder.build();*/
+
+                        for (Device item : allDevices) {
+                            if (mapBounds==null) {
+                                LatLng point = new LatLng(item.lat, item.lng);
+                                mapBounds =new LatLngBounds(point, point);
+                            } else {
+                                mapBounds = mapBounds.including(new LatLng(item.lat, item.lng));
+                            }
+                        }
+
                         map.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback()
                         {
                             @Override
@@ -277,10 +288,10 @@ public class AddGeofenceActivity extends AppCompatActivity implements OnMapReady
                             {
                                 if (activeDevices > 1)
                                 {
-                                    map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, Utils.dpToPx(AddGeofenceActivity.this, 50)));
+                                    map.moveCamera(CameraUpdateFactory.newLatLngBounds(mapBounds, Utils.dpToPx(AddGeofenceActivity.this, 50)));
                                 } else
                                 {
-                                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(bounds.getCenter(), 10));
+                                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(mapBounds.getCenter(), 10));
                                 }
                                 map.setOnCameraChangeListener(null);
                             }

@@ -316,7 +316,11 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
                         public void failure(RetrofitError retrofitError) {
                             loading_layout.setVisibility(View.GONE);
                             Log.d(TAG, "get history failure: " + retrofitError.getMessage());
-                            if (retrofitError.getResponse().getStatus() == 403) {
+                            if(retrofitError.getKind() == RetrofitError.Kind.UNEXPECTED)
+                            {
+                                Toast.makeText(HistoryActivity.this, R.string.tooMuchData, Toast.LENGTH_LONG).show();
+                            }
+                            else if (retrofitError.getResponse().getStatus() == 403) {
                                 Toast.makeText(HistoryActivity.this, R.string.dontHavePermission, Toast.LENGTH_SHORT).show();
                             }
                             else {

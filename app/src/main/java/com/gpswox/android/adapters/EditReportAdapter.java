@@ -26,6 +26,8 @@ import com.gpswox.android.models.ReportFormat;
 import com.gpswox.android.models.ReportStop;
 import com.gpswox.android.models.ReportType;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 
 /**
@@ -145,6 +147,7 @@ public class EditReportAdapter extends BaseExpandableListAdapter
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if(StringUtils.isNotEmpty(s))
                     report.speed_limit = Integer.valueOf(s.toString());
                 }
             });

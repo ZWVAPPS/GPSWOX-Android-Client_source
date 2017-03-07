@@ -38,6 +38,8 @@ import com.gpswox.android.utils.DataSaver;
 import com.gpswox.android.utils.Lang;
 import com.gpswox.android.utils.Utils;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -297,11 +299,19 @@ public class InputAlertActivity extends AppCompatActivity
                     convertView.findViewById(R.id.add).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            AlertSavedGeofence item = new AlertSavedGeofence();
-                            item.id = ((AlertGeofence) geofence_name.getSelectedItem()).id;
-                            item.zone = ((AlertZone) zone_name.getSelectedItem()).id;
-                            alert.geofences.add(item);
-                            geofencesApdater.add(item);
+                            if(geofencesAdapter.getCount() > 0)
+                            {
+                                AlertSavedGeofence item = new AlertSavedGeofence();
+                                item.id = ((AlertGeofence) geofence_name.getSelectedItem()).id;
+                                item.zone = ((AlertZone) zone_name.getSelectedItem()).id;
+                                alert.geofences.add(item);
+                                geofencesApdater.add(item);
+                            }
+                            else
+                            {
+                                Toast.makeText(InputAlertActivity.this, R.string.noGeofencingData, Toast.LENGTH_SHORT).show();
+                            }
+
                         }
                     });
                 }
@@ -316,6 +326,7 @@ public class InputAlertActivity extends AppCompatActivity
                         @Override
                         public void onTextChanged(CharSequence s, int start, int before, int count)
                         {
+                            if(StringUtils.isNotEmpty(s))
                             alert.overspeed_speed = Integer.valueOf(s.toString());
                         }
                     });
