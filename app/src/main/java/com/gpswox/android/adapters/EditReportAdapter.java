@@ -3,6 +3,7 @@ package com.gpswox.android.adapters;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.github.jjobes.slidedatetimepicker.SlideDateTimeListener;
+import com.github.jjobes.slidedatetimepicker.SlideDateTimePicker;
 import com.gpswox.android.R;
 import com.gpswox.android.api.ApiInterface;
 import com.gpswox.android.models.Device;
@@ -28,7 +31,11 @@ import com.gpswox.android.models.ReportType;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by gintas on 08/10/15.
@@ -169,6 +176,75 @@ public class EditReportAdapter extends BaseExpandableListAdapter
                 if(reportType.id == report.type)
                     type.setSelection(i);
             }
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.HOUR_OF_DAY, 0);
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
+            final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+            // from
+
+            report.dateFrom = dateFormat.format(calendar.getTime());
+            final TextView fromDateTextView = (TextView) convertView.findViewById(R.id.dateFrom);
+            fromDateTextView.setText(dateFormat.format(calendar.getTime()));
+            fromDateTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v)
+                {
+                    try {
+                        new SlideDateTimePicker.Builder(((AppCompatActivity)context).getSupportFragmentManager())
+                                .setListener(new SlideDateTimeListener() {
+                                    @Override
+                                    public void onDateTimeSet(Date date)
+                                    {
+                                        fromDateTextView.setText(dateFormat.format(date));
+                                        report.dateFrom = fromDateTextView.getText().toString();
+                                    }
+                                })
+                                .setInitialDate(dateFormat.parse(fromDateTextView.getText().toString()))
+                                .setIs24HourTime(true)
+                                .build()
+                                .show();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            // to
+
+            final TextView toDateTextView = (TextView) convertView.findViewById(R.id.dateTo);
+            calendar.set(Calendar.HOUR_OF_DAY, 23);
+            calendar.set(Calendar.MINUTE, 45);
+            calendar.set(Calendar.SECOND, 0);
+            report.dateTo = dateFormat.format(calendar.getTime());
+
+            toDateTextView.setText(dateFormat.format(calendar.getTime()));
+            toDateTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v)
+                {
+                    try {
+                        new SlideDateTimePicker.Builder(((AppCompatActivity)context).getSupportFragmentManager())
+                                .setListener(new SlideDateTimeListener() {
+                                    @Override
+                                    public void onDateTimeSet(Date date)
+                                    {
+                                        toDateTextView.setText(dateFormat.format(date));
+                                        report.dateTo = toDateTextView.getText().toString();
+                                    }
+                                })
+                                .setInitialDate(dateFormat.parse(toDateTextView.getText().toString()))
+                                .setIs24HourTime(true)
+                                .build()
+                                .show();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
 
             // format
             final Spinner format = (Spinner) convertView.findViewById(R.id.formatSpinner);

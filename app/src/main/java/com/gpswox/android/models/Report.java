@@ -9,7 +9,7 @@ public class Report
 {
     public int id, user_id, type, show_addresses, stops;
     public String title, email;
-    public String format;
+    public String format, dateFrom, dateTo;
     public int daily, weekly, zones_instead;
     public int speed_limit;
     public ArrayList<Integer> devices;

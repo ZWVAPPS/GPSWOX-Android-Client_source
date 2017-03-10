@@ -558,6 +558,7 @@ public class InputAlertActivity extends AppCompatActivity
             @Override
             public void failure(RetrofitError retrofitError)
             {
+                Toast.makeText(InputAlertActivity.this, R.string.errorHappened, Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -55,6 +55,8 @@ public class HistoryItemDetailsActivity extends AppCompatActivity implements OnM
     @Bind(R.id.zoom_in) View zoom_in;
     @Bind(R.id.zoom_out) View zoom_out;
     GoogleMap map;
+    HistoryItem item;
+    ArrayList<HistoryItemClass> historyItemClasses;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -76,8 +78,8 @@ public class HistoryItemDetailsActivity extends AppCompatActivity implements OnM
         listview.setVisibility(View.VISIBLE);
         map_layout.setVisibility(View.GONE);
 
-        HistoryItem item = new Gson().fromJson(getIntent().getStringExtra("item"), HistoryItem.class);
-        ArrayList<HistoryItemClass> historyItemClasses = new Gson().fromJson(getIntent().getStringExtra("historyItemClasses"), new TypeToken<ArrayList<HistoryItemClass>>(){}.getType());
+        item = new Gson().fromJson(getIntent().getStringExtra("item"), HistoryItem.class);
+        historyItemClasses = new Gson().fromJson(getIntent().getStringExtra("historyItemClasses"), new TypeToken<ArrayList<HistoryItemClass>>(){}.getType());
         ArrayList<HistoryItemImage> historyItemImages = new Gson().fromJson(getIntent().getStringExtra("historyItemImages"), new TypeToken<ArrayList<HistoryItemImage>>(){}.getType());
 
         ArrayList<Pair> array = new ArrayList<>();
@@ -144,6 +146,34 @@ public class HistoryItemDetailsActivity extends AppCompatActivity implements OnM
             }
         });
 
+        bottomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(listview.getVisibility() == View.VISIBLE)
+                {
+                    listview.setVisibility(View.GONE);
+                    map_layout.setVisibility(View.VISIBLE);
+                    bottomButton.setText(R.string.viewDetails);
+                }
+                else
+                {
+                    listview.setVisibility(View.VISIBLE);
+                    map_layout.setVisibility(View.GONE);
+                    bottomButton.setText(R.string.viewMap);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap)
+    {
+        map = googleMap;
+        setUpMap();
+    }
+
+    private void setUpMap()
+    {
         zoom_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -198,29 +228,5 @@ public class HistoryItemDetailsActivity extends AppCompatActivity implements OnM
                 }, 100);
             }
         }
-
-        bottomButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(listview.getVisibility() == View.VISIBLE)
-                {
-                    listview.setVisibility(View.GONE);
-                    map_layout.setVisibility(View.VISIBLE);
-                    bottomButton.setText(R.string.viewDetails);
-                }
-                else
-                {
-                    listview.setVisibility(View.VISIBLE);
-                    map_layout.setVisibility(View.GONE);
-                    bottomButton.setText(R.string.viewMap);
-                }
-            }
-        });
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap)
-    {
-        map = googleMap;
     }
 }

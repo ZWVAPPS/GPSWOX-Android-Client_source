@@ -106,7 +106,7 @@ public class InputReportActivity extends AppCompatActivity {
                     String geofences_array = new Gson().toJson(report.geofences);
                     API.getApiInterface(InputReportActivity.this).saveEditedReport((String) DataSaver.getInstance(InputReportActivity.this).load("api_key"), Lang.getCurrentLanguage(),
                             report.id,
-                            report.title, report.type, report.format, report.stops, report.speed_limit, devices_array, geofences_array, report.daily, report.weekly, report.email, new Callback<ApiInterface.SaveEditedReportResult>() {
+                            report.title, report.type, report.dateFrom, report.dateTo, report.format, report.stops, report.speed_limit, devices_array, geofences_array, report.daily, report.weekly, report.email, new Callback<ApiInterface.SaveEditedReportResult>() {
                                 @Override
                                 public void success(ApiInterface.SaveEditedReportResult saveEditedReportResult, Response response) {
                                     Toast.makeText(InputReportActivity.this, R.string.reportSaved, Toast.LENGTH_SHORT).show();
@@ -124,7 +124,7 @@ public class InputReportActivity extends AppCompatActivity {
                     String devices_array = new Gson().toJson(report.devices);
                     String geofences_array = new Gson().toJson(report.geofences);
                     API.getApiInterface(InputReportActivity.this).addNewReport((String) DataSaver.getInstance(InputReportActivity.this).load("api_key"), Lang.getCurrentLanguage(),
-                            report.title, report.type, report.format, report.stops, report.speed_limit, devices_array, geofences_array, report.daily, report.weekly, report.email, new Callback<ApiInterface.AddNewReportResult>() {
+                            report.title, report.type, report.dateFrom, report.dateTo, report.format, report.stops, report.speed_limit, devices_array, geofences_array, report.daily, report.weekly, report.email, new Callback<ApiInterface.AddNewReportResult>() {
                                 @Override
                                 public void success(ApiInterface.AddNewReportResult addNewReportResult, Response response) {
                                     Toast.makeText(InputReportActivity.this, R.string.newReportAdded, Toast.LENGTH_SHORT).show();

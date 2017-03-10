@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="#ffffff"
+              android:orientation="vertical"
               android:paddingBottom="10dp">
 
     <ImageView
@@ -16,165 +16,229 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/title"
             android:background="@drawable/preference_name"
             android:gravity="center"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp"/>
+            android:paddingRight="10dp"
+            android:text="@string/title"/>
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="textEmailAddress"
-            android:ems="10"
             android:id="@+id/titleEditText"
-            android:background="@drawable/preference_right"
-            android:textColor="#666666"
-            android:textSize="14sp"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/type"
-            android:background="@drawable/preference_name"
-            android:gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"/>
-
-        <Spinner
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="textEmailAddress"
-            android:ems="10"
-            android:id="@+id/typeSpinner"
             android:background="@drawable/preference_right"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/format"
-            android:background="@drawable/preference_name"
-            android:gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"/>
-
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="textEmailAddress"
             android:ems="10"
-            android:id="@+id/formatSpinner"
-            android:background="@drawable/preference_right"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/stops"
-            android:background="@drawable/preference_name"
-            android:gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"/>
-
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:inputType="textEmailAddress"
-            android:ems="10"
-            android:id="@+id/stopsSpinner"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:background="@drawable/preference_right"/>
+            android:textColor="#666666"
+            android:textSize="14sp"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Speed limit(kph)"
             android:background="@drawable/preference_name"
             android:gravity="center"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp"/>
+            android:paddingRight="10dp"
+            android:text="@string/type"/>
+
+        <Spinner
+            android:id="@+id/typeSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/preference_right"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"/>
+    </LinearLayout>
+
+    <!-- date from to-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/preference_name"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/From"/>
+
+        <TextView
+            android:id="@+id/dateFrom"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/preference_right"
+            android:ems="10"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/preference_name"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/to"/>
+
+        <TextView
+            android:id="@+id/dateTo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/preference_right"
+            android:ems="10"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"/>
+    </LinearLayout>
+    <!-- date from to-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/preference_name"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/format"/>
+
+        <Spinner
+            android:id="@+id/formatSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/preference_right"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/preference_name"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/stops"/>
+
+        <Spinner
+            android:id="@+id/stopsSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/preference_right"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/preference_name"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="Speed limit(kph)"/>
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ems="10"
             android:id="@+id/speedLimitEditText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="@drawable/preference_right"
+            android:ems="10"
             android:inputType="number"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:textColor="#666666"
-            android:textSize="14sp"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"/>
+            android:textSize="14sp"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/devices"
             android:background="@drawable/preference_name"
             android:gravity="center"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp"/>
+            android:paddingRight="10dp"
+            android:text="@string/devices"/>
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ems="10"
             android:id="@+id/devicesTextView"
-            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="@drawable/preference_right"
+            android:ems="10"
+            android:gravity="center_vertical"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"/>
     </LinearLayout>
@@ -182,26 +246,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/geofences"
             android:background="@drawable/preference_name"
             android:gravity="center"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp"/>
+            android:paddingRight="10dp"
+            android:text="@string/geofences"/>
 
         <TextView
+            android:id="@+id/geofencesTextView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:ems="10"
-            android:id="@+id/geofencesTextView"
-            android:gravity="center_vertical"
             android:background="@drawable/preference_right"
+            android:ems="10"
+            android:gravity="center_vertical"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"/>
     </LinearLayout>
