@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -40,6 +41,9 @@ import com.gpswox.android.utils.Utils;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -47,6 +51,7 @@ import butterknife.ButterKnife;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import retrofit.mime.TypedInput;
 
 public class InputAlertActivity extends AppCompatActivity
 {
@@ -547,12 +552,31 @@ public class InputAlertActivity extends AppCompatActivity
     {
         if(eventIdSpinner.getAdapter() != null)
             ((ArrayAdapter<CustomEventByProtocol>)eventIdSpinner.getAdapter()).clear();
-        API.getApiInterface(this).getEventsByProtocolForDropdown((String) DataSaver.getInstance(this).load("api_key"), Lang.getCurrentLanguage(), type, protocol, new Callback<ArrayList<CustomEventByProtocol>>() {
+        API.getApiInterface(this).getEventsByProtocolForDropdown((String) DataSaver.getInstance(this).load("api_key"), Lang.getCurrentLanguage(), type, protocol, new Callback<ApiInterface.CustomEventsByProtocol>() {
             @Override
-            public void success(ArrayList<CustomEventByProtocol> array, Response response)
+            public void success(ApiInterface.CustomEventsByProtocol array, Response response)
             {
-                ArrayAdapter<CustomEventByProtocol> eventIdAdapter = new ArrayAdapter<>(InputAlertActivity.this, R.layout.spinner_item, array);
-                eventIdSpinner.setAdapter(eventIdAdapter);
+                Log.d("getEventsByProtocol Res", response.getBody().toString());
+                /*ArrayAdapter<CustomEventByProtocol> eventIdAdapter = new ArrayAdapter<>(InputAlertActivity.this, R.layout.spinner_item, array);
+                eventIdSpinner.setAdapter(eventIdAdapter);*/
+                // todo
+                TypedInput body = response.getBody();
+                try {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(body.in()));
+                    StringBuilder out = new StringBuilder();
+                    String newLine = System.getProperty("line.separator");
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        out.append(line);
+                        out.append(newLine);
+                    }
+
+                    // Prints the correct String representation of body.
+                    System.out.println(out);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
 
             @Override

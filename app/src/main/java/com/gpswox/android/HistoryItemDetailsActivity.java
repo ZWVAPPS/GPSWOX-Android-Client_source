@@ -204,7 +204,7 @@ public class HistoryItemDetailsActivity extends AppCompatActivity implements OnM
             if(item.getHint(historyItemClasses).equals("Driving")) {
                 PolylineOptions polylineOptions = new PolylineOptions();
                 polylineOptions.color(Color.parseColor("#819afc"));
-                polylineOptions.width(Utils.dpToPx(HistoryItemDetailsActivity.this, 1));
+                polylineOptions.width(Utils.dpToPx(HistoryItemDetailsActivity.this, 3));
 
                 final LatLngBounds.Builder builder = new LatLngBounds.Builder();
                 for (HistoryItemCoord coord : item.items)

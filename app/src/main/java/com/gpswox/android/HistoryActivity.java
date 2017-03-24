@@ -55,7 +55,6 @@ import com.gpswox.android.utils.Utils;
 import com.squareup.picasso.Picasso;
 
 import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.overlay.PathOverlay;
 
 import java.net.URL;
 import java.text.ParseException;
@@ -76,36 +75,58 @@ import retrofit.client.Response;
 public class HistoryActivity extends AppCompatActivity implements OnMapReadyCallback
 {
     private static final String TAG = "HistoryActivity";
-    @Bind(R.id.back) View back;
-    @Bind(R.id.search) View search;
-    @Bind(R.id.searchLayout) View search_layout;
-    @Bind(R.id.startSearch) View startSearch;
+    @Bind(R.id.back)
+    View back;
+    @Bind(R.id.search)
+    View search;
+    @Bind(R.id.searchLayout)
+    View search_layout;
+    @Bind(R.id.startSearch)
+    View startSearch;
 
-    @Bind(R.id.deviceSpinner) Spinner deviceSpinner;
-    @Bind(R.id.fromDateTextView) TextView fromDateTextView;
-    @Bind(R.id.toDateTextView) TextView toDateTextView;
+    @Bind(R.id.deviceSpinner)
+    Spinner deviceSpinner;
+    @Bind(R.id.fromDateTextView)
+    TextView fromDateTextView;
+    @Bind(R.id.toDateTextView)
+    TextView toDateTextView;
 
     // list layout'as
-    @Bind(R.id.list_layout) View list_layout;
-    @Bind(R.id.list_layout_list) ListView list_layout_list;
-    @Bind(R.id.list_layout_map) View list_layout_map;
-    @Bind(R.id.list_layout_statistics) View list_layout_statistics;
+    @Bind(R.id.list_layout)
+    View list_layout;
+    @Bind(R.id.list_layout_list)
+    ListView list_layout_list;
+    @Bind(R.id.list_layout_map)
+    View list_layout_map;
+    @Bind(R.id.list_layout_statistics)
+    View list_layout_statistics;
 
     // map layoutas
-    @Bind(R.id.map_layout) View map_layout;
-    @Bind(R.id.zoom_in) View zoom_in;
-    @Bind(R.id.zoom_out) View zoom_out;
-    @Bind(R.id.list_layout_historylog) View list_layout_historylog;
-    @Bind(R.id.list_layout_statistics2) View list_layout_statistics2;
+    @Bind(R.id.map_layout)
+    View map_layout;
+    @Bind(R.id.zoom_in)
+    View zoom_in;
+    @Bind(R.id.zoom_out)
+    View zoom_out;
+    @Bind(R.id.list_layout_historylog)
+    View list_layout_historylog;
+    @Bind(R.id.list_layout_statistics2)
+    View list_layout_statistics2;
 
     // stats layout'as
-    @Bind(R.id.stats_layout) View stats_layout;
-    @Bind(R.id.stats_layout_list) ExpandableListView stats_list;
-    @Bind(R.id.list_layout_map2) View list_layout_map2;
-    @Bind(R.id.list_layout_historylog2) View list_layout_historylog2;
+    @Bind(R.id.stats_layout)
+    View stats_layout;
+    @Bind(R.id.stats_layout_list)
+    ExpandableListView stats_list;
+    @Bind(R.id.list_layout_map2)
+    View list_layout_map2;
+    @Bind(R.id.list_layout_historylog2)
+    View list_layout_historylog2;
 
-    @Bind(R.id.loading_layout) View loading_layout;
-    @Bind(R.id.nodata_layout) View nodata_layout;
+    @Bind(R.id.loading_layout)
+    View loading_layout;
+    @Bind(R.id.nodata_layout)
+    View nodata_layout;
 
     AwesomeAdapter<HistoryItem> historyLogAdapter;
 
@@ -119,8 +140,10 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
     private GoogleMap map;
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
         ButterKnife.bind(this);
@@ -128,17 +151,21 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        back.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                    onBackPressed();
+            public void onClick(View v)
+            {
+                onBackPressed();
             }
         });
-        search.setOnClickListener(new View.OnClickListener() {
+        search.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                if(getHistoryResult == null) return;
-                if(search_layout.getVisibility() == View.VISIBLE)
+            public void onClick(View v)
+            {
+                if (getHistoryResult == null) return;
+                if (search_layout.getVisibility() == View.VISIBLE)
                     search_layout.setVisibility(View.GONE);
                 else
                     search_layout.setVisibility(View.VISIBLE);
@@ -151,13 +178,16 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
         calendar.set(Calendar.SECOND, 0);
 
         fromDateTextView.setText(dateFormat.format(calendar.getTime()));
-        fromDateTextView.setOnClickListener(new View.OnClickListener() {
+        fromDateTextView.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v)
             {
-                try {
+                try
+                {
                     new SlideDateTimePicker.Builder(getSupportFragmentManager())
-                            .setListener(new SlideDateTimeListener() {
+                            .setListener(new SlideDateTimeListener()
+                            {
                                 @Override
                                 public void onDateTimeSet(Date date)
                                 {
@@ -168,7 +198,8 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
                             .setIs24HourTime(true)
                             .build()
                             .show();
-                } catch (ParseException e) {
+                } catch (ParseException e)
+                {
                     e.printStackTrace();
                 }
             }
@@ -179,13 +210,16 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
         calendar.set(Calendar.SECOND, 0);
 
         toDateTextView.setText(dateFormat.format(calendar.getTime()));
-        toDateTextView.setOnClickListener(new View.OnClickListener() {
+        toDateTextView.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v)
             {
-                try {
+                try
+                {
                     new SlideDateTimePicker.Builder(getSupportFragmentManager())
-                            .setListener(new SlideDateTimeListener() {
+                            .setListener(new SlideDateTimeListener()
+                            {
                                 @Override
                                 public void onDateTimeSet(Date date)
                                 {
@@ -196,33 +230,39 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
                             .setIs24HourTime(true)
                             .build()
                             .show();
-                } catch (ParseException e) {
+                } catch (ParseException e)
+                {
                     e.printStackTrace();
                 }
             }
         });
 
-        API.getApiInterface(this).getDevices((String) DataSaver.getInstance(HistoryActivity.this).load("api_key"), Lang.getCurrentLanguage(), new Callback<ArrayList<ApiInterface.GetDevicesItem>>() {
+        API.getApiInterface(this).getDevices((String) DataSaver.getInstance(HistoryActivity.this).load("api_key"), Lang.getCurrentLanguage(), new Callback<ArrayList<ApiInterface.GetDevicesItem>>()
+        {
             @Override
             public void success(ArrayList<ApiInterface.GetDevicesItem> getDevicesItems, Response response)
             {
                 ArrayList<Device> totalDevices = new ArrayList<>();
-                for(ApiInterface.GetDevicesItem item : getDevicesItems)
+                for (ApiInterface.GetDevicesItem item : getDevicesItems)
                     totalDevices.addAll(item.items);
                 final ArrayAdapter<Device> devicesAdapter = new ArrayAdapter<>(HistoryActivity.this, R.layout.spinner_item, totalDevices);
                 deviceSpinner.setAdapter(devicesAdapter);
             }
 
             @Override
-            public void failure(RetrofitError retrofitError) {
+            public void failure(RetrofitError retrofitError)
+            {
                 Toast.makeText(HistoryActivity.this, R.string.errorHappened, Toast.LENGTH_SHORT).show();
             }
         });
 
-        startSearch.setOnClickListener(new View.OnClickListener() {
+        startSearch.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                try {
+            public void onClick(View v)
+            {
+                try
+                {
                     nodata_layout.setVisibility(View.GONE);
                     list_layout.setVisibility(View.GONE);
                     map_layout.setVisibility(View.GONE);
@@ -240,95 +280,105 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
 
                     API.getApiInterface(HistoryActivity.this).getHistory((String) DataSaver.getInstance(HistoryActivity.this).load("api_key"), Lang.getCurrentLanguage(),
                             device_id, from_date, from_time, to_date, to_time, false,
-                            new Callback<ApiInterface.GetHistoryResult>() {
-                        @Override
-                        public void success(ApiInterface.GetHistoryResult result, Response response)
-                        {
-                            historyItems = result.items;
-                            search_layout.setVisibility(View.GONE);
-                            getHistoryResult = result;
-                            historyLogAdapter.setArray(getHistoryResult.items);
-                            initMap(result.items);
-
-                            if(getHistoryResult.sensors == null)
-                                getHistoryResult.sensors = new ArrayList<HistorySensor>();
-
-                            getHistoryResult.sensors.add(0, new HistorySensor("speed", "Speed", " " + DataSaver.getInstance(HistoryActivity.this).load("unit_of_distance_hour")));
-                            getHistoryResult.sensors.add(1, new HistorySensor("altitude", "Altitude", " " + DataSaver.getInstance(HistoryActivity.this).load("unit_of_altitude")));
-
-                            historyItemCoords = new ArrayList<>();
-                            for (HistoryItem item : getHistoryResult.items)
-                                historyItemCoords.addAll(item.items);
-                            Collections.sort(historyItemCoords, new Comparator<HistoryItemCoord>() {
+                            new Callback<ApiInterface.GetHistoryResult>()
+                            {
                                 @Override
-                                public int compare(HistoryItemCoord lhs, HistoryItemCoord rhs) {
-                                    long t1 = rhs.getTimestamp();
-                                    long t2 = lhs.getTimestamp();
-                                    if (t2 > t1)
-                                        return 1;
-                                    else if (t1 > t2)
-                                        return -1;
+                                public void success(ApiInterface.GetHistoryResult result, Response response)
+                                {
+                                    historyItems = result.items;
+                                    search_layout.setVisibility(View.GONE);
+                                    getHistoryResult = result;
+                                    historyLogAdapter.setArray(getHistoryResult.items);
+                                    initMap(result.items);
+
+                                    if (getHistoryResult.sensors == null)
+                                        getHistoryResult.sensors = new ArrayList<HistorySensor>();
+
+                                    getHistoryResult.sensors.add(0, new HistorySensor("speed", "Speed", " " + DataSaver.getInstance(HistoryActivity.this).load("unit_of_distance_hour")));
+                                    getHistoryResult.sensors.add(1, new HistorySensor("altitude", "Altitude", " " + DataSaver.getInstance(HistoryActivity.this).load("unit_of_altitude")));
+
+                                    historyItemCoords = new ArrayList<>();
+                                    for (HistoryItem item : getHistoryResult.items)
+                                        historyItemCoords.addAll(item.items);
+                                    Collections.sort(historyItemCoords, new Comparator<HistoryItemCoord>()
+                                    {
+                                        @Override
+                                        public int compare(HistoryItemCoord lhs, HistoryItemCoord rhs)
+                                        {
+                                            long t1 = rhs.getTimestamp();
+                                            long t2 = lhs.getTimestamp();
+                                            if (t2 > t1)
+                                                return 1;
+                                            else if (t1 > t2)
+                                                return -1;
+                                            else
+                                                return 0;
+                                        }
+                                    });
+
+                                    precalculatedGraphDatas = new ArrayList<>();
+                                    for (HistorySensor sensor : getHistoryResult.sensors)
+                                    {
+                                        ArrayList<Float> sensorDataValues = new ArrayList<>();
+                                        ArrayList<Long> sensorDataTimestamps = new ArrayList<>();
+                                        for (HistoryItemCoord item : historyItemCoords)
+                                        {
+                                            if (item.sensors_data != null)
+                                                for (HistorySensorData data : item.sensors_data)
+                                                    if (data.id.equals(sensor.id))
+                                                    {
+                                                        sensorDataValues.add(data.value);
+                                                        long timestamp = item.getTimestamp();
+                                                        sensorDataTimestamps.add(timestamp);
+                                                    }
+                                        }
+
+                                        PrecalculatedGraphData object = new PrecalculatedGraphData();
+                                        object.sensor_id = sensor.id;
+                                        object.sensorDataValues = sensorDataValues;
+                                        object.sensorDataTimestamps = sensorDataTimestamps;
+
+                                        ArrayList<String> xVals = new ArrayList<>();
+                                        for (int i = 0; i < sensorDataTimestamps.size(); i++)
+                                            xVals.add(new SimpleDateFormat("MM-dd HH:mm:ss").format(sensorDataTimestamps.get(i)));
+                                        object.xVals = xVals;
+
+                                        ArrayList<Entry> yVals = new ArrayList<>();
+                                        for (int i = 0; i < sensorDataValues.size(); i++)
+                                            yVals.add(new Entry(sensorDataValues.get(i), i));
+                                        object.yVals = yVals;
+
+                                        precalculatedGraphDatas.add(object);
+                                    }
+
+                                    loading_layout.setVisibility(View.GONE);
+                                    if (result.items.size() != 0)
+                                        list_layout.setVisibility(View.VISIBLE);
                                     else
-                                        return 0;
+                                        nodata_layout.setVisibility(View.VISIBLE);
+                                }
+
+                                @Override
+                                public void failure(RetrofitError retrofitError)
+                                {
+                                    loading_layout.setVisibility(View.GONE);
+                                    Log.d(TAG, "get history failure: " + retrofitError.getMessage());
+                                    if (retrofitError.getKind() == RetrofitError.Kind.UNEXPECTED)
+                                    {
+                                        Toast.makeText(HistoryActivity.this, R.string.tooMuchData, Toast.LENGTH_LONG).show();
+                                    } else if (retrofitError.getResponse().getStatus() == 403)
+                                    {
+                                        Toast.makeText(HistoryActivity.this, R.string.dontHavePermission, Toast.LENGTH_SHORT).show();
+                                    } else
+                                    {
+                                        Toast.makeText(HistoryActivity.this, R.string.errorHappened, Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             });
-
-                            precalculatedGraphDatas = new ArrayList<>();
-                            for(HistorySensor sensor : getHistoryResult.sensors) {
-                                ArrayList<Float> sensorDataValues = new ArrayList<>();
-                                ArrayList<Long> sensorDataTimestamps = new ArrayList<>();
-                                for (HistoryItemCoord item : historyItemCoords) {
-                                    if (item.sensors_data != null)
-                                        for (HistorySensorData data : item.sensors_data)
-                                            if (data.id.equals(sensor.id)) {
-                                                sensorDataValues.add(data.value);
-                                                long timestamp = item.getTimestamp();
-                                                sensorDataTimestamps.add(timestamp);
-                                            }
-                                }
-
-                                PrecalculatedGraphData object = new PrecalculatedGraphData();
-                                object.sensor_id = sensor.id;
-                                object.sensorDataValues = sensorDataValues;
-                                object.sensorDataTimestamps = sensorDataTimestamps;
-
-                                ArrayList<String> xVals = new ArrayList<>();
-                                for (int i = 0; i < sensorDataTimestamps.size(); i++)
-                                    xVals.add(new SimpleDateFormat("MM-dd HH:mm:ss").format(sensorDataTimestamps.get(i)));
-                                object.xVals = xVals;
-
-                                ArrayList<Entry> yVals = new ArrayList<>();
-                                for (int i = 0; i < sensorDataValues.size(); i++)
-                                    yVals.add(new Entry(sensorDataValues.get(i), i));
-                                object.yVals = yVals;
-
-                                precalculatedGraphDatas.add(object);
-                            }
-
-                            loading_layout.setVisibility(View.GONE);
-                            if(result.items.size() != 0)
-                                list_layout.setVisibility(View.VISIBLE);
-                            else
-                                nodata_layout.setVisibility(View.VISIBLE);
-                        }
-
-                        @Override
-                        public void failure(RetrofitError retrofitError) {
-                            loading_layout.setVisibility(View.GONE);
-                            Log.d(TAG, "get history failure: " + retrofitError.getMessage());
-                            if(retrofitError.getKind() == RetrofitError.Kind.UNEXPECTED)
-                            {
-                                Toast.makeText(HistoryActivity.this, R.string.tooMuchData, Toast.LENGTH_LONG).show();
-                            }
-                            else if (retrofitError.getResponse().getStatus() == 403) {
-                                Toast.makeText(HistoryActivity.this, R.string.dontHavePermission, Toast.LENGTH_SHORT).show();
-                            }
-                            else {
-                                Toast.makeText(HistoryActivity.this, R.string.errorHappened, Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                } catch(Exception e) { e.printStackTrace(); }
+                } catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -336,8 +386,9 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
         historyLogAdapter = new AwesomeAdapter<HistoryItem>(this)
         {
             @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                if(convertView == null)
+            public View getView(int position, View convertView, ViewGroup parent)
+            {
+                if (convertView == null)
                     convertView = getLayoutInflater().inflate(R.layout.adapter_historylog, null);
                 HistoryItem item = getItem(position);
                 TextView device_name = (TextView) convertView.findViewById(R.id.device_name);
@@ -345,8 +396,8 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
                 TextView date = (TextView) convertView.findViewById(R.id.date);
 
                 String dateText = item.raw_time;
-                if(item.getHint(getHistoryResult.item_class).equals("Driving")
-                || item.getHint(getHistoryResult.item_class).equals("Parked"))
+                if (item.getHint(getHistoryResult.item_class).equals("Driving")
+                        || item.getHint(getHistoryResult.item_class).equals("Parked"))
                     dateText += " (" + item.show + ")";
                 date.setText(dateText);
 
@@ -359,9 +410,11 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
         };
         list_layout_list.setAdapter(historyLogAdapter);
 
-        list_layout_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        list_layout_list.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
                 Intent intent = new Intent(HistoryActivity.this, HistoryItemDetailsActivity.class);
                 intent.putExtra("item", new Gson().toJson(list_layout_list.getItemAtPosition(position)));
                 intent.putExtra("historyItemClasses", new Gson().toJson(getHistoryResult.item_class));
@@ -370,52 +423,65 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
             }
         });
 
-        stats_list.setAdapter(new BaseExpandableListAdapter() {
+        stats_list.setAdapter(new BaseExpandableListAdapter()
+        {
             @Override
-            public int getGroupCount() {
+            public int getGroupCount()
+            {
                 return 2;
             }
 
             @Override
-            public int getChildrenCount(int groupPosition) {
-                if(groupPosition == 0) return 1;
+            public int getChildrenCount(int groupPosition)
+            {
+                if (groupPosition == 0) return 1;
                 else return historyItemCoords.size();
             }
 
             @Override
-            public Object getGroup(int groupPosition) {
+            public Object getGroup(int groupPosition)
+            {
                 return null;
             }
 
             @Override
-            public Object getChild(int groupPosition, int childPosition) {
+            public Object getChild(int groupPosition, int childPosition)
+            {
                 return null;
             }
 
             @Override
-            public long getGroupId(int groupPosition) {
+            public long getGroupId(int groupPosition)
+            {
                 return 0;
             }
 
             @Override
-            public long getChildId(int groupPosition, int childPosition) {
+            public long getChildId(int groupPosition, int childPosition)
+            {
                 return 0;
             }
 
             @Override
-            public boolean hasStableIds() {
+            public boolean hasStableIds()
+            {
                 return true;
             }
 
             @Override
-            public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-                if(convertView == null)
+            public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent)
+            {
+                if (convertView == null)
                     convertView = getLayoutInflater().inflate(R.layout.adapter_expandable_parent, null);
                 String titleText = "";
-                switch(groupPosition)
+                switch (groupPosition)
                 {
-                    case 0: titleText = getString(R.string.statisticsGraph); break;
-                    case 1: titleText = getString(R.string.dataLog); break;
+                    case 0:
+                        titleText = getString(R.string.statisticsGraph);
+                        break;
+                    case 1:
+                        titleText = getString(R.string.dataLog);
+                        break;
                 }
                 TextView title = (TextView) convertView.findViewById(R.id.title);
                 title.setText(titleText);
@@ -426,16 +492,23 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
             }
 
             @Override
-            public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-                if(groupPosition == 0) {
+            public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent)
+            {
+                if (groupPosition == 0)
+                {
                     convertView = getLayoutInflater().inflate(R.layout.adapter_historystats_graph, null);
                     final Spinner dataSpinner = (Spinner) convertView.findViewById(R.id.dataSpinner);
                     final ArrayAdapter<HistorySensor> dataAdapter = new ArrayAdapter<>(HistoryActivity.this, R.layout.spinner_item, getHistoryResult.sensors);
                     dataSpinner.setAdapter(dataAdapter);
 
                     final LineChart chart = (LineChart) convertView.findViewById(R.id.chart);
-                    dataSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override public void onNothingSelected(AdapterView<?> parent) {}
+                    dataSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+                    {
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent)
+                        {
+                        }
+
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
                         {
@@ -452,13 +525,15 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
                     chart.setPinchZoom(true);
                     updateChart((LineChart) convertView.findViewById(R.id.chart), getHistoryResult.sensors.get(0));
 
-                    convertView.findViewById(R.id.chart).setOnClickListener(new View.OnClickListener() {
+                    convertView.findViewById(R.id.chart).setOnClickListener(new View.OnClickListener()
+                    {
                         @Override
-                        public void onClick(View v) {
+                        public void onClick(View v)
+                        {
                             HistorySensor selectedSensor = (HistorySensor) dataSpinner.getItemAtPosition(dataSpinner.getSelectedItemPosition());
                             PrecalculatedGraphData precalculatedGraphData = null;
-                            for(PrecalculatedGraphData item : precalculatedGraphDatas)
-                                if(item.sensor_id.equals(selectedSensor.id))
+                            for (PrecalculatedGraphData item : precalculatedGraphDatas)
+                                if (item.sensor_id.equals(selectedSensor.id))
                                     precalculatedGraphData = item;
 
                             Intent intent = new Intent(HistoryActivity.this, ViewHistoryChartActivity.class);
@@ -468,35 +543,41 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
                         }
                     });
 
-                    convertView.findViewById(R.id.graph_zoom_in).setOnClickListener(new View.OnClickListener() {
+                    convertView.findViewById(R.id.graph_zoom_in).setOnClickListener(new View.OnClickListener()
+                    {
                         @Override
-                        public void onClick(View v) {
+                        public void onClick(View v)
+                        {
                             chart.zoomIn();
                         }
                     });
-                    convertView.findViewById(R.id.graph_zoom_out).setOnClickListener(new View.OnClickListener() {
+                    convertView.findViewById(R.id.graph_zoom_out).setOnClickListener(new View.OnClickListener()
+                    {
                         @Override
-                        public void onClick(View v) {
+                        public void onClick(View v)
+                        {
                             chart.zoomOut();
                         }
                     });
-                }
-                else if(groupPosition == 1)
+                } else if (groupPosition == 1)
                 {
                     convertView = getLayoutInflater().inflate(R.layout.adapter_historyitemcoord, null);
                     final HistoryItemCoord item = historyItemCoords.get(childPosition);
                     TextView time = (TextView) convertView.findViewById(R.id.time);
                     time.setText(item.raw_time);
                     TextView speed = (TextView) convertView.findViewById(R.id.speed);
-                    if(item.sensors_data != null) {
+                    if (item.sensors_data != null)
+                    {
                         for (HistorySensorData data : item.sensors_data)
                             if (data.id.toLowerCase().equals("speed"))
                                 speed.setText(String.valueOf(data.value));
                     }
 
-                    convertView.findViewById(R.id.details).setOnClickListener(new View.OnClickListener() {
+                    convertView.findViewById(R.id.details).setOnClickListener(new View.OnClickListener()
+                    {
                         @Override
-                        public void onClick(View v) {
+                        public void onClick(View v)
+                        {
                             Intent intent = new Intent(HistoryActivity.this, HistoryItemCoordDetailsActivity.class);
                             intent.putExtra("item", new Gson().toJson(item));
                             intent.putExtra("sensors", new Gson().toJson(getHistoryResult.sensors));
@@ -508,21 +589,25 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
             }
 
             @Override
-            public boolean isChildSelectable(int groupPosition, int childPosition) {
+            public boolean isChildSelectable(int groupPosition, int childPosition)
+            {
                 return false;
             }
         });
 
         // BOTTOM BUTTON'AI
-        View.OnClickListener mapClick = new View.OnClickListener() {
+        View.OnClickListener mapClick = new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                if(getHistoryResult == null) return;
+            public void onClick(View v)
+            {
+                if (getHistoryResult == null) return;
                 list_layout.setVisibility(View.GONE);
                 stats_layout.setVisibility(View.GONE);
                 map_layout.setVisibility(View.VISIBLE);
 
-                new Handler().post(new Runnable() {
+                new Handler().post(new Runnable()
+                {
                     @Override
                     public void run()
                     {
@@ -538,10 +623,12 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
         list_layout_map.setOnClickListener(mapClick);
         list_layout_map2.setOnClickListener(mapClick);
 
-        View.OnClickListener historyLogClick = new View.OnClickListener() {
+        View.OnClickListener historyLogClick = new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                if(getHistoryResult == null) return;
+            public void onClick(View v)
+            {
+                if (getHistoryResult == null) return;
                 map_layout.setVisibility(View.GONE);
                 stats_layout.setVisibility(View.GONE);
                 list_layout.setVisibility(View.VISIBLE);
@@ -550,10 +637,12 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
         list_layout_historylog.setOnClickListener(historyLogClick);
         list_layout_historylog2.setOnClickListener(historyLogClick);
 
-        View.OnClickListener statisticsClick = new View.OnClickListener() {
+        View.OnClickListener statisticsClick = new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                if(getHistoryResult == null) return;
+            public void onClick(View v)
+            {
+                if (getHistoryResult == null) return;
                 map_layout.setVisibility(View.GONE);
                 stats_layout.setVisibility(View.VISIBLE);
                 list_layout.setVisibility(View.GONE);
@@ -563,15 +652,19 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
         list_layout_statistics2.setOnClickListener(statisticsClick);
 
 
-        zoom_in.setOnClickListener(new View.OnClickListener() {
+        zoom_in.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 map.animateCamera(CameraUpdateFactory.zoomIn());
             }
         });
-        zoom_out.setOnClickListener(new View.OnClickListener() {
+        zoom_out.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 map.animateCamera(CameraUpdateFactory.zoomOut());
             }
         });
@@ -580,11 +673,11 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
     private void updateChart(LineChart chart, final HistorySensor selectedSensor)
     {
         PrecalculatedGraphData precalculatedGraphData = null;
-        for(PrecalculatedGraphData item : precalculatedGraphDatas)
-            if(item.sensor_id.equals(selectedSensor.id))
+        for (PrecalculatedGraphData item : precalculatedGraphDatas)
+            if (item.sensor_id.equals(selectedSensor.id))
                 precalculatedGraphData = item;
 
-        if(precalculatedGraphData == null) return;
+        if (precalculatedGraphData == null) return;
 
         chart.clear();
         chart.setHighlightPerTapEnabled(false);
@@ -594,9 +687,11 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
 
         YAxis leftAxis = chart.getAxisLeft();
         leftAxis.setStartAtZero(false);
-        leftAxis.setValueFormatter(new YAxisValueFormatter() {
+        leftAxis.setValueFormatter(new YAxisValueFormatter()
+        {
             @Override
-            public String getFormattedValue(float value, YAxis yAxis) {
+            public String getFormattedValue(float value, YAxis yAxis)
+            {
                 return String.valueOf(Math.round(value)) + selectedSensor.sufix;
             }
         });
@@ -630,49 +725,86 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
     {
         map.clear();
         ArrayList<HistoryItemCoord> historyItemCoords = new ArrayList<>();
-        for(HistoryItem item : items) {
-            for (HistoryItemCoord coord : item.items) {
+        for (HistoryItem item : items)
+        {
+            for (HistoryItemCoord coord : item.items)
+            {
                 historyItemCoords.add(coord);
             }
         }
-        Collections.sort(historyItemCoords, new Comparator<HistoryItemCoord>() {
+        Collections.sort(historyItemCoords, new Comparator<HistoryItemCoord>()
+        {
             @Override
-            public int compare(HistoryItemCoord lhs, HistoryItemCoord rhs) {
+            public int compare(HistoryItemCoord lhs, HistoryItemCoord rhs)
+            {
                 long t1 = lhs.getTimestamp();
                 long t2 = rhs.getTimestamp();
-                if(t2 > t1)
+                if (t2 > t1)
                     return 1;
-                else if(t1 > t2)
+                else if (t1 > t2)
                     return -1;
                 else
                     return 0;
             }
         });
         final List<GeoPoint> points = new ArrayList<>();
-        PathOverlay pathOverlay = new PathOverlay(0xFF7f97ff, this);
-        for(HistoryItemCoord coord : historyItemCoords)
+
+        Collections.sort(historyItemCoords, new Comparator<HistoryItemCoord>()
         {
-            GeoPoint point = new GeoPoint(Double.parseDouble(coord.lat), Double.parseDouble(coord.lng));
-            points.add(point);
+            @Override
+            public int compare(HistoryItemCoord lhs, HistoryItemCoord rhs)
+            {
+                if (lhs.getTimestamp() == rhs.getTimestamp())
+                    return 0;
+                else if (lhs.getTimestamp() < rhs.getTimestamp())
+                    return -1;
+                return 1;
+            }
+        });
+
+        long previousCoordTime = historyItemCoords.get(0).getTimestamp();
+        int loopId = 0;
+        for (HistoryItemCoord coord : historyItemCoords)
+        {
+            if (loopId == 0 || (loopId > 0 && previousCoordTime != coord.getTimestamp()))
+            {
+                GeoPoint point = new GeoPoint(Double.parseDouble(coord.lat), Double.parseDouble(coord.lng));
+                points.add(point);
+            }
+            previousCoordTime = coord.getTimestamp();
+            loopId++;
         }
         PolylineOptions polylineOptions = new PolylineOptions();
         polylineOptions.color(Color.parseColor("#819afc"));
-        polylineOptions.width(Utils.dpToPx(HistoryActivity.this, 1));
-        for(GeoPoint point : points)
+        polylineOptions.width(Utils.dpToPx(HistoryActivity.this, 3));
+        for (GeoPoint point : points)
+        {
+
             polylineOptions.add(new LatLng(point.getLatitude(), point.getLongitude()));
+
+            /*MarkerOptions opt = new MarkerOptions();
+            opt.position(new LatLng(point.getLatitude(), point.getLongitude()));
+            opt.title(String.valueOf(id)).snippet(String.valueOf(point.getLatitude()) + ", " + point.getLongitude() + "\n" + historyItemCoords.get(id).getTimestamp() + "\n" + historyItemCoords.get(0).raw_time);
+            id++;
+            map.addMarker(opt);*/
+        }
         map.addPolyline(polylineOptions);
 
         // Create markers
-        new AsyncTask<Void, Void, Void>() {
+        new AsyncTask<Void, Void, Void>()
+        {
             ArrayList<MarkerOptions> items;
+
             @Override
-            protected Void doInBackground(Void... params) {
+            protected Void doInBackground(Void... params)
+            {
                 int markerSize = Utils.dpToPx(HistoryActivity.this, 25);
                 items = new ArrayList<>();
-                for(HistoryItem item : getHistoryResult.items)
+                for (HistoryItem item : getHistoryResult.items)
                 {
-                    if(item.status == 1) continue;
-                    try {
+                    if (item.status == 1) continue;
+                    try
+                    {
                         Bitmap bmp = BitmapFactory.decodeStream(new URL(item.getImageUrl(getHistoryResult.images)).openConnection().getInputStream());
 
                         int srcWidth = bmp.getWidth();
@@ -690,7 +822,8 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
                         opt.position(new LatLng(Float.valueOf(item.items.get(0).lat), Float.valueOf(item.items.get(0).lng)));
                         opt.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(bmp, dstWidth, dstHeight, true)));
                         items.add(opt);
-                    } catch(Exception e) {
+                    } catch (Exception e)
+                    {
                         e.printStackTrace();
                     }
                 }
@@ -698,8 +831,9 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
             }
 
             @Override
-            protected void onPostExecute(Void aVoid) {
-                for(MarkerOptions opt : items)
+            protected void onPostExecute(Void aVoid)
+            {
+                for (MarkerOptions opt : items)
                     map.addMarker(opt);
 
                 Log.d(TAG, "onPostExecute: icons downloaded and added to map, total markers: " + items.size());

@@ -16,7 +16,7 @@ public class HistoryItemCoord
     public String raw_time;
     public String lat, lng;
 
-    private final static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    private final static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     public long getTimestamp()
     {
         try {

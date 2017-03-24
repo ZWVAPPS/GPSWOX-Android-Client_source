@@ -49,6 +49,7 @@ import butterknife.ButterKnife;
 public class HistoryItemCoordDetailsActivity extends AppCompatActivity implements OnMapReadyCallback
 {
     private GoogleMap map;
+    HistoryItemCoord item;
     @Bind(R.id.back) View back;
     @Bind(R.id.listview) ListView listview;
     @Bind(R.id.bottomButton) Button bottomButton;
@@ -71,7 +72,7 @@ public class HistoryItemCoordDetailsActivity extends AppCompatActivity implement
             }
         });
 
-        HistoryItemCoord item = new Gson().fromJson(getIntent().getStringExtra("item"), HistoryItemCoord.class);
+        item = new Gson().fromJson(getIntent().getStringExtra("item"), HistoryItemCoord.class);
         ArrayList<HistorySensor> sensors = new Gson().fromJson(getIntent().getStringExtra("sensors"), new TypeToken<ArrayList<HistorySensor>>(){}.getType());
 
         ArrayList<Pair> array = new ArrayList<>();
@@ -128,46 +129,6 @@ public class HistoryItemCoordDetailsActivity extends AppCompatActivity implement
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        zoom_in.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                map.animateCamera(CameraUpdateFactory.zoomIn());
-            }
-        });
-        zoom_out.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                map.animateCamera(CameraUpdateFactory.zoomOut());
-            }
-        });
-
-
-        // Marker
-        Drawable dr = getResources().getDrawable(R.drawable.ruler_marker);
-        Bitmap bmp = ((BitmapDrawable) dr).getBitmap();
-
-        int srcWidth = bmp.getWidth();
-        int srcHeight = bmp.getHeight();
-
-        int maxWidth = Utils.dpToPx(HistoryItemCoordDetailsActivity.this, 10);
-        int maxHeight = Utils.dpToPx(HistoryItemCoordDetailsActivity.this, 10);
-        int dp100 = Utils.dpToPx(HistoryItemCoordDetailsActivity.this, 50);
-
-        float ratio = Math.min((float) maxWidth / (float) srcWidth, (float) maxHeight / (float) srcHeight);
-        int dstWidth = (int) (srcWidth * ratio);
-        int dstHeight = (int) (srcHeight * ratio);
-
-        bmp = bmp.createScaledBitmap(bmp, dp100, dp100, true);
-
-        MarkerOptions mo = new MarkerOptions();
-        mo.position(new LatLng(Double.parseDouble(item.lat), Double.parseDouble(item.lng)));
-        mo.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(bmp, dstWidth, dstHeight, true)));
-        mo.title(item.lat + ", " + item.lng);
-        Marker m = map.addMarker(mo);
-        m.showInfoWindow();
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(m.getPosition(), 15));
-        map_layout.setVisibility(View.GONE);
-
         bottomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -193,5 +154,49 @@ public class HistoryItemCoordDetailsActivity extends AppCompatActivity implement
     public void onMapReady(GoogleMap googleMap)
     {
         map = googleMap;
+
+        zoom_in.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                map.animateCamera(CameraUpdateFactory.zoomIn());
+            }
+        });
+        zoom_out.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                map.animateCamera(CameraUpdateFactory.zoomOut());
+            }
+        });
+
+        putMarker();
+    }
+
+    private void putMarker()
+    {
+        // Marker
+        Drawable dr = getResources().getDrawable(R.drawable.ruler_marker);
+        Bitmap bmp = ((BitmapDrawable) dr).getBitmap();
+
+        int srcWidth = bmp.getWidth();
+        int srcHeight = bmp.getHeight();
+
+        int maxWidth = Utils.dpToPx(HistoryItemCoordDetailsActivity.this, 10);
+        int maxHeight = Utils.dpToPx(HistoryItemCoordDetailsActivity.this, 10);
+        int dp100 = Utils.dpToPx(HistoryItemCoordDetailsActivity.this, 50);
+
+        float ratio = Math.min((float) maxWidth / (float) srcWidth, (float) maxHeight / (float) srcHeight);
+        int dstWidth = (int) (srcWidth * ratio);
+        int dstHeight = (int) (srcHeight * ratio);
+
+        bmp = bmp.createScaledBitmap(bmp, dp100, dp100, true);
+
+        MarkerOptions mo = new MarkerOptions();
+        mo.position(new LatLng(Double.parseDouble(item.lat), Double.parseDouble(item.lng)));
+        mo.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(bmp, dstWidth, dstHeight, true)));
+        mo.title(item.lat + ", " + item.lng);
+        Marker m = map.addMarker(mo);
+        m.showInfoWindow();
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(m.getPosition(), 15));
+        map_layout.setVisibility(View.GONE);
     }
 }

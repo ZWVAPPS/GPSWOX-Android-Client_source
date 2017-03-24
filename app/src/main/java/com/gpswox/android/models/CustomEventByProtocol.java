@@ -6,7 +6,7 @@ package com.gpswox.android.models;
 public class CustomEventByProtocol
 {
     public int id;
-    public String value;
+    public String title, value;
 
     @Override
     public String toString() {

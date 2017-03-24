@@ -10,7 +10,6 @@ import com.gpswox.android.models.AlertFuelType;
 import com.gpswox.android.models.AlertGeofence;
 import com.gpswox.android.models.AlertZone;
 import com.gpswox.android.models.CustomEvent;
-import com.gpswox.android.models.CustomEventByProtocol;
 import com.gpswox.android.models.CustomEventConditionType;
 import com.gpswox.android.models.CustomEventProtocol;
 import com.gpswox.android.models.Device;
@@ -55,12 +54,14 @@ import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Query;
 
-public interface ApiInterface {
+public interface ApiInterface
+{
     @FormUrlEncoded
     @POST("/login")
     void login(@Field("email") String email, @Field("password") String password, Callback<LoginResult> cb);
 
-    public static class LoginResult {
+    public static class LoginResult
+    {
         public int status;
         public String user_api_hash;
     }
@@ -68,14 +69,16 @@ public interface ApiInterface {
     @GET("/registration_status")
     void registrationStatus(@Query("lang") String lang, Callback<RegistrationStatusResult> cb);
 
-    public static class RegistrationStatusResult {
+    public static class RegistrationStatusResult
+    {
         public int status;
     }
 
     @GET("/device_stop_time")
     void deviceStopTime(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, @Query("device_id") int id, Callback<DeviceStopTimeResult> cb);
 
-    public static class DeviceStopTimeResult {
+    public static class DeviceStopTimeResult
+    {
         public String time;
     }
 
@@ -83,7 +86,8 @@ public interface ApiInterface {
     @GET("/get_devices")
     void getDevices(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, Callback<ArrayList<GetDevicesItem>> cb);
 
-    public static class GetDevicesItem{
+    public static class GetDevicesItem
+    {
         public String title; // group title
         public ArrayList<Device> items;
 
@@ -91,16 +95,16 @@ public interface ApiInterface {
         {
             this.title = another.title;
             this.items = new ArrayList<>();
-            for(Device device : another.items)
+            for (Device device : another.items)
                 items.add(new Device(device));
         }
     }
 
-
     @GET("/add_device_data")
     void getFieldsDataForEditing(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, @Query("perm") int perm, Callback<GetFieldsDataForEditingResult> cb);
 
-    public static class GetFieldsDataForEditingResult {
+    public static class GetFieldsDataForEditingResult
+    {
         public ArrayList<ObjectGroup> device_groups;
         public ArrayList<FuelMeasurement> device_fuel_measurements;
 
@@ -135,7 +139,8 @@ public interface ApiInterface {
                       @Field("timezone_id") int timezone_id,
                       Callback<AddDeviceResult> cb);
 
-    public static class AddDeviceResult {
+    public static class AddDeviceResult
+    {
 
     }
 
@@ -165,14 +170,16 @@ public interface ApiInterface {
                           @Field("timezone_id") int timezone_id,
                           Callback<SaveEditedDeviceResult> cb);
 
-    public static class SaveEditedDeviceResult {
+    public static class SaveEditedDeviceResult
+    {
 
     }
 
     @POST("/change_active_device")
     void changeActiveDevice(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, @Query("id") int id, @Query("active") boolean active, Callback<ChangeActiveDeviceResult> cb);
 
-    public static class ChangeActiveDeviceResult {
+    public static class ChangeActiveDeviceResult
+    {
     }
 
 
@@ -180,16 +187,19 @@ public interface ApiInterface {
     @GET("/get_reports")
     void getReports(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, Callback<GetReportsResult> cb);
 
-    public static class GetReportsResult {
+    public static class GetReportsResult
+    {
         public int status;
         public GetReportsItem items;
 
-        public class GetReportsItem {
+        public class GetReportsItem
+        {
             public GetReportsData reports;
             public ArrayList<ReportType> types;
         }
 
-        public class GetReportsData {
+        public class GetReportsData
+        {
             public int total, per_page, current_page, last_page, from, to;
             public ArrayList<Report> data;
 
@@ -200,7 +210,8 @@ public interface ApiInterface {
     @POST("/destroy_report")
     void deleteReport(@Field("user_api_hash") String user_api_hash, @Field("report_id") int report_id, @Field("lang") String lang, Callback<DeleteReportResult> cb);
 
-    public static class DeleteReportResult {
+    public static class DeleteReportResult
+    {
     }
 
     @GET("/add_report_data")
@@ -259,7 +270,8 @@ public interface ApiInterface {
     @GET("/destroy_sensor")
     void destroySensor(@Query("user_api_hash") String user_api_hash, @Query("sensor_id") int sensor_id, @Query("lang") String lang, Callback<DestroySensorResult> cb);
 
-    public static class DestroySensorResult {
+    public static class DestroySensorResult
+    {
         public int status;
     }
 
@@ -267,11 +279,13 @@ public interface ApiInterface {
     @GET("/get_events")
     void getEvents(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, @Query("page") int page, Callback<GetEventsResult> cb);
 
-    public static class GetEventsResult {
+    public static class GetEventsResult
+    {
         public int status;
         public GetEventsResultItems items;
 
-        public class GetEventsResultItems {
+        public class GetEventsResultItems
+        {
             public int total, per_page, current_page, last_page, from, to;
             public ArrayList<Event> data;
         }
@@ -280,14 +294,16 @@ public interface ApiInterface {
     @POST("/destroy_events")
     void clearAllEvents(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, Callback<ClearEventsResult> cb);
 
-    public static class ClearEventsResult {
+    public static class ClearEventsResult
+    {
     }
 
     //////////////////////////////////////////////////////////// MY ACCOUNT DATA
     @GET("/get_user_data")
     void getMyAccountData(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, Callback<GetMyAccountDataResult> cb);
 
-    public static class GetMyAccountDataResult {
+    public static class GetMyAccountDataResult
+    {
         public String email, expiration_date, plan;
         public int days_left, devices_limit;
     }
@@ -296,7 +312,8 @@ public interface ApiInterface {
     @GET("/edit_setup_data")
     void getSetupData(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, Callback<SetupDataResult> cb);
 
-    public static class SetupDataResult {
+    public static class SetupDataResult
+    {
         public SetupData item;
         public ArrayList<Timezone> timezones;
 
@@ -315,15 +332,18 @@ public interface ApiInterface {
     @GET("/get_user_drivers")
     void getUserDrivers(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, @Query("page") int page, Callback<GetUserDriversResult> cb);
 
-    public static class GetUserDriversResult {
+    public static class GetUserDriversResult
+    {
         public int status;
         public GetUserDriversResultItem items;
 
-        public class GetUserDriversResultItem {
+        public class GetUserDriversResultItem
+        {
             public GetUserDriversResultDrivers drivers;
         }
 
-        public class GetUserDriversResultDrivers {
+        public class GetUserDriversResultDrivers
+        {
             public int total, per_page, current_page, last_page, from, to;
             public ArrayList<Driver> data;
         }
@@ -332,7 +352,8 @@ public interface ApiInterface {
     @POST("/destroy_user_driver")
     void destroyUserDriver(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, @Query("user_driver_id") int user_driver_id, Callback<DestroyUserDriverResult> cb);
 
-    public static class DestroyUserDriverResult {
+    public static class DestroyUserDriverResult
+    {
     }
 
     @POST("/add_user_driver")
@@ -345,7 +366,8 @@ public interface ApiInterface {
                        @Query("description") String description,
                        Callback<AddUserDriverResult> cb);
 
-    public static class AddUserDriverResult {
+    public static class AddUserDriverResult
+    {
         public int status;
         public Driver item;
     }
@@ -369,14 +391,16 @@ public interface ApiInterface {
                          @Query("senders_phone") String senders_phone,
                          Callback<AddUserDriverResult> cb);
 
-    public static class SaveEditedSetupResult {
+    public static class SaveEditedSetupResult
+    {
     }
 
     //////////////////////////////////////////////////////////// MAP ICONS
     @GET("/get_map_icons")
     void getMapIcons(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, Callback<GetMapIconsResult> cb);
 
-    public static class GetMapIconsResult {
+    public static class GetMapIconsResult
+    {
         public int status;
         public ArrayList<MapIcon> items;
     }
@@ -385,14 +409,17 @@ public interface ApiInterface {
     @GET("/get_custom_events")
     void getCustomEvents(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, Callback<GetCustomEventsResult> cb);
 
-    public static class GetCustomEventsResult {
+    public static class GetCustomEventsResult
+    {
         public int status;
         public GetCustomEventsResultItems items;
 
-        public class GetCustomEventsResultItems {
+        public class GetCustomEventsResultItems
+        {
             public GetCustomEventsResultItemsEvents events;
 
-            public class GetCustomEventsResultItemsEvents {
+            public class GetCustomEventsResultItemsEvents
+            {
                 public int total, per_page, current_page, last_page, from, to;
                 public ArrayList<CustomEvent> data;
             }
@@ -402,7 +429,8 @@ public interface ApiInterface {
     @POST("/destroy_custom_event")
     void destroyCustomEvent(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, @Query("custom_event_id") int custom_event_id, Callback<DestroyCustomEventResult> cb);
 
-    public static class DestroyCustomEventResult {
+    public static class DestroyCustomEventResult
+    {
     }
 
     @GET("/add_custom_event")
@@ -412,7 +440,8 @@ public interface ApiInterface {
                         @Query("show_always") int show_always,
                         @Query("conditions") String conditions_array, Callback<AddCustomEventResult> cb);
 
-    public static class AddCustomEventResult {
+    public static class AddCustomEventResult
+    {
         public int status;
         public CustomEvent item;
     }
@@ -420,7 +449,8 @@ public interface ApiInterface {
     @GET("/add_custom_event_data")
     void getCustomEventData(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, Callback<GetCustomEventDataResult> cb);
 
-    public static class GetCustomEventDataResult {
+    public static class GetCustomEventDataResult
+    {
         public ArrayList<CustomEventProtocol> protocols;
         public ArrayList<CustomEventConditionType> types;
     }
@@ -430,14 +460,17 @@ public interface ApiInterface {
     @GET("/get_user_sms_templates")
     void getUserSmsTemplates(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, Callback<GetUserSmsTemplatesResult> cb);
 
-    public static class GetUserSmsTemplatesResult {
+    public static class GetUserSmsTemplatesResult
+    {
         public int status;
         public GetUserSmsTemplatesResultItems items;
 
-        public class GetUserSmsTemplatesResultItems {
+        public class GetUserSmsTemplatesResultItems
+        {
             public GetUserSmsTemplatesResultItemsTemplates user_sms_templates;
 
-            public class GetUserSmsTemplatesResultItemsTemplates {
+            public class GetUserSmsTemplatesResultItemsTemplates
+            {
                 public int total, per_page, current_page, last_page, from, to;
                 public ArrayList<UserSmsTemplate> data;
             }
@@ -447,7 +480,8 @@ public interface ApiInterface {
     @POST("/add_user_sms_template")
     void addUserSmsTemplate(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, @Query("title") String title, @Query("message") String message, Callback<AddUserSmsTemplateResult> cb);
 
-    public static class AddUserSmsTemplateResult {
+    public static class AddUserSmsTemplateResult
+    {
         public int status;
         public UserSmsTemplate item;
     }
@@ -455,21 +489,25 @@ public interface ApiInterface {
     @POST("/destroy_user_sms_template")
     void destroyUserSmsTemplate(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, @Query("user_sms_template_id") int user_sms_template_id, Callback<DestroyUserSmsTemplateResult> cb);
 
-    public static class DestroyUserSmsTemplateResult {
+    public static class DestroyUserSmsTemplateResult
+    {
     }
 
     //////////////////////////////////////////////////////////// USER GPRS TEMPLATES
     @GET("/get_user_gprs_templates")
     void getUserGprsTemplates(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, Callback<GetUserGprsTemplatesResult> cb);
 
-    public static class GetUserGprsTemplatesResult {
+    public static class GetUserGprsTemplatesResult
+    {
         public int status;
         public GetUserGprsTemplatesResultItems items;
 
-        public class GetUserGprsTemplatesResultItems {
+        public class GetUserGprsTemplatesResultItems
+        {
             public GetUserGprsTemplatesResultItemsTemplates user_gprs_templates;
 
-            public class GetUserGprsTemplatesResultItemsTemplates {
+            public class GetUserGprsTemplatesResultItemsTemplates
+            {
                 public int total, per_page, current_page, last_page, from, to;
                 public ArrayList<UserGprsTemplate> data;
             }
@@ -479,13 +517,15 @@ public interface ApiInterface {
     @POST("/destroy_user_gprs_template")
     void destroyUserGprsTemplate(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, @Query("user_gprs_template_id") int user_gprs_template_id, Callback<DestroyUserGprsTemplateResult> cb);
 
-    public static class DestroyUserGprsTemplateResult {
+    public static class DestroyUserGprsTemplateResult
+    {
     }
 
     @POST("/add_user_gprs_template")
     void addUserGprsTemplate(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, @Query("title") String title, @Query("message") String message, Callback<AddUserGprsTemplateResult> cb);
 
-    public static class AddUserGprsTemplateResult {
+    public static class AddUserGprsTemplateResult
+    {
         public int status;
         public UserGprsTemplate item;
     }
@@ -507,7 +547,8 @@ public interface ApiInterface {
                      @Query("message") String message,
                      Callback<SendTestSmsResult> cb);
 
-    public static class SendTestSmsResult {
+    public static class SendTestSmsResult
+    {
     }
 
     //////////////////////////////////////////////////////////// HISTORY
@@ -522,11 +563,13 @@ public interface ApiInterface {
                             @Query("limit") int limit,
                             Callback<GetHistoryMessagesResult> cb);
 
-    public static class GetHistoryMessagesResult {
+    public static class GetHistoryMessagesResult
+    {
         public int status;
         public GetHistoryMessagesResultMessages messages;
 
-        public class GetHistoryMessagesResultMessages {
+        public class GetHistoryMessagesResultMessages
+        {
             public int total, per_page, current_page, last_page, from, to;
             public ArrayList<HistoryMessage> data;
         }
@@ -542,7 +585,8 @@ public interface ApiInterface {
                     @Query("snap_to_road") boolean snap_to_road,
                     Callback<GetHistoryResult> cb);
 
-    public static class GetHistoryResult {
+    public static class GetHistoryResult
+    {
         public int status;
         public ArrayList<HistoryItem> items;
         public String distance_sum, top_speed, move_duration, stop_duration, fuel_consumption;
@@ -557,12 +601,14 @@ public interface ApiInterface {
     @GET("/get_user_map_icons")
     void loadPOIMarkers(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, Callback<LoadPOIMarkersResult> cb);
 
-    public static class LoadPOIMarkersResult {
+    public static class LoadPOIMarkersResult
+    {
 
         public int status;
         public LoadPOIMarkersResultItems items;
 
-        public class LoadPOIMarkersResultItems {
+        public class LoadPOIMarkersResultItems
+        {
             public ArrayList<POIMarker> mapIcons;
         }
     }
@@ -570,13 +616,15 @@ public interface ApiInterface {
     @POST("/destroy_map_icon")
     void destroyPOIMarker(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, @Query("map_icon_id") int map_icon_id, Callback<DestroyPOIMarkerResult> cb);
 
-    public static class DestroyPOIMarkerResult {
+    public static class DestroyPOIMarkerResult
+    {
     }
 
     @GET("/get_map_icons")
     void getPOIMapIcons(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, Callback<GetPOIMapIconsResult> cb);
 
-    public static class GetPOIMapIconsResult {
+    public static class GetPOIMapIconsResult
+    {
         public int status;
         public ArrayList<MapIcon> items;
     }
@@ -589,14 +637,16 @@ public interface ApiInterface {
                        @Query("coordinates") String coordinates,
                        Callback<SavePOIMarkerResult> cb);
 
-    public static class SavePOIMarkerResult {
+    public static class SavePOIMarkerResult
+    {
     }
 
     //////////////////////////////////////////////////////////// SEND COMMAND
     @GET("/send_command_data")
     void getSendCommandData(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, Callback<SendCommandData> cb);
 
-    public static class SendCommandData {
+    public static class SendCommandData
+    {
         public ArrayList<SendCommandDevice> devices_sms;
         public ArrayList<SendCommandDevice> devices_gprs;
         public ArrayList<SendCommandTemplate> sms_templates;
@@ -612,7 +662,8 @@ public interface ApiInterface {
                          @Query("device_id") int device_id,
                          @Query("type") String type, Callback<SendGprsCommandResult> cb);
 
-    public static class SendGprsCommandResult {
+    public static class SendGprsCommandResult
+    {
     }
 
     @FormUrlEncoded
@@ -623,9 +674,10 @@ public interface ApiInterface {
                         @Field("unit") String unit,
                         @Field("message") String message,
                         @Field("devices[]") String devices_array,
-                         Callback<SendSmsCommandResult> cb);
+                        Callback<SendSmsCommandResult> cb);
 
-    public static class SendSmsCommandResult {
+    public static class SendSmsCommandResult
+    {
     }
 
     //////////////////////////////////////////////////////////// GEOFENCING
@@ -636,6 +688,7 @@ public interface ApiInterface {
     {
         public int status;
         public GetGeofencesResultItems items;
+
         public class GetGeofencesResultItems
         {
             public ArrayList<Geofence> geofences;
@@ -645,19 +698,22 @@ public interface ApiInterface {
     @GET("/add_geofence_data")
     void getGeofenceData(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, Callback<GetGeofenceDataResult> cb);
 
-    public static class GetGeofenceDataResult {
+    public static class GetGeofenceDataResult
+    {
     }
 
     @POST("/destroy_geofence")
     void destroyGeofence(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, @Query("geofence_id") int geofence_id, Callback<DestroyGeofenceResult> cb);
 
-    public static class DestroyGeofenceResult {
+    public static class DestroyGeofenceResult
+    {
     }
 
     @POST("/change_active_geofence")
     void setGeofenceActive(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, @Query("id") int id, @Query("active") boolean active, Callback<SetGeofenceActiveResult> cb);
 
-    public static class SetGeofenceActiveResult {
+    public static class SetGeofenceActiveResult
+    {
     }
 
     @POST("/add_geofence")
@@ -667,18 +723,21 @@ public interface ApiInterface {
                         @Query("polygon") String polygon_array,
                         Callback<AddNewGeofenceResult> cb);
 
-    public static class AddNewGeofenceResult {
+    public static class AddNewGeofenceResult
+    {
     }
 
     //////////////////////////////////////////////////////////// ALERTS
     @GET("/get_alerts")
     void getAlerts(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, Callback<GetAlertsResult> cb);
 
-    public static class GetAlertsResult {
+    public static class GetAlertsResult
+    {
         int status;
         public GetAlertsResultItemsAlerts items;
 
-        public class GetAlertsResultItemsAlerts {
+        public class GetAlertsResultItemsAlerts
+        {
             public ArrayList<Alert> alerts;
         }
     }
@@ -727,8 +786,22 @@ public interface ApiInterface {
             public ArrayList<AlertEventProtocol> items;
         }
     }
+
     @GET("/get_events_by_protocol")
-    void getEventsByProtocolForDropdown(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, @Query("type") int type, @Query("protocol") String protocol, Callback<ArrayList<CustomEventByProtocol>> cb);
+    void getEventsByProtocolForDropdown(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang, @Query("type") int type, @Query("protocol") String protocol, Callback<CustomEventsByProtocol> cb);
+
+    class CustomEventsByProtocol
+    {
+        /*public ArrayList<CustomEventByProtocol> list;
+
+        public CustomEventsByProtocol()
+        {
+            for (CustomEventByProtocol responseItem : list)
+            {
+
+            }
+        }*/
+    }
 
     @POST("/add_alert")
     void addNewAlert(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang,
@@ -745,18 +818,19 @@ public interface ApiInterface {
     public static class AddNewAlertResult
     {
     }
+
     @POST("/edit_alert")
     void saveEditedAlert(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang,
-                     @Query("id") int id,
-                     @Query("name") String name,
-                     @Query("email") String email,
-                     @Query("devices") String devices_array,
-                     @Query("drivers") String drivers_array,
-                     @Query("geofences") String geofences_array,
-                     @Query("overspeed_speed") int overspeed_speed,
-                     @Query("overspeed_distance") int overspeed_distance,
-                     @Query("events_custom") String events_custom_array,
-                     Callback<SaveEditedAlertResult> cb);
+                         @Query("id") int id,
+                         @Query("name") String name,
+                         @Query("email") String email,
+                         @Query("devices") String devices_array,
+                         @Query("drivers") String drivers_array,
+                         @Query("geofences") String geofences_array,
+                         @Query("overspeed_speed") int overspeed_speed,
+                         @Query("overspeed_distance") int overspeed_distance,
+                         @Query("events_custom") String events_custom_array,
+                         Callback<SaveEditedAlertResult> cb);
 
     public static class SaveEditedAlertResult
     {

@@ -31,23 +31,32 @@ import retrofit.client.Response;
 public class DashboardActivity extends AppCompatActivity
 {
     private final String TAG = this.getClass().getSimpleName();
+
     private class DashboardItem
     {
         public int titleResId;
         public int resId;
         public Class activityClass;
-        public DashboardItem(int titleResId, int resId, Class activityClass) {
+
+        public DashboardItem(int titleResId, int resId, Class activityClass)
+        {
             this.titleResId = titleResId;
             this.resId = resId;
             this.activityClass = activityClass;
         }
     }
-    @Bind(R.id.logout) View logout;
-    @Bind(R.id.gridview) GridView gridview;
-    @Bind(R.id.myAccount) View myAccount;
-    @Bind(R.id.support) View support;
+
+    @Bind(R.id.logout)
+    View logout;
+    @Bind(R.id.gridview)
+    GridView gridview;
+    @Bind(R.id.myAccount)
+    View myAccount;
+    @Bind(R.id.support)
+    View support;
 
     private AwesomeAdapter<DashboardItem> adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -60,7 +69,7 @@ public class DashboardActivity extends AppCompatActivity
             @Override
             public View getView(int position, View convertView, ViewGroup parent)
             {
-                if(convertView == null)
+                if (convertView == null)
                     convertView = getLayoutInflater().inflate(R.layout.adapter_dashboard, null);
 
                 DashboardItem item = getItem(position);
@@ -76,7 +85,7 @@ public class DashboardActivity extends AppCompatActivity
                 totalHeight -= Utils.dpToPx(DashboardActivity.this, 48); // actionbaro height atimam
                 totalHeight -= Utils.dpToPx(DashboardActivity.this, 50); // footerio height atimam
                 totalHeight = totalHeight * 55 / 100; // weight...*/
-                convertView.setMinimumHeight(gridview.getHeight()/ 2);
+                convertView.setMinimumHeight(gridview.getHeight() / 2);
 
                 return convertView;
             }
@@ -93,67 +102,81 @@ public class DashboardActivity extends AppCompatActivity
         gridview.setAdapter(adapter);
         //gridview.setEnabled(false);
 
-        logout.setOnClickListener(new View.OnClickListener() {
+        logout.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 DataSaver.getInstance(DashboardActivity.this).save("api_key", null);
                 finish();
             }
         });
 
-        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                try {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                try
+                {
                     startActivity(new Intent(DashboardActivity.this, adapter.getItem(position).activityClass));
-                } catch(Exception e)
+                } catch (Exception e)
                 {
                     Toast.makeText(DashboardActivity.this, "Coming soon!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        myAccount.setOnClickListener(new View.OnClickListener() {
+        myAccount.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 startActivity(new Intent(DashboardActivity.this, MyAccountActivity.class));
             }
         });
 
-        support.setOnClickListener(new View.OnClickListener() {
+        support.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto",getResources().getString(R.string.support_email), null));
+            public void onClick(View v)
+            {
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", getResources().getString(R.string.support_email), null));
                 startActivity(Intent.createChooser(emailIntent, getString(R.string.sendEmail)));
             }
         });
 
-        final String api_key = (String) DataSaver.getInstance(this).load("api_key");
-        API.getApiInterface(this).getDevices(api_key, Lang.getCurrentLanguage(), new Callback<ArrayList<ApiInterface.GetDevicesItem>>()
+        // set units on the first load only
+        if (DataSaver.getInstance(DashboardActivity.this).load("unit_of_distance") == null)
         {
-            @Override
-            public void success(final ArrayList<ApiInterface.GetDevicesItem> getDevicesItems, Response response)
+            final String api_key = (String) DataSaver.getInstance(this).load("api_key");
+            API.getApiInterface(this).getDevices(api_key, Lang.getCurrentLanguage(), new Callback<ArrayList<ApiInterface.GetDevicesItem>>()
             {
-                Log.d(TAG, "success: loaded devices array");
-                final ArrayList<Device> allDevices = new ArrayList<>();
-                if(getDevicesItems != null)
-                    for(ApiInterface.GetDevicesItem item : getDevicesItems)
-                        allDevices.addAll(item.items);
-                if(allDevices.size() > 0)
+                @Override
+                public void success(final ArrayList<ApiInterface.GetDevicesItem> getDevicesItems, Response response)
                 {
-                    Device device = allDevices.get(0);
-                    DataSaver.getInstance(DashboardActivity.this).save("unit_of_distance_hour", device.distance_unit_hour);
-                    DataSaver.getInstance(DashboardActivity.this).save("unit_of_distance", device.unit_of_distance);
-                    DataSaver.getInstance(DashboardActivity.this).save("unit_of_capacity", device.unit_of_capacity);
-                    DataSaver.getInstance(DashboardActivity.this).save("unit_of_altitude", device.unit_of_altitude);
+                    Log.d(TAG, "success: loaded devices array");
+                    final ArrayList<Device> allDevices = new ArrayList<>();
+                    if (getDevicesItems != null)
+                        for (ApiInterface.GetDevicesItem item : getDevicesItems)
+                            allDevices.addAll(item.items);
+                    if (allDevices.size() > 0)
+                    {
+                        Device device = allDevices.get(0);
+                        DataSaver.getInstance(DashboardActivity.this).save("unit_of_distance_hour", device.distance_unit_hour);
+                        DataSaver.getInstance(DashboardActivity.this).save("unit_of_distance", device.unit_of_distance);
+                        DataSaver.getInstance(DashboardActivity.this).save("unit_of_capacity", device.unit_of_capacity);
+                        DataSaver.getInstance(DashboardActivity.this).save("unit_of_altitude", device.unit_of_altitude);
+                    }
+                    Log.d(TAG, "success: loaded devices array");
                 }
-                Log.d(TAG, "success: loaded devices array");
-            }
-            @Override
-            public void failure(RetrofitError retrofitError)
-            {
-                Log.d(TAG, "failure: loaded devices array");
-            }
-        });
+
+                @Override
+                public void failure(RetrofitError retrofitError)
+                {
+                    Log.d(TAG, "failure: loaded devices array");
+                }
+            });
+        }
     }
 }
