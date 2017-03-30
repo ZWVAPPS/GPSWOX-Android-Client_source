@@ -12,15 +12,6 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Mantoska\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.1.1\support-annotations-25.1.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="b59b6ee8d6ecc03e672d253800430343493a6ed8">
-        <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\support-annotations-25.1.1_e4d631ce422223baad35463306fc560b9cb48312.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\libs\picasso-2.5.2.jar"
         jumboMode="false"
         optimize="true"
@@ -39,30 +30,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.1\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
-        <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\com.android.support-recyclerview-v7-23.1.1_25a8e3319e506b87a07d2d274b8d3634e788794b.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\exploded-aar\com.crashlytics.sdk.android\crashlytics\2.5.2\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.3"
         sha1="0c7f9fb9a729166c69fa585e01be2fe8fab4f45c">
         <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\com.crashlytics.sdk.android-crashlytics-2.5.2_73cc23916a814146c92c970b7790f9c9a5e97978.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.1.1\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="3e04ac8ca644ea7baddf6fdcf72e15c79e9df94a">
-        <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\com.android.support-support-core-ui-25.1.1_dc0d918e24b008fb54e0e121da16f80846b32c0e.jar" />
     </item>
     <item
         is-multidex="false"
@@ -75,21 +48,21 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.3.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="425c7b17887e5c3f8cbdf67ba171bc246f29b42c">
+        <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\com.android.support-support-media-compat-25.3.0_1fd4961cf25035aab5cb4df2044172480c83c9c4.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\10.2.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.3"
         sha1="c7626a9aa507bbbdc16188bc9a9f9bf3370c1ddd">
         <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\com.google.android.gms-play-services-maps-10.2.1_abc1829e0061af90ac67e4335a536e6335fcb7ce.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\exploded-aar\com.google.maps.android\android-maps-utils\0.5\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="e41a052c714bf67f743c22ed74153422ad773f88">
-        <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\com.google.maps.android-android-maps-utils-0.5_b1f192a9dbf1b745ab260584a0cb9a1b7f2c369c.jar" />
     </item>
     <item
         is-multidex="false"
@@ -129,21 +102,39 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.1.1\jars\classes.jar"
+        jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.3.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.3"
-        sha1="02741d05d4b697fba5e279e9881aaa1da0ca7c7f">
-        <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\com.android.support-support-compat-25.1.1_1a1044da16ac0b12b32ec76c47c0d91eb0fbdad1.jar" />
+        sha1="4b746ef0fd46acb5aaf3d9ab9a4cec22c28d3211">
+        <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\com.android.support-animated-vector-drawable-25.3.0_5f9fe5feab6e8fb2255f326cea0b5d9c9bd2d9cd.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.1.1\jars\classes.jar"
+        jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.3.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.3"
-        sha1="e2719c102dca3a7a5b02ce07f769362da6ddb4ab">
-        <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\com.android.support-support-fragment-25.1.1_11d6cfe9e4c9a92cd40c51d890df269646f41847.jar" />
+        sha1="d6a04527c17597019dad82777c5094a3d60d1c33">
+        <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\com.android.support-support-vector-drawable-25.3.0_240e72c802890a59033b4ad71ac70596b2d8e26b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\exploded-aar\com.android.support\design\25.3.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="9ab787a20aae245b5b3651ae0b9c38459eb37715">
+        <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\com.android.support-design-25.3.0_dc6fe466baa151f9a5bb30cba8201991dd5b04ee.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Mantoska\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.3.0\support-annotations-25.3.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="dd84903d2e1af25a6081ef9038ad863cb14ca3a0">
+        <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\support-annotations-25.3.0_4f702cd63cedfc800855e3e2bea365ed20259816.jar" />
     </item>
     <item
         is-multidex="false"
@@ -156,12 +147,30 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.3.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="5cc5ef8347a6bafa14556cbd35230aa9b3431bb0">
+        <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\com.android.support-support-core-ui-25.3.0_2a2aff671e397f9e6184836d848253bae616a9f7.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\Mantoska\.gradle\caches\modules-2\files-2.1\org.apache.commons\commons-lang3\3.0\8873bd0bb5cb9ee37f1b04578eb7e26fcdd44cb0\commons-lang3-3.0.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.3"
         sha1="8873bd0bb5cb9ee37f1b04578eb7e26fcdd44cb0">
         <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\commons-lang3-3.0_d7ba213cf6691f2f1e923d11f165afc130114961.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\25.3.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="a3e61044038fb54cddf6b8dc79f41d2b57f42caf">
+        <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\com.android.support-recyclerview-v7-25.3.0_07429fc822fc70b2739bd3a997f7105eb95174d3.jar" />
     </item>
     <item
         is-multidex="false"
@@ -183,15 +192,6 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\exploded-aar\com.android.support\design\23.1.1\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
-        <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\com.android.support-design-23.1.1_35c00d20f4226915f6064bbb7da6d29149450332.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\exploded-aar\osmbonuspack_v5.5\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -210,30 +210,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
-        <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\com.android.support-appcompat-v7-23.1.1_c57dc726660a334df4864dcc18cd474be2ff2f91.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.1.1\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="7bde4c34162092e0a77e7f12dc85ed77c484cf5c">
-        <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\com.android.support-support-media-compat-25.1.1_bc38c4cbf073db37269c84d0d0e606bb21553dc5.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.1.1\jars\classes.jar"
+        jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.3.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.3"
         sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\com.android.support-support-v4-25.1.1_ce80313d5064c4f25db07b124abac9888210b8b6.jar" />
+        <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\com.android.support-support-v4-25.3.0_79114d2e67ee89a365bb7b0e89761c4245bef54a.jar" />
     </item>
     <item
         is-multidex="false"
@@ -273,12 +255,30 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\exploded-aar\com.android.support\transition\25.3.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="fbb206f7a119f66ce171d95aae1225a5b209a8b7">
+        <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\com.android.support-transition-25.3.0_69adb3c92cc99ef8ddb8652950b8c5f2910285a1.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\exploded-aar\com.mapbox.mapboxsdk\mapbox-android-sdk\3.1.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.3"
         sha1="d0fa12efc32d795cea71c66f1def6fccea85338a">
         <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\com.mapbox.mapboxsdk-mapbox-android-sdk-3.1.0_b49424e775c86d6e32597f97ae90e6cb58b036b5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\exploded-aar\com.google.maps.android\android-maps-utils\0.4.4\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="6f57b76211a1d7b0c1f18873af59faad95664681">
+        <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\com.google.maps.android-android-maps-utils-0.4.4_b2a601481fc1dd64863dbf93f35858d50dbac4eb.jar" />
     </item>
     <item
         is-multidex="false"
@@ -309,12 +309,39 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.1.1\jars\classes.jar"
+        jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.3.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.3"
-        sha1="0fb891e8f0cfba0513043a7bb357513d229ca2cd">
-        <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\com.android.support-support-core-utils-25.1.1_e22ea7461cb36ef573d15d75eeec2c6ca0e220c4.jar" />
+        sha1="70f23cb87278f89aa51e6f57e8f0fd5266572d95">
+        <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\com.android.support-appcompat-v7-25.3.0_53026615f282abe3bdb2405067fafa26791e5f77.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.3.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="518768f3200963fbfec652f498da2c9d39245234">
+        <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\com.android.support-support-core-utils-25.3.0_84cda7510066bdfa3e1f655b9b7de3a52ddfd2eb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.3.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="93c10d68ab5ea070f15782ae6d3a28d1f1d8f45e">
+        <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\com.android.support-support-compat-25.3.0_fde501451936f934694099a2fd14678f047d1158.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.3.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="93c1199fcb0a34b980e6fff8350daff62e696ec2">
+        <dex dex="C:\Users\Mantoska\Desktop\Android_Projects\GPSWox\GPSWOX-Android-Client\app\build\intermediates\pre-dexed\release\com.android.support-support-fragment-25.3.0_21e6716e10712afe61360d3d7ac15f1f75af3947.jar" />
     </item>
     <item
         is-multidex="false"
