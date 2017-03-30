@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">[NAME]</string>
     <string name="google_maps_key">AIzaSyCAcU-W7seDYbl6OZ55ZW9ehfh8JZjRS0I</string>
-    <string name="ip">[IP]</string>
+    <string name="ip">dev-ss.gpswox.com</string>
     <string name="support_email">[EMAIL]</string>
     <string name="https_on">[HTTPS]</string>
 
@@ -87,7 +87,7 @@
     <string name="report">Report</string>
     <string name="timePeriod">Time period</string>
     <string name="filter">Filter</string>
-    <string name="From">From</string>
+    <string name="from">From</string>
     <string name="to">To</string>
     <string name="title">Title</string>
     <string name="type">Type</string>

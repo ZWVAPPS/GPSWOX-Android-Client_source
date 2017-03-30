@@ -87,7 +87,7 @@
             android:gravity="center"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="@string/From"/>
+            android:text="@string/from"/>
 
         <TextView
             android:id="@+id/dateFrom"

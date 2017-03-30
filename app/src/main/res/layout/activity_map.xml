@@ -118,6 +118,12 @@
                 android:layout_height="30dp"
                 android:src="@drawable/autozoom_enabled"
                 android:layout_marginTop="5dp"/>
+            <ImageView
+                android:id="@+id/geofences"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/geofence_active"
+                android:layout_marginTop="5dp"/>
         </LinearLayout>
 
     </RelativeLayout>

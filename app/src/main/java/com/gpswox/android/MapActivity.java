@@ -32,16 +32,17 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.maps.android.SphericalUtil;
 import com.gpswox.android.adapters.AwesomeAdapter;
 import com.gpswox.android.api.API;
 import com.gpswox.android.api.ApiInterface;
 import com.gpswox.android.models.Device;
 import com.gpswox.android.models.DeviceIcon;
 import com.gpswox.android.models.Geofence;
+import com.gpswox.android.models.PolygonWithName;
 import com.gpswox.android.models.Sensor;
 import com.gpswox.android.models.TailItem;
 import com.gpswox.android.utils.DataSaver;
@@ -85,6 +86,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     ImageView autozoom;
     @Bind(R.id.showtails)
     ImageView showtails;
+    @Bind(R.id.geofences)
+    ImageView showGeofences;
     //@Bind(R.id.map) MapView map;
     private GoogleMap map;
 
@@ -106,10 +109,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     boolean isAutoZoomEnabled = true;
     boolean isShowTitlesEnabled;
     boolean isShowTailsEnabled = true;
+    boolean isShowGeofencesEnabled = true;
     private String stopTime;
 
     ApiInterface.GetGeofencesResult geofencesResult;
-    List<Polygon> polygons = new ArrayList<>();
+    ArrayList<PolygonWithName> polygonsWithDetails = new ArrayList<>();
+    float previousZoomLevel = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -186,6 +191,34 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     showtails.setImageResource(R.drawable.tail_inactive);
                     for (Polyline polyline : deviceIdPolyline.values())
                         polyline.setVisible(false);
+                }
+            }
+        });
+
+        showGeofences.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if(isShowGeofencesEnabled)
+                {
+                    showGeofences.setImageResource(R.drawable.geofence_inactive);
+                    for(PolygonWithName polygon : polygonsWithDetails)
+                    {
+                        polygon.getMarker().setVisible(false);
+                        polygon.getPolygon().setVisible(false);
+                    }
+                    isShowGeofencesEnabled = false;
+                }
+                else
+                {
+                    showGeofences.setImageResource(R.drawable.geofence_active);
+                    for(PolygonWithName polygon : polygonsWithDetails)
+                    {
+                        polygon.getMarker().setVisible(true);
+                        polygon.getPolygon().setVisible(true);
+                    }
+                    isShowGeofencesEnabled = true;
                 }
             }
         });
@@ -507,72 +540,75 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                                         }
                                         final Device device = markerIdDevices.get(marker.getId());
-
-                                        View view = getLayoutInflater().inflate(R.layout.layout_map_infowindow, null);
-                                        view.bringToFront();
-                                        view.findViewById(R.id.close).setOnClickListener(new View.OnClickListener()
+                                        if(device != null)
                                         {
-                                            @Override
-                                            public void onClick(View v)
+                                            View view = getLayoutInflater().inflate(R.layout.layout_map_infowindow, null);
+                                            view.bringToFront();
+                                            view.findViewById(R.id.close).setOnClickListener(new View.OnClickListener()
                                             {
-                                                marker.hideInfoWindow();
-                                            }
-                                        });
-                                        TextView device_name = (TextView) view.findViewById(R.id.device_name);
-                                        device_name.setText(device.name);
-                                        TextView altitude = (TextView) view.findViewById(R.id.altitude);
-                                        altitude.setText(String.valueOf(device.altitude) + " " + device.unit_of_altitude);
-                                        TextView time = (TextView) view.findViewById(R.id.time);
-                                        time.setText(device.time);
-                                        TextView stopTimev = (TextView) view.findViewById(R.id.stopTime);
-                                        stopTimev.setText(stopTime);
-                                        TextView speed = (TextView) view.findViewById(R.id.speed);
-                                        speed.setText(device.speed + " " + device.distance_unit_hour);
-                                        TextView address = (TextView) view.findViewById(R.id.address);
-                                        address.setText(device.address);
+                                                @Override
+                                                public void onClick(View v)
+                                                {
+                                                    marker.hideInfoWindow();
+                                                }
+                                            });
+                                            TextView device_name = (TextView) view.findViewById(R.id.device_name);
+                                            device_name.setText(device.name);
+                                            TextView altitude = (TextView) view.findViewById(R.id.altitude);
+                                            altitude.setText(String.valueOf(device.altitude) + " " + device.unit_of_altitude);
+                                            TextView time = (TextView) view.findViewById(R.id.time);
+                                            time.setText(device.time);
+                                            TextView stopTimev = (TextView) view.findViewById(R.id.stopTime);
+                                            stopTimev.setText(stopTime);
+                                            TextView speed = (TextView) view.findViewById(R.id.speed);
+                                            speed.setText(device.speed + " " + device.distance_unit_hour);
+                                            TextView address = (TextView) view.findViewById(R.id.address);
+                                            address.setText(device.address);
 
-                                        final ArrayList<Sensor> showableSensors = new ArrayList<>();
-                                        for (Sensor item : device.sensors)
-                                            if (item.show_in_popup > 0)
-                                                showableSensors.add(item);
+                                            final ArrayList<Sensor> showableSensors = new ArrayList<>();
+                                            for (Sensor item : device.sensors)
+                                                if (item.show_in_popup > 0)
+                                                    showableSensors.add(item);
 
-                                        ListView sensors_list = (ListView) view.findViewById(R.id.sensors_list);
-                                        sensors_list.setAdapter(new AwesomeAdapter<Sensor>(MapActivity.this)
-                                        {
-                                            @Override
-                                            public int getCount()
+                                            ListView sensors_list = (ListView) view.findViewById(R.id.sensors_list);
+                                            sensors_list.setAdapter(new AwesomeAdapter<Sensor>(MapActivity.this)
                                             {
-                                                return showableSensors.size();
-                                            }
+                                                @Override
+                                                public int getCount()
+                                                {
+                                                    return showableSensors.size();
+                                                }
 
-                                            @NonNull
-                                            @Override
-                                            public View getView(int position, View convertView, @NonNull ViewGroup parent)
+                                                @NonNull
+                                                @Override
+                                                public View getView(int position, View convertView, @NonNull ViewGroup parent)
+                                                {
+                                                    if (convertView == null)
+                                                        convertView = getLayoutInflater().inflate(R.layout.adapter_map_sensorslist, null);
+
+                                                    Sensor item = showableSensors.get(position);
+                                                    TextView name = (TextView) convertView.findViewById(R.id.name);
+                                                    name.setText(item.name);
+                                                    TextView value = (TextView) convertView.findViewById(R.id.value);
+                                                    value.setText(item.value);
+                                                    return convertView;
+                                                }
+                                            });
+
+                                            List<Address> addresses;
+                                            try
                                             {
-                                                if (convertView == null)
-                                                    convertView = getLayoutInflater().inflate(R.layout.adapter_map_sensorslist, null);
-
-                                                Sensor item = showableSensors.get(position);
-                                                TextView name = (TextView) convertView.findViewById(R.id.name);
-                                                name.setText(item.name);
-                                                TextView value = (TextView) convertView.findViewById(R.id.value);
-                                                value.setText(item.value);
-                                                return convertView;
+                                                addresses = new Geocoder(MapActivity.this).getFromLocation(device.lat, device.lng, 1);
+                                                if (addresses.size() > 0)
+                                                    address.setText(addresses.get(0).getAddressLine(0));
+                                            } catch (IOException e)
+                                            {
+                                                e.printStackTrace();
                                             }
-                                        });
 
-                                        List<Address> addresses;
-                                        try
-                                        {
-                                            addresses = new Geocoder(MapActivity.this).getFromLocation(device.lat, device.lng, 1);
-                                            if (addresses.size() > 0)
-                                                address.setText(addresses.get(0).getAddressLine(0));
-                                        } catch (IOException e)
-                                        {
-                                            e.printStackTrace();
+                                            return view;
                                         }
-
-                                        return view;
+                                        return null;
                                     }
                                 });
                                 map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener()
@@ -584,21 +620,24 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                         map.setPadding(0, px, 0, 0);
                                         stopTime = "...";
                                         final Device device = markerIdDevices.get(marker.getId());
-                                        API.getApiInterface(MapActivity.this).deviceStopTime((String) DataSaver.getInstance(MapActivity.this).load("api_key"), "en", device.id, new Callback<ApiInterface.DeviceStopTimeResult>()
+                                        if(device != null)
                                         {
-                                            @Override
-                                            public void success(ApiInterface.DeviceStopTimeResult result, Response response)
+                                            API.getApiInterface(MapActivity.this).deviceStopTime((String) DataSaver.getInstance(MapActivity.this).load("api_key"), "en", device.id, new Callback<ApiInterface.DeviceStopTimeResult>()
                                             {
-                                                stopTime = result.time;
-                                                marker.showInfoWindow();
-                                            }
+                                                @Override
+                                                public void success(ApiInterface.DeviceStopTimeResult result, Response response)
+                                                {
+                                                    stopTime = result.time;
+                                                    marker.showInfoWindow();
+                                                }
 
-                                            @Override
-                                            public void failure(RetrofitError retrofitError)
-                                            {
-                                                Toast.makeText(MapActivity.this, R.string.errorHappened, Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
+                                                @Override
+                                                public void failure(RetrofitError retrofitError)
+                                                {
+                                                    Toast.makeText(MapActivity.this, R.string.errorHappened, Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                        }
 
                                         return false;
                                     }
@@ -655,43 +694,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             {
                 geofencesResult = getGeofencesResult;
                 decomposeGeofenceCoordinates();
-                for (Geofence geofence : geofencesResult.items.geofences)
-                {
-                    if (geofence.active == 1)
-                    {
-                        polygons.add(map.addPolygon(new PolygonOptions()
-                                .addAll(geofence.coordinatesList)
-                                .strokeColor(Color.parseColor(geofence.polygon_color))
-                                .fillColor(Color.parseColor("#59" + geofence.polygon_color.substring(1))))
-                        );
-                     /*text*/
-                        String strText = geofence.name;
-
-                        FontMetrics fm = new FontMetrics();
-                        Paint paintText = new Paint();
-                        paintText.setColor(Color.parseColor(geofence.polygon_color));
-                        paintText.setTextAlign(Paint.Align.CENTER);
-                        paintText.setTextSize(getResources().getDimension(R.dimen.text_size));
-                        paintText.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-                        paintText.getFontMetrics(fm);
-
-                        Rect rectText = new Rect();
-                        paintText.getTextBounds(strText, 0, strText.length(),
-                                rectText);
-                        Bitmap.Config conf = Bitmap.Config.ARGB_8888;
-                        Bitmap bmpText = Bitmap.createBitmap(rectText.width(),
-                                rectText.height(), conf);
-                        Canvas canvas = new Canvas(bmpText);
-                        canvas.drawText(strText, canvas.getWidth() / 2,
-                                canvas.getHeight() - rectText.bottom, paintText);
-                        MarkerOptions markerOptions = new MarkerOptions()
-                                .position(centroid(geofence.coordinatesList))
-                                .icon(BitmapDescriptorFactory.fromBitmap(bmpText))
-                                .anchor(0.5f, 1);
-                        map.addMarker(markerOptions);
-                    /*text*/
-                    }
-                }
+                putGeofenceNameMarkers(12);
             }
 
             @Override
@@ -707,8 +710,81 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
         });
 
+        map.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener()
+        {
+            @Override
+            public void onCameraIdle()
+            {
+
+                if(map.getCameraPosition().zoom < 13 && previousZoomLevel > 13)
+                {
+                    for(PolygonWithName polygon : polygonsWithDetails)
+                    {
+                        polygon.getMarker().remove();
+                    }
+                    putGeofenceNameMarkers(10);
+                }
+                else if(previousZoomLevel < 13 && (map.getCameraPosition().zoom > 13))
+                {
+                    for(PolygonWithName polygon : polygonsWithDetails)
+                    {
+                        polygon.getMarker().remove();
+                        polygon.getPolygon().remove();
+                    }
+                    putGeofenceNameMarkers(30);
+                }
+
+                previousZoomLevel = map.getCameraPosition().zoom;
+                //Toast.makeText(MapActivity.this, "zoome level is: " + map.getCameraPosition().zoom, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
+    private void putGeofenceNameMarkers(int textSize)
+    {
+        for (Geofence geofence : geofencesResult.items.geofences)
+        {
+            if (geofence.active == 1)
+            {
+                String strText = geofence.name;
+
+                FontMetrics fm = new FontMetrics();
+                Paint paintText = new Paint();
+                paintText.setColor(Color.parseColor(geofence.polygon_color));
+                paintText.setTextAlign(Paint.Align.CENTER);
+                if(Double.compare(SphericalUtil.computeArea(geofence.coordinatesList), 10000000) > 0)
+                {
+                    paintText.setTextSize(30);
+                }
+                else
+                {
+                    paintText.setTextSize(textSize);
+                }
+                paintText.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+                paintText.getFontMetrics(fm);
+
+                Rect rectText = new Rect();
+                paintText.getTextBounds(strText, 0, strText.length(),
+                        rectText);
+                Bitmap.Config conf = Bitmap.Config.ARGB_8888;
+                Bitmap bmpText = Bitmap.createBitmap(rectText.width(),
+                        rectText.height(), conf);
+                Canvas canvas = new Canvas(bmpText);
+                canvas.drawText(strText, canvas.getWidth() / 2,
+                        canvas.getHeight() - rectText.bottom, paintText);
+                MarkerOptions markerOptions = new MarkerOptions()
+                        .position(centroid(geofence.coordinatesList))
+                        .icon(BitmapDescriptorFactory.fromBitmap(bmpText))
+                        .anchor(0.5f, 1);
+                Marker marker = map.addMarker(markerOptions);
+                polygonsWithDetails.add(new PolygonWithName(map.addPolygon(new PolygonOptions()
+                        .addAll(geofence.coordinatesList)
+                        .strokeColor(Color.parseColor(geofence.polygon_color))
+                        .fillColor(Color.parseColor("#59" + geofence.polygon_color.substring(1))))
+                        , paintText, markerOptions, marker, geofence));
+            }
+        }
+    }
 
     private LatLng centroid(List<LatLng> points)
     {
@@ -726,6 +802,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         return new LatLng(centroid[0], centroid[1]);
     }
+
     /*private void updateSmallMarkerData(ArrayList<Device> allDevices)
     {
         for(Device device : allDevices)
