@@ -39,7 +39,6 @@ android {
     }
     buildTypes {
         release {
-            debuggable true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
@@ -65,7 +64,7 @@ dependencies {
     compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:3.1.0@aar'){
         transitive=true
     }
-    compile 'com.google.android.gms:play-services-maps:10.2.1'
-    compile 'com.google.maps.android:android-maps-utils:0.5'
+    compile 'com.google.android.gms:play-services-maps:10.2.0'
+    compile 'com.google.maps.android:android-maps-utils:0.4+'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
 }
