@@ -285,6 +285,16 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
                                 @Override
                                 public void success(ApiInterface.GetHistoryResult result, Response response)
                                 {
+                                    if (result.items.size() != 0)
+                                    {
+                                        loading_layout.setVisibility(View.INVISIBLE);
+                                        list_layout.setVisibility(View.VISIBLE);
+                                    } else
+                                    {
+                                        loading_layout.setVisibility(View.INVISIBLE);
+                                        nodata_layout.setVisibility(View.VISIBLE);
+                                        return;
+                                    }
                                     historyItems = result.items;
                                     search_layout.setVisibility(View.GONE);
                                     getHistoryResult = result;
@@ -352,10 +362,6 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
                                     }
 
                                     loading_layout.setVisibility(View.GONE);
-                                    if (result.items.size() != 0)
-                                        list_layout.setVisibility(View.VISIBLE);
-                                    else
-                                        nodata_layout.setVisibility(View.VISIBLE);
                                 }
 
                                 @Override
