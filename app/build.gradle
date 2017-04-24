@@ -26,8 +26,8 @@ android {
         applicationId "com.gpswox.android"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 49
-        versionName "1.6.12"
+        versionCode 50
+        versionName "1.6.13"
     }
     signingConfigs {
         release {

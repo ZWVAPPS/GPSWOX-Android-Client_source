@@ -29,7 +29,9 @@ import com.gpswox.android.models.SendCommandTemplate;
 import com.gpswox.android.utils.DataSaver;
 import com.gpswox.android.utils.Lang;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -359,7 +361,16 @@ public class SendCommandActivity extends AppCompatActivity
                         @Override
                         public void failure(RetrofitError retrofitError)
                         {
-                            Toast.makeText(SendCommandActivity.this, R.string.errorHappened, Toast.LENGTH_SHORT).show();
+                            Scanner s = null;
+                            try
+                            {
+                                s = new Scanner(retrofitError.getResponse().getBody().in()).useDelimiter("\\A");
+                            } catch (IOException e)
+                            {
+                                e.printStackTrace();
+                            }
+                            String result = s.hasNext() ? s.next() : "";
+                            Toast.makeText(SendCommandActivity.this, result.substring(29, result.length()-4), Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else // sms

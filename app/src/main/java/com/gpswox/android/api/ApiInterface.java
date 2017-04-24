@@ -807,11 +807,12 @@ public interface ApiInterface
     void addNewAlert(@Query("user_api_hash") String user_api_hash, @Query("lang") String lang,
                      @Query("name") String name,
                      @Query("email") String email,
+                     @Query("mobile_phone") String mobile_phone,
                      @Query("devices") String devices_array,
                      @Query("drivers") String drivers_array,
                      @Query("geofences") String geofences_array,
-                     @Query("overspeed_speed") int overspeed_speed,
-                     @Query("overspeed_distance") int overspeed_distance,
+                     @Query("overspeed[speed]") int overspeed_speed,
+                     @Query("overspeed[distance]") int overspeed_distance,
                      @Query("events_custom") String events_custom_array,
                      Callback<AddNewAlertResult> cb);
 
@@ -824,11 +825,12 @@ public interface ApiInterface
                          @Query("id") int id,
                          @Query("name") String name,
                          @Query("email") String email,
+                         @Query("mobile_phone") String mobile_phone,
                          @Query("devices") String devices_array,
                          @Query("drivers") String drivers_array,
                          @Query("geofences") String geofences_array,
-                         @Query("overspeed_speed") int overspeed_speed,
-                         @Query("overspeed_distance") int overspeed_distance,
+                         @Query("overspeed[speed]") int overspeed_speed,
+                         @Query("overspeed[distance]") int overspeed_distance,
                          @Query("events_custom") String events_custom_array,
                          Callback<SaveEditedAlertResult> cb);
 
