@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import com.gpswox.android.utils.Utils;
 
+import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
@@ -54,16 +55,16 @@ public class ShowPointActivity extends AppCompatActivity
                 ArrayList<OverlayItem> items = new ArrayList<>();
 
                 try {
-                    double lat = Double.parseDouble(latitude.getText().toString());
-                    double lng = Double.parseDouble(longitude.getText().toString());
+                    final double lat = Double.parseDouble(latitude.getText().toString());
+                    final double lng = Double.parseDouble(longitude.getText().toString());
                     OverlayItem olItem = new OverlayItem(getString(R.string.yourPoint), "", new GeoPoint(lat, lng));
                     Drawable dr = ContextCompat.getDrawable(ShowPointActivity.this, R.drawable.map_simple_marker);
                     Bitmap bitmap = ((BitmapDrawable) dr).getBitmap();
                     int srcWidth = dr.getIntrinsicWidth();
                     int srcHeight = dr.getIntrinsicHeight();
 
-                    int maxWidth = Utils.dpToPx(ShowPointActivity.this, 100);
-                    int maxHeight = Utils.dpToPx(ShowPointActivity.this, 100);
+                    int maxWidth = Utils.dpToPx(ShowPointActivity.this, 50);
+                    int maxHeight = Utils.dpToPx(ShowPointActivity.this, 50);
 
                     float ratio = Math.min((float) maxWidth / (float) srcWidth, (float) maxHeight / (float) srcHeight);
                     int dstWidth = (int) (srcWidth * ratio);
@@ -73,7 +74,34 @@ public class ShowPointActivity extends AppCompatActivity
                     items.add(olItem);
                     mOverlay = new ItemizedIconOverlay<>(ShowPointActivity.this, items, null);
                     map.getOverlays().add(mOverlay);
-                    map.getController().setZoom(10);
+                    IGeoPoint iGeoPoint = new IGeoPoint()
+                    {
+                        @Override
+                        public int getLatitudeE6()
+                        {
+                            return 0;
+                        }
+
+                        @Override
+                        public int getLongitudeE6()
+                        {
+                            return 0;
+                        }
+
+                        @Override
+                        public double getLatitude()
+                        {
+                            return lat;
+                        }
+
+                        @Override
+                        public double getLongitude()
+                        {
+                            return lng;
+                        }
+                    };
+                    map.getController().animateTo(iGeoPoint);
+                    map.getController().setZoom(22);
                 } catch(Exception e) {
                     e.printStackTrace();
                 }

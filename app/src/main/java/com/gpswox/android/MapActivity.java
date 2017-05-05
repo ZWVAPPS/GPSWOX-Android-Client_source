@@ -111,6 +111,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     boolean isShowTailsEnabled = true;
     boolean isShowGeofencesEnabled = true;
     private String stopTime;
+    private AsyncTask downloadingAsync;
+
+    private boolean isRefreshLoced = false;
 
     ApiInterface.GetGeofencesResult geofencesResult;
     ArrayList<PolygonWithName> polygonsWithDetails = new ArrayList<>();
@@ -200,20 +203,19 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v)
             {
-                if(isShowGeofencesEnabled)
+                if (isShowGeofencesEnabled)
                 {
                     showGeofences.setImageResource(R.drawable.geofence_inactive);
-                    for(PolygonWithName polygon : polygonsWithDetails)
+                    for (PolygonWithName polygon : polygonsWithDetails)
                     {
                         polygon.getMarker().setVisible(false);
                         polygon.getPolygon().setVisible(false);
                     }
                     isShowGeofencesEnabled = false;
-                }
-                else
+                } else
                 {
                     showGeofences.setImageResource(R.drawable.geofence_active);
-                    for(PolygonWithName polygon : polygonsWithDetails)
+                    for (PolygonWithName polygon : polygonsWithDetails)
                     {
                         polygon.getMarker().setVisible(true);
                         polygon.getPolygon().setVisible(true);
@@ -261,9 +263,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     Matcher matcherLat = patternLat.matcher(item);
                     Matcher matcherLng = patternLng.matcher(item);
                     while (matcherLat.find())
-                    lat = Double.parseDouble(matcherLat.group(1));
+                        lat = Double.parseDouble(matcherLat.group(1));
                     while (matcherLng.find())
-                    lng = Double.parseDouble(matcherLng.group(1));
+                        lng = Double.parseDouble(matcherLng.group(1));
 
                     coordinatesList.add(new LatLng(lat, lng));
                     geofencesResult.items.geofences.get(i).coordinatesList = coordinatesList;
@@ -292,7 +294,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                             timeleft = 0;
                         updatetimer.setText(String.format("%.0f", timeleft));
                         if (System.currentTimeMillis() - lastRefreshTime >= 10 * 1000)
-                            refresh();
+                            if (map != null)
+                                refresh();
                     }
                 });
             }
@@ -307,6 +310,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         {
             timer.cancel();
             timer.purge();
+            downloadingAsync.cancel(true);
         } catch (Exception e)
         {
             e.printStackTrace();
@@ -315,6 +319,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     private void refresh()
     {
+        if (isRefreshLoced)
+            return;
+        isRefreshLoced = true;
         lastRefreshTime = System.currentTimeMillis();
         final String api_key = (String) DataSaver.getInstance(this).load("api_key");
         API.getApiInterface(this).getDevices(api_key, Lang.getCurrentLanguage(), new Callback<ArrayList<ApiInterface.GetDevicesItem>>()
@@ -333,7 +340,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     public void success(final ApiInterface.GetFieldsDataForEditingResult getFieldsDataForEditingResult, Response response)
                     {
                         Log.d(TAG, "success: loaded icons");
-                        new AsyncTask<Void, Void, Void>()
+                        downloadingAsync = new AsyncTask<Void, Void, Void>()
                         {
                             ArrayList<MarkerOptions> markers;
                             ArrayList<Integer> deviceIds;
@@ -349,6 +356,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                     return null;
                                 for (Device item : allDevices)
                                 {
+                                    if (isCancelled())
+                                        break;
                                     if (item.device_data.active == 1)
                                     {
                                         // ieškom ikonos masyve
@@ -390,6 +399,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                                             markers.add(m);
                                             deviceIds.add(item.id);
+                                        } catch (OutOfMemoryError outOfMemoryError)
+                                        {
+                                            Toast.makeText(MapActivity.this, "Out of memory! Too many devices are selected to be displayed", Toast.LENGTH_LONG).show();
                                         } catch (Exception e)
                                         {
                                             e.printStackTrace();
@@ -540,7 +552,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                                         }
                                         final Device device = markerIdDevices.get(marker.getId());
-                                        if(device != null)
+                                        if (device != null)
                                         {
                                             View view = getLayoutInflater().inflate(R.layout.layout_map_infowindow, null);
                                             view.bringToFront();
@@ -620,7 +632,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                         map.setPadding(0, px, 0, 0);
                                         stopTime = "...";
                                         final Device device = markerIdDevices.get(marker.getId());
-                                        if(device != null)
+                                        if (device != null)
                                         {
                                             API.getApiInterface(MapActivity.this).deviceStopTime((String) DataSaver.getInstance(MapActivity.this).load("api_key"), "en", device.id, new Callback<ApiInterface.DeviceStopTimeResult>()
                                             {
@@ -661,6 +673,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                 });
 
                                 //                                updateSmallMarkerData(allDevices);
+                                isRefreshLoced = false;
                             }
                         }.execute();
                     }
@@ -669,6 +682,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     public void failure(RetrofitError retrofitError)
                     {
                         Toast.makeText(MapActivity.this, R.string.errorHappened, Toast.LENGTH_SHORT).show();
+                        isRefreshLoced = false;
                     }
                 });
             }
@@ -677,6 +691,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             public void failure(RetrofitError retrofitError)
             {
                 Toast.makeText(MapActivity.this, R.string.errorHappened, Toast.LENGTH_SHORT).show();
+                isRefreshLoced = false;
             }
         });
     }
@@ -705,7 +720,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     Toast.makeText(MapActivity.this, R.string.dontHavePermission, Toast.LENGTH_SHORT).show();
                 } else
                 {
-                    Toast.makeText(MapActivity.this, retrofitError.getResponse().getStatus(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MapActivity.this, /*retrofitError.getResponse().getStatus()*/"Error", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -716,17 +731,16 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             public void onCameraIdle()
             {
 
-                if(map.getCameraPosition().zoom < 13 && previousZoomLevel > 13)
+                if (map.getCameraPosition().zoom < 13 && previousZoomLevel > 13)
                 {
-                    for(PolygonWithName polygon : polygonsWithDetails)
+                    for (PolygonWithName polygon : polygonsWithDetails)
                     {
                         polygon.getMarker().remove();
                     }
                     putGeofenceNameMarkers(10);
-                }
-                else if(previousZoomLevel < 13 && (map.getCameraPosition().zoom > 13))
+                } else if (previousZoomLevel < 13 && (map.getCameraPosition().zoom > 13))
                 {
-                    for(PolygonWithName polygon : polygonsWithDetails)
+                    for (PolygonWithName polygon : polygonsWithDetails)
                     {
                         polygon.getMarker().remove();
                         polygon.getPolygon().remove();
@@ -752,11 +766,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 Paint paintText = new Paint();
                 paintText.setColor(Color.parseColor(geofence.polygon_color));
                 paintText.setTextAlign(Paint.Align.CENTER);
-                if(Double.compare(SphericalUtil.computeArea(geofence.coordinatesList), 10000000) > 0)
+                if (Double.compare(SphericalUtil.computeArea(geofence.coordinatesList), 10000000) > 0)
                 {
                     paintText.setTextSize(30);
-                }
-                else
+                } else
                 {
                     paintText.setTextSize(textSize);
                 }

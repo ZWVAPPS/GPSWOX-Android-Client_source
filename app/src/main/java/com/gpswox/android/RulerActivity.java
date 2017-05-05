@@ -121,7 +121,7 @@ public class RulerActivity extends AppCompatActivity implements OnMapReadyCallba
 
                 CameraUpdate center =
                         CameraUpdateFactory.newLatLngBounds(bounds, 10);
-                CameraUpdate zoom = CameraUpdateFactory.zoomTo(15);
+                CameraUpdate zoom = CameraUpdateFactory.zoomTo(10);
 
                 map.moveCamera(center);
                 map.animateCamera(zoom);

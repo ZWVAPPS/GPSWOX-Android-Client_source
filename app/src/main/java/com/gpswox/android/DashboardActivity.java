@@ -108,6 +108,7 @@ public class DashboardActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 DataSaver.getInstance(DashboardActivity.this).save("api_key", null);
+                startActivity(new Intent(DashboardActivity.this, MainActivity.class));
                 finish();
             }
         });
@@ -119,6 +120,10 @@ public class DashboardActivity extends AppCompatActivity
             {
                 try
                 {
+                    /*if(position == 1)
+                    {
+                        if(ContextCompat.checkSelfPermission(DashboardActivity.this, Manifest.permission.
+                    }*/
                     startActivity(new Intent(DashboardActivity.this, adapter.getItem(position).activityClass));
                 } catch (Exception e)
                 {
