@@ -235,4 +235,6 @@ SMS gateway URL example: http://SMS_GATEWAY/sendsms.php?username=USER&password=P
     <string name="authToken">Auth token</string>
     <string name="sendersPhone">Sender\'s phone</string>
     <string name="tooMuchData">Too much data, try selecting a shorter interval</string>
+    <string name="allFieldsMustBeFilled">All fields must be filled in</string>
+
 </resources>
