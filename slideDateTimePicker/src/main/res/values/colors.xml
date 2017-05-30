@@ -4,5 +4,6 @@
 
     <item name="gray_holo_dark" type="color">#ff464646</item>
     <item name="gray_holo_light" type="color">#ffd0d0d0</item>
+    <item name="blue" type="color">#1b99bd</item>
 
 </resources>
