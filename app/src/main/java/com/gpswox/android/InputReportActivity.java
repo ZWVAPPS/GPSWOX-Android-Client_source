@@ -59,7 +59,7 @@ public class InputReportActivity extends AppCompatActivity {
         });
 
         loading_layout.setVisibility(View.VISIBLE);
-        API.getApiInterface(this).getDataForReports((String) DataSaver.getInstance(this).load("api_key"), Lang.getCurrentLanguage(), new Callback<ApiInterface.GetReportDataResult>() {
+        API.getApiInterface(this).getDataForReports((String) DataSaver.getInstance(this).load("api_key"), getResources().getString(R.string.lang), new Callback<ApiInterface.GetReportDataResult>() {
             @Override
             public void success(ApiInterface.GetReportDataResult getReportDataResult, Response response) {
                 adapter = new EditReportAdapter(InputReportActivity.this, report, types, getReportDataResult);
@@ -104,7 +104,7 @@ public class InputReportActivity extends AppCompatActivity {
                 {
                     String devices_array = new Gson().toJson(report.devices);
                     String geofences_array = new Gson().toJson(report.geofences);
-                    API.getApiInterface(InputReportActivity.this).saveEditedReport((String) DataSaver.getInstance(InputReportActivity.this).load("api_key"), Lang.getCurrentLanguage(),
+                    API.getApiInterface(InputReportActivity.this).saveEditedReport((String) DataSaver.getInstance(InputReportActivity.this).load("api_key"), getResources().getString(R.string.lang),
                             report.id,
                             report.title, report.type, report.dateFrom, report.dateTo, report.format, report.stops, report.speed_limit, devices_array, geofences_array, report.daily, report.weekly, report.email, new Callback<ApiInterface.SaveEditedReportResult>() {
                                 @Override
@@ -123,7 +123,7 @@ public class InputReportActivity extends AppCompatActivity {
                 {
                     String devices_array = new Gson().toJson(report.devices);
                     String geofences_array = new Gson().toJson(report.geofences);
-                    API.getApiInterface(InputReportActivity.this).addNewReport((String) DataSaver.getInstance(InputReportActivity.this).load("api_key"), Lang.getCurrentLanguage(),
+                    API.getApiInterface(InputReportActivity.this).addNewReport((String) DataSaver.getInstance(InputReportActivity.this).load("api_key"), getResources().getString(R.string.lang),
                             report.title, report.type, report.dateFrom, report.dateTo, report.format, report.stops, report.speed_limit, devices_array, geofences_array, report.daily, report.weekly, report.email, new Callback<ApiInterface.AddNewReportResult>() {
                                 @Override
                                 public void success(ApiInterface.AddNewReportResult addNewReportResult, Response response) {

@@ -49,7 +49,7 @@ public class InputSmsTemplateActivity extends AppCompatActivity
                 else if(messageStr.equals(""))
                     Toast.makeText(InputSmsTemplateActivity.this, R.string.messageFieldRequired, Toast.LENGTH_SHORT).show();
                 else
-                    API.getApiInterface(InputSmsTemplateActivity.this).addUserSmsTemplate((String) DataSaver.getInstance(InputSmsTemplateActivity.this).load("api_key"), Lang.getCurrentLanguage(), titleStr, messageStr, new Callback<ApiInterface.AddUserSmsTemplateResult>() {
+                    API.getApiInterface(InputSmsTemplateActivity.this).addUserSmsTemplate((String) DataSaver.getInstance(InputSmsTemplateActivity.this).load("api_key"), getResources().getString(R.string.lang), titleStr, messageStr, new Callback<ApiInterface.AddUserSmsTemplateResult>() {
                         @Override
                         public void success(ApiInterface.AddUserSmsTemplateResult addUserSmsTemplateResult, Response response) {
                             Intent data = new Intent();

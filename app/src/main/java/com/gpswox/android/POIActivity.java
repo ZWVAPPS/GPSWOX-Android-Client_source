@@ -63,7 +63,7 @@ public class POIActivity extends AppCompatActivity
                     @Override
                     public void onClick(View v)
                     {
-                        API.getApiInterface(POIActivity.this).destroyPOIMarker(api_key, Lang.getCurrentLanguage(), item.id, new Callback<ApiInterface.DestroyPOIMarkerResult>() {
+                        API.getApiInterface(POIActivity.this).destroyPOIMarker(api_key, getResources().getString(R.string.lang), item.id, new Callback<ApiInterface.DestroyPOIMarkerResult>() {
                             @Override
                             public void success(ApiInterface.DestroyPOIMarkerResult destroyPOIMarkerResult, Response response) {
                                 adapter.remove(item);
@@ -107,7 +107,7 @@ public class POIActivity extends AppCompatActivity
         nodata_layout.setVisibility(View.GONE);
         loading_layout.setVisibility(View.VISIBLE);
         final String api_key = (String) DataSaver.getInstance(this).load("api_key");
-        API.getApiInterface(this).loadPOIMarkers(api_key, Lang.getCurrentLanguage(), new Callback<ApiInterface.LoadPOIMarkersResult>() {
+        API.getApiInterface(this).loadPOIMarkers(api_key, getResources().getString(R.string.lang), new Callback<ApiInterface.LoadPOIMarkersResult>() {
             @Override
             public void success(ApiInterface.LoadPOIMarkersResult loadPOIMarkersResult, Response response)
             {

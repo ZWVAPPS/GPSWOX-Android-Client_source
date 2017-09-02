@@ -50,7 +50,7 @@ public class InputGprsTemplateActivity extends AppCompatActivity {
                 else if(messageStr.equals(""))
                     Toast.makeText(InputGprsTemplateActivity.this, R.string.messageFieldRequired, Toast.LENGTH_SHORT).show();
                 else
-                    API.getApiInterface(InputGprsTemplateActivity.this).addUserGprsTemplate((String) DataSaver.getInstance(InputGprsTemplateActivity.this).load("api_key"), Lang.getCurrentLanguage(), titleStr, messageStr, new Callback<ApiInterface.AddUserGprsTemplateResult>() {
+                    API.getApiInterface(InputGprsTemplateActivity.this).addUserGprsTemplate((String) DataSaver.getInstance(InputGprsTemplateActivity.this).load("api_key"), getResources().getString(R.string.lang), titleStr, messageStr, new Callback<ApiInterface.AddUserGprsTemplateResult>() {
                         @Override
                         public void success(ApiInterface.AddUserGprsTemplateResult addUserGprsTemplateResult, Response response) {
                             Intent data = new Intent();

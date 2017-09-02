@@ -36,7 +36,6 @@ import com.gpswox.android.models.AlertSavedGeofence;
 import com.gpswox.android.models.AlertZone;
 import com.gpswox.android.models.CustomEventByProtocol;
 import com.gpswox.android.utils.DataSaver;
-import com.gpswox.android.utils.Lang;
 import com.gpswox.android.utils.Utils;
 
 import org.apache.commons.lang3.StringUtils;
@@ -554,12 +553,12 @@ public class InputAlertActivity extends AppCompatActivity
 
         loading_layout.setVisibility(View.VISIBLE);
         final String api_key = (String) DataSaver.getInstance(this).load("api_key");
-        API.getApiInterface(this).getAlertData(api_key, Lang.getCurrentLanguage(), new Callback<ApiInterface.GetAlertDataResult>()
+        API.getApiInterface(this).getAlertData(api_key, getResources().getString(R.string.lang), new Callback<ApiInterface.GetAlertDataResult>()
         {
             @Override
             public void success(final ApiInterface.GetAlertDataResult getAlertDataResult, Response response)
             {
-                API.getApiInterface(InputAlertActivity.this).getProtocolsForAlertData(api_key, Lang.getCurrentLanguage(), new Callback<ApiInterface.GetProtocolsResult>()
+                API.getApiInterface(InputAlertActivity.this).getProtocolsForAlertData(api_key, getResources().getString(R.string.lang), new Callback<ApiInterface.GetProtocolsResult>()
                 {
                     @Override
                     public void success(ApiInterface.GetProtocolsResult getProtocolsResult, Response response)
@@ -614,7 +613,7 @@ public class InputAlertActivity extends AppCompatActivity
                     String drivers_array = new Gson().toJson(alert.drivers);
                     String geofences_array = new Gson().toJson(alert.geofences);
                     String events_custom_array = new Gson().toJson(alert.events_custom);
-                    API.getApiInterface(InputAlertActivity.this).saveEditedAlert(api_key, Lang.getCurrentLanguage(), alert.id, alert.name, alert.email, alert.mobile_phone, devices_array, drivers_array, geofences_array, alert.overspeed_speed, alert.overspeed_distance, events_custom_array, new Callback<ApiInterface.SaveEditedAlertResult>()
+                    API.getApiInterface(InputAlertActivity.this).saveEditedAlert(api_key, getResources().getString(R.string.lang), alert.id, alert.name, alert.email, alert.mobile_phone, devices_array, drivers_array, geofences_array, alert.overspeed_speed, alert.overspeed_distance, events_custom_array, new Callback<ApiInterface.SaveEditedAlertResult>()
                     {
                         @Override
                         public void success(ApiInterface.SaveEditedAlertResult saveEditedAlertResult, Response response)
@@ -635,7 +634,7 @@ public class InputAlertActivity extends AppCompatActivity
                     String drivers_array = new Gson().toJson(alert.drivers);
                     String geofences_array = new Gson().toJson(alert.geofences);
                     String events_custom_array = new Gson().toJson(alert.events_custom);
-                    API.getApiInterface(InputAlertActivity.this).addNewAlert(api_key, Lang.getCurrentLanguage(), alert.name, alert.email, alert.mobile_phone, devices_array, drivers_array, geofences_array, alert.overspeed_speed, alert.overspeed_distance, events_custom_array, new Callback<ApiInterface.AddNewAlertResult>()
+                    API.getApiInterface(InputAlertActivity.this).addNewAlert(api_key, getResources().getString(R.string.lang), alert.name, alert.email, alert.mobile_phone, devices_array, drivers_array, geofences_array, alert.overspeed_speed, alert.overspeed_distance, events_custom_array, new Callback<ApiInterface.AddNewAlertResult>()
                     {
                         @Override
                         public void success(ApiInterface.AddNewAlertResult addNewAlertResult, Response response)
@@ -659,7 +658,7 @@ public class InputAlertActivity extends AppCompatActivity
     {
         if (eventIdSpinner.getAdapter() != null)
             ((ArrayAdapter<CustomEventByProtocol>) eventIdSpinner.getAdapter()).clear();
-        API.getApiInterface(this).getEventsByProtocolForDropdown((String) DataSaver.getInstance(this).load("api_key"), Lang.getCurrentLanguage(), type, protocol, new Callback<ApiInterface.CustomEventsByProtocol>()
+        API.getApiInterface(this).getEventsByProtocolForDropdown((String) DataSaver.getInstance(this).load("api_key"), getResources().getString(R.string.lang), type, protocol, new Callback<ApiInterface.CustomEventsByProtocol>()
         {
             @Override
             public void success(ApiInterface.CustomEventsByProtocol array, Response response)

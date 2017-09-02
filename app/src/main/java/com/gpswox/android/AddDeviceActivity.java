@@ -26,7 +26,6 @@ import com.gpswox.android.models.FuelMeasurement;
 import com.gpswox.android.models.ObjectGroup;
 import com.gpswox.android.models.Timezone;
 import com.gpswox.android.utils.DataSaver;
-import com.gpswox.android.utils.Lang;
 import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
@@ -160,7 +159,7 @@ public class AddDeviceActivity extends AppCompatActivity
                     API.getApiInterface(AddDeviceActivity.this).addNewDevice(
                             (String) DataSaver.getInstance(
                                     AddDeviceActivity.this).load("api_key"),
-                                    Lang.getCurrentLanguage(),
+                                    getResources().getString(R.string.lang),
                                     device.name,
                                     device.device_data.imei,
                                     device.device_data.icon_id,
@@ -203,7 +202,7 @@ public class AddDeviceActivity extends AppCompatActivity
     {
         content_layout.setVisibility(View.GONE);
         loading_layout.setVisibility(View.VISIBLE);
-        API.getApiInterface(this).getFieldsDataForEditing((String) DataSaver.getInstance(this).load("api_key"), Lang.getCurrentLanguage(), 0, new Callback<ApiInterface.GetFieldsDataForEditingResult>() {
+        API.getApiInterface(this).getFieldsDataForEditing((String) DataSaver.getInstance(this).load("api_key"), getResources().getString(R.string.lang), 0, new Callback<ApiInterface.GetFieldsDataForEditingResult>() {
             @Override
             public void success(ApiInterface.GetFieldsDataForEditingResult result, Response response)
             {

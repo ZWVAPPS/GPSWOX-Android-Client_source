@@ -20,7 +20,6 @@ import com.gpswox.android.api.ApiInterface;
 import com.gpswox.android.models.Device;
 import com.gpswox.android.models.MapIcon;
 import com.gpswox.android.utils.DataSaver;
-import com.gpswox.android.utils.Lang;
 import com.gpswox.android.utils.Utils;
 import com.squareup.picasso.Picasso;
 
@@ -102,13 +101,13 @@ public class AddPOIMarkerActivity extends AppCompatActivity implements MapEvents
 
         loading_layout.setVisibility(View.VISIBLE);
         final String api_key = (String) DataSaver.getInstance(this).load("api_key");
-        API.getApiInterface(this).getPOIMapIcons(api_key, Lang.getCurrentLanguage(), new Callback<ApiInterface.GetPOIMapIconsResult>() {
+        API.getApiInterface(this).getPOIMapIcons(api_key, getResources().getString(R.string.lang), new Callback<ApiInterface.GetPOIMapIconsResult>() {
             @Override
             public void success(ApiInterface.GetPOIMapIconsResult getPOIMapIconsResult, Response response) {
                 selectedIcon = getPOIMapIconsResult.items.get(0);
                 iconsAdapter.setArray(getPOIMapIconsResult.items);
 
-                API.getApiInterface(AddPOIMarkerActivity.this).getDevices(api_key, Lang.getCurrentLanguage(), new Callback<ArrayList<ApiInterface.GetDevicesItem>>() {
+                API.getApiInterface(AddPOIMarkerActivity.this).getDevices(api_key, getResources().getString(R.string.lang), new Callback<ArrayList<ApiInterface.GetDevicesItem>>() {
                     @Override
                     public void success(final ArrayList<ApiInterface.GetDevicesItem> getDevicesItems, Response response) {
                         final ArrayList<Device> allDevices = new ArrayList<>();
@@ -207,7 +206,7 @@ public class AddPOIMarkerActivity extends AppCompatActivity implements MapEvents
                     obj.put("lat", currentPos.getLatitude());
                     obj.put("lng", currentPos.getLongitude());
                     String coordinates = obj.toString();
-                    API.getApiInterface(AddPOIMarkerActivity.this).savePOIMarker(api_key, Lang.getCurrentLanguage(),
+                    API.getApiInterface(AddPOIMarkerActivity.this).savePOIMarker(api_key, getResources().getString(R.string.lang),
                             nameStr, descriptionStr, selectedIcon.id, coordinates, new Callback<ApiInterface.SavePOIMarkerResult>() {
                                 @Override
                                 public void success(ApiInterface.SavePOIMarkerResult savePOIMarkerResult, Response response) {

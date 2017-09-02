@@ -18,7 +18,6 @@ import com.gpswox.android.api.API;
 import com.gpswox.android.api.ApiInterface;
 import com.gpswox.android.models.Device;
 import com.gpswox.android.utils.DataSaver;
-import com.gpswox.android.utils.Lang;
 
 import java.util.ArrayList;
 
@@ -155,7 +154,7 @@ public class DashboardActivity extends AppCompatActivity
         if (DataSaver.getInstance(DashboardActivity.this).load("unit_of_distance") == null)
         {
             final String api_key = (String) DataSaver.getInstance(this).load("api_key");
-            API.getApiInterface(this).getDevices(api_key, Lang.getCurrentLanguage(), new Callback<ArrayList<ApiInterface.GetDevicesItem>>()
+            API.getApiInterface(this).getDevices(api_key, getResources().getString(R.string.lang), new Callback<ArrayList<ApiInterface.GetDevicesItem>>()
             {
                 @Override
                 public void success(final ArrayList<ApiInterface.GetDevicesItem> getDevicesItems, Response response)

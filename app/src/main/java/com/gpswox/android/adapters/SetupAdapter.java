@@ -45,7 +45,6 @@ import com.gpswox.android.models.UnitOfDistance;
 import com.gpswox.android.models.UserGprsTemplate;
 import com.gpswox.android.models.UserSmsTemplate;
 import com.gpswox.android.utils.DataSaver;
-import com.gpswox.android.utils.Lang;
 
 import java.util.ArrayList;
 
@@ -302,7 +301,7 @@ public class SetupAdapter extends BaseExpandableListAdapter {
                         @Override
                         public void onClick(View v)
                         {
-                            API.getApiInterface(getContext()).destroyUserDriver((String) DataSaver.getInstance(getContext()).load("api_key"), Lang.getCurrentLanguage(), item.id, new Callback<ApiInterface.DestroyUserDriverResult>() {
+                            API.getApiInterface(getContext()).destroyUserDriver((String) DataSaver.getInstance(getContext()).load("api_key"), context.getResources().getString(R.string.lang), item.id, new Callback<ApiInterface.DestroyUserDriverResult>() {
                                 @Override
                                 public void success(ApiInterface.DestroyUserDriverResult destroyUserDriverResult, Response response) {
                                     remove(item);
@@ -368,7 +367,7 @@ public class SetupAdapter extends BaseExpandableListAdapter {
                         @Override
                         public void onClick(View v)
                         {
-                            API.getApiInterface(getContext()).destroyCustomEvent((String) DataSaver.getInstance(getContext()).load("api_key"), Lang.getCurrentLanguage(), item.id, new Callback<ApiInterface.DestroyCustomEventResult>() {
+                            API.getApiInterface(getContext()).destroyCustomEvent((String) DataSaver.getInstance(getContext()).load("api_key"), context.getResources().getString(R.string.lang), item.id, new Callback<ApiInterface.DestroyCustomEventResult>() {
                                 @Override
                                 public void success(ApiInterface.DestroyCustomEventResult destroyCustomEventResult, Response response) {
                                     remove(item);
@@ -674,7 +673,7 @@ public class SetupAdapter extends BaseExpandableListAdapter {
                     delete.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            API.getApiInterface(context).destroyUserSmsTemplate(api_key, Lang.getCurrentLanguage(), item.id, new Callback<ApiInterface.DestroyUserSmsTemplateResult>() {
+                            API.getApiInterface(context).destroyUserSmsTemplate(api_key, context.getResources().getString(R.string.lang), item.id, new Callback<ApiInterface.DestroyUserSmsTemplateResult>() {
                                 @Override
                                 public void success(ApiInterface.DestroyUserSmsTemplateResult destroyUserSmsTemplateResult, Response response) {
                                     smsTemplates.remove(item);
@@ -721,7 +720,7 @@ public class SetupAdapter extends BaseExpandableListAdapter {
                     delete.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            API.getApiInterface(context).destroyUserGprsTemplate(api_key, Lang.getCurrentLanguage(), item.id, new Callback<ApiInterface.DestroyUserGprsTemplateResult>() {
+                            API.getApiInterface(context).destroyUserGprsTemplate(api_key, context.getResources().getString(R.string.lang), item.id, new Callback<ApiInterface.DestroyUserGprsTemplateResult>() {
                                 @Override
                                 public void success(ApiInterface.DestroyUserGprsTemplateResult destroyUserGprsTemplateResult, Response response) {
                                     gprsTemplates.remove(item);

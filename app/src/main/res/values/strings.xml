@@ -236,5 +236,12 @@ SMS gateway URL example: http://SMS_GATEWAY/sendsms.php?username=USER&password=P
     <string name="sendersPhone">Sender\'s phone</string>
     <string name="tooMuchData">Too much data, try selecting a shorter interval</string>
     <string name="allFieldsMustBeFilled">All fields must be filled in</string>
+    <string name="networkError">Network Error</string>
+    <string name="driving">Driving</string>
+    <string name="stopped">Stopped</string>
+    <string name="route_begin">Route begin</string>
+    <string name="route_end">Route end</string>
+    <string name="event">Event</string>
+    <string name="lang">en</string>
 
 </resources>

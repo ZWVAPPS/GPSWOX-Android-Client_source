@@ -27,7 +27,6 @@ import com.gpswox.android.api.API;
 import com.gpswox.android.api.ApiInterface;
 import com.gpswox.android.models.Device;
 import com.gpswox.android.utils.DataSaver;
-import com.gpswox.android.utils.Lang;
 import com.gpswox.android.utils.Utils;
 
 import org.json.JSONArray;
@@ -168,7 +167,7 @@ public class AddGeofenceActivity extends AppCompatActivity implements OnMapReady
                             arr.put(obj);
                         }
                         String polygon_array = arr.toString();
-                        API.getApiInterface(AddGeofenceActivity.this).addNewGeofence((String) DataSaver.getInstance(AddGeofenceActivity.this).load("api_key"), Lang.getCurrentLanguage(), nameStr, bgcolorStr, polygon_array, new Callback<ApiInterface.AddNewGeofenceResult>()
+                        API.getApiInterface(AddGeofenceActivity.this).addNewGeofence((String) DataSaver.getInstance(AddGeofenceActivity.this).load("api_key"), getResources().getString(R.string.lang), nameStr, bgcolorStr, polygon_array, new Callback<ApiInterface.AddNewGeofenceResult>()
                         {
                             @Override
                             public void success(ApiInterface.AddNewGeofenceResult addNewGeofenceResult, Response response)
@@ -244,12 +243,12 @@ public class AddGeofenceActivity extends AppCompatActivity implements OnMapReady
     private void zoomMap()
     {
         final String api_key = (String) DataSaver.getInstance(this).load("api_key");
-        API.getApiInterface(this).getGeofenceData(api_key, Lang.getCurrentLanguage(), new Callback<ApiInterface.GetGeofenceDataResult>()
+        API.getApiInterface(this).getGeofenceData(api_key, getResources().getString(R.string.lang), new Callback<ApiInterface.GetGeofenceDataResult>()
         {
             @Override
             public void success(ApiInterface.GetGeofenceDataResult getGeofenceDataResult, Response response)
             {
-                API.getApiInterface(AddGeofenceActivity.this).getDevices(api_key, Lang.getCurrentLanguage(), new Callback<ArrayList<ApiInterface.GetDevicesItem>>()
+                API.getApiInterface(AddGeofenceActivity.this).getDevices(api_key, getResources().getString(R.string.lang), new Callback<ArrayList<ApiInterface.GetDevicesItem>>()
                 {
                     @Override
                     public void success(final ArrayList<ApiInterface.GetDevicesItem> getDevicesItems, Response response)

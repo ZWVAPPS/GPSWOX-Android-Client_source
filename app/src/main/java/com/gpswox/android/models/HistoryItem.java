@@ -20,15 +20,15 @@ public class HistoryItem
         for(HistoryItemClass itemClass : itemClasses)
             if(itemClass.id == status) {
                 if (itemClass.value.equals("drive"))
-                    hint = "Driving";
+                    hint = "drive";
                 else if (itemClass.value.equals("stop"))
-                    hint = "Stopped";
+                    hint = "stop";
                 else if (itemClass.value.equals("start"))
-                    hint = "Route begin";
+                    hint = "start";
                 else if (itemClass.value.equals("end"))
-                    hint = "Route end";
+                    hint = "end";
                 else if (itemClass.value.equals("event"))
-                    hint = "Event";
+                    hint = "event";
             }
         return hint;
     }

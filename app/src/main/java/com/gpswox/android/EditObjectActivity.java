@@ -30,7 +30,6 @@ import com.gpswox.android.models.ObjectGroup;
 import com.gpswox.android.models.Sensor;
 import com.gpswox.android.models.Timezone;
 import com.gpswox.android.utils.DataSaver;
-import com.gpswox.android.utils.Lang;
 import com.gpswox.android.utils.Utils;
 import com.squareup.picasso.Picasso;
 
@@ -169,7 +168,7 @@ public class EditObjectActivity extends AppCompatActivity
                 else
                     API.getApiInterface(EditObjectActivity.this).saveEditedDevice(
                         (String) DataSaver.getInstance(EditObjectActivity.this).load("api_key"),
-                        Lang.getCurrentLanguage(),
+                        getResources().getString(R.string.lang),
                         device.id,
                         device.name,
                         device.device_data.imei,
@@ -214,7 +213,7 @@ public class EditObjectActivity extends AppCompatActivity
     {
         content_layout.setVisibility(View.GONE);
         loading_layout.setVisibility(View.VISIBLE);
-        API.getApiInterface(this).getFieldsDataForEditing(api_key, Lang.getCurrentLanguage(), 2, new Callback<ApiInterface.GetFieldsDataForEditingResult>() {
+        API.getApiInterface(this).getFieldsDataForEditing(api_key, getResources().getString(R.string.lang), 2, new Callback<ApiInterface.GetFieldsDataForEditingResult>() {
             @Override
             public void success(ApiInterface.GetFieldsDataForEditingResult result, Response response)
             {
@@ -495,7 +494,7 @@ public class EditObjectActivity extends AppCompatActivity
                     @Override
                     public void onClick(View v)
                     {
-                        API.getApiInterface(EditObjectActivity.this).destroySensor(api_key, item.id, Lang.getCurrentLanguage(), new Callback<ApiInterface.DestroySensorResult>()
+                        API.getApiInterface(EditObjectActivity.this).destroySensor(api_key, item.id, getResources().getString(R.string.lang), new Callback<ApiInterface.DestroySensorResult>()
                         {
                             @Override
                             public void success(ApiInterface.DestroySensorResult result, Response response)

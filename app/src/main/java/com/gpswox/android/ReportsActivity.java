@@ -116,7 +116,7 @@ public class ReportsActivity extends AppCompatActivity
                 convertView.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        API.getApiInterface(getContext()).deleteReport((String) DataSaver.getInstance(getContext()).load("api_key"), item.id, Lang.getCurrentLanguage(), new Callback<ApiInterface.DeleteReportResult>() {
+                        API.getApiInterface(getContext()).deleteReport((String) DataSaver.getInstance(getContext()).load("api_key"), item.id, getResources().getString(R.string.lang), new Callback<ApiInterface.DeleteReportResult>() {
                             @Override
                             public void success(ApiInterface.DeleteReportResult result, Response response)
                             {
@@ -159,7 +159,7 @@ public class ReportsActivity extends AppCompatActivity
         listview.setVisibility(View.GONE);
         nodata_layout.setVisibility(View.GONE);
         loading_layout.setVisibility(View.VISIBLE);
-        API.getApiInterface(this).getReports((String) DataSaver.getInstance(this).load("api_key"), Lang.getCurrentLanguage(), new Callback<ApiInterface.GetReportsResult>() {
+        API.getApiInterface(this).getReports((String) DataSaver.getInstance(this).load("api_key"), getResources().getString(R.string.lang), new Callback<ApiInterface.GetReportsResult>() {
             @Override
             public void success(ApiInterface.GetReportsResult getReportsResult, Response response) {
                 types = getReportsResult.items.types;

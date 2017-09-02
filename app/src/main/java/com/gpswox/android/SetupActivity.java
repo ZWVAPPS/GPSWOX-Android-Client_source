@@ -55,33 +55,33 @@ public class SetupActivity extends AppCompatActivity
         loading_layout.setVisibility(View.VISIBLE);
         final String api_key = (String) dataSaver.load("api_key");
         // setup data
-        API.getApiInterface(this).getSetupData(api_key, Lang.getCurrentLanguage(), new Callback<ApiInterface.SetupDataResult>()
+        API.getApiInterface(this).getSetupData(api_key, getResources().getString(R.string.lang), new Callback<ApiInterface.SetupDataResult>()
         {
             @Override
             public void success(final ApiInterface.SetupDataResult setupDataResult, Response response)
             {
 
                 // get drivers
-                API.getApiInterface(SetupActivity.this).getUserDrivers(api_key, Lang.getCurrentLanguage(), 0, new Callback<ApiInterface.GetUserDriversResult>()
+                API.getApiInterface(SetupActivity.this).getUserDrivers(api_key, getResources().getString(R.string.lang), 0, new Callback<ApiInterface.GetUserDriversResult>()
                 {
                     @Override
                     public void success(final ApiInterface.GetUserDriversResult getUserDriversResult, Response response)
                     {
 
                         // get events
-                        API.getApiInterface(SetupActivity.this).getCustomEvents(api_key, Lang.getCurrentLanguage(), new Callback<ApiInterface.GetCustomEventsResult>()
+                        API.getApiInterface(SetupActivity.this).getCustomEvents(api_key, getResources().getString(R.string.lang), new Callback<ApiInterface.GetCustomEventsResult>()
                         {
                             @Override
                             public void success(final ApiInterface.GetCustomEventsResult getCustomEventsResult, Response response)
                             {
                                 // get sms templates
-                                API.getApiInterface(SetupActivity.this).getUserSmsTemplates(api_key, Lang.getCurrentLanguage(), new Callback<ApiInterface.GetUserSmsTemplatesResult>()
+                                API.getApiInterface(SetupActivity.this).getUserSmsTemplates(api_key, getResources().getString(R.string.lang), new Callback<ApiInterface.GetUserSmsTemplatesResult>()
                                 {
                                     @Override
                                     public void success(final ApiInterface.GetUserSmsTemplatesResult getUserSmsTemplatesResult, Response response)
                                     {
                                         // get gprs templates
-                                        API.getApiInterface(SetupActivity.this).getUserGprsTemplates(api_key, Lang.getCurrentLanguage(), new Callback<ApiInterface.GetUserGprsTemplatesResult>()
+                                        API.getApiInterface(SetupActivity.this).getUserGprsTemplates(api_key, getResources().getString(R.string.lang), new Callback<ApiInterface.GetUserGprsTemplatesResult>()
                                         {
                                             @Override
                                             public void success(ApiInterface.GetUserGprsTemplatesResult getUserGprsTemplatesResult, Response response)
@@ -155,7 +155,7 @@ public class SetupActivity extends AppCompatActivity
                 final SetupData data = adapter.getSetupData();
                 if (data == null) return; // not loaded yet
                 String groups_array = new Gson().toJson(adapter.getObjectGroups());
-                API.getApiInterface(SetupActivity.this).saveEditedSetup(api_key, Lang.getCurrentLanguage(),
+                API.getApiInterface(SetupActivity.this).saveEditedSetup(api_key, getResources().getString(R.string.lang),
                         data.unit_of_distance,
                         data.unit_of_capacity,
                         data.unit_of_altitude,

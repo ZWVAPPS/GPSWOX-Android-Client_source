@@ -21,7 +21,6 @@ import com.gpswox.android.models.CustomEventCondition;
 import com.gpswox.android.models.CustomEventConditionType;
 import com.gpswox.android.models.CustomEventProtocol;
 import com.gpswox.android.utils.DataSaver;
-import com.gpswox.android.utils.Lang;
 
 import java.util.ArrayList;
 
@@ -64,7 +63,7 @@ public class AddCustomEventActivity extends AppCompatActivity
         });
 
         final String api_key = (String) DataSaver.getInstance(this).load("api_key");
-        API.getApiInterface(this).getCustomEventData(api_key, Lang.getCurrentLanguage(), new Callback<ApiInterface.GetCustomEventDataResult>() {
+        API.getApiInterface(this).getCustomEventData(api_key, getResources().getString(R.string.lang), new Callback<ApiInterface.GetCustomEventDataResult>() {
             @Override
             public void success(ApiInterface.GetCustomEventDataResult getCustomEventDataResult, Response response)
             {
@@ -135,7 +134,7 @@ public class AddCustomEventActivity extends AppCompatActivity
 
                 String conditions_array = new Gson().toJson(conditionsAdapter.getArray());
 
-                API.getApiInterface(AddCustomEventActivity.this).addCustomEvent(api_key, Lang.getCurrentLanguage(), protocolStr, messageStr, show_always, conditions_array, new Callback<ApiInterface.AddCustomEventResult>() {
+                API.getApiInterface(AddCustomEventActivity.this).addCustomEvent(api_key, getResources().getString(R.string.lang), protocolStr, messageStr, show_always, conditions_array, new Callback<ApiInterface.AddCustomEventResult>() {
                     @Override
                     public void success(ApiInterface.AddCustomEventResult addCustomEventResult, Response response)
                     {

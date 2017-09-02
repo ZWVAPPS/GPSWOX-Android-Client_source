@@ -304,7 +304,7 @@ public class SendCommandActivity extends AppCompatActivity
 
         loading_layout.setVisibility(View.VISIBLE);
         final String api_key = (String) DataSaver.getInstance(this).load("api_key");
-        API.getApiInterface(this).getSendCommandData(api_key, Lang.getCurrentLanguage(), new Callback<ApiInterface.SendCommandData>()
+        API.getApiInterface(this).getSendCommandData(api_key, getResources().getString(R.string.lang), new Callback<ApiInterface.SendCommandData>()
         {
             @Override
             public void success(ApiInterface.SendCommandData sendCommandData, Response response)
@@ -349,7 +349,7 @@ public class SendCommandActivity extends AppCompatActivity
             {
                 if (expandable_list.isGroupExpanded(0)) // gprs
                 {
-                    API.getApiInterface(SendCommandActivity.this).sendGprsCommand(api_key, Lang.getCurrentLanguage(), 1, "minute", gprs_selectedDevice.id, gprs_selectedCommand.id, new Callback<ApiInterface.SendGprsCommandResult>()
+                    API.getApiInterface(SendCommandActivity.this).sendGprsCommand(api_key, getResources().getString(R.string.lang), 1, "minute", gprs_selectedDevice.id, gprs_selectedCommand.id, new Callback<ApiInterface.SendGprsCommandResult>()
                     {
                         @Override
                         public void success(ApiInterface.SendGprsCommandResult sendGprsCommandResult, Response response)
@@ -378,7 +378,7 @@ public class SendCommandActivity extends AppCompatActivity
                     String devices_array = TextUtils.join(",", sms_devices_ids);
 
                     System.out.println("devices_array : " + devices_array);
-                    API.getApiInterface(SendCommandActivity.this).sendSmsCommand(api_key, Lang.getCurrentLanguage(), 1, "minute", sms_message, devices_array, new Callback<ApiInterface.SendSmsCommandResult>()
+                    API.getApiInterface(SendCommandActivity.this).sendSmsCommand(api_key, getResources().getString(R.string.lang), 1, "minute", sms_message, devices_array, new Callback<ApiInterface.SendSmsCommandResult>()
                     {
                         @Override
                         public void success(ApiInterface.SendSmsCommandResult sendSmsCommandResult, Response response)

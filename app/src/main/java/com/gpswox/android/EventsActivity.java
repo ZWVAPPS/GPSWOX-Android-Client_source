@@ -44,7 +44,7 @@ public class EventsActivity extends AppCompatActivity
         list.setAdapter(adapter);
 
         loading_layout.setVisibility(View.VISIBLE);
-        API.getApiInterface(this).getEvents(api_key, Lang.getCurrentLanguage(), 0, new Callback<ApiInterface.GetEventsResult>() {
+        API.getApiInterface(this).getEvents(api_key, getResources().getString(R.string.lang), 0, new Callback<ApiInterface.GetEventsResult>() {
             @Override
             public void success(ApiInterface.GetEventsResult result, Response response)
             {
@@ -66,7 +66,7 @@ public class EventsActivity extends AppCompatActivity
         clearAllEvents.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                API.getApiInterface(EventsActivity.this).clearAllEvents(api_key, Lang.getCurrentLanguage(), new Callback<ApiInterface.ClearEventsResult>() {
+                API.getApiInterface(EventsActivity.this).clearAllEvents(api_key, getResources().getString(R.string.lang), new Callback<ApiInterface.ClearEventsResult>() {
                     @Override
                     public void success(ApiInterface.ClearEventsResult clearEventsResult, Response response) {
                         adapter.clear();

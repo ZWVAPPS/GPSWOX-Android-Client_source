@@ -134,7 +134,7 @@ public class ObjectsAdapter extends BaseExpandableListAdapter
             @Override
             public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked)
             {
-                API.getApiInterface(context).changeActiveDevice((String) DataSaver.getInstance(context).load("api_key"), Lang.getCurrentLanguage(), item.id, isChecked, new Callback<ApiInterface.ChangeActiveDeviceResult>() {
+                API.getApiInterface(context).changeActiveDevice((String) DataSaver.getInstance(context).load("api_key"), context.getResources().getString(R.string.lang), item.id, isChecked, new Callback<ApiInterface.ChangeActiveDeviceResult>() {
                     @Override
                     public void success(ApiInterface.ChangeActiveDeviceResult changeActiveDeviceResult, Response response) {
                         item.device_data.active = item.device_data.active == 1 ? 0 : 1;

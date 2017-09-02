@@ -101,7 +101,7 @@ public class RulerActivity extends AppCompatActivity implements OnMapReadyCallba
         loading_layout.setVisibility(View.GONE);
         mapLayout.setVisibility(View.VISIBLE);
         final String api_key = (String) DataSaver.getInstance(this).load("api_key");
-        API.getApiInterface(RulerActivity.this).getDevices(api_key, Lang.getCurrentLanguage(), new Callback<ArrayList<ApiInterface.GetDevicesItem>>()
+        API.getApiInterface(RulerActivity.this).getDevices(api_key, getResources().getString(R.string.lang), new Callback<ArrayList<ApiInterface.GetDevicesItem>>()
         {
             @Override
             public void success(final ArrayList<ApiInterface.GetDevicesItem> getDevicesItems, Response response)

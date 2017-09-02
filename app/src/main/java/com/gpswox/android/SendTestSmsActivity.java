@@ -46,7 +46,7 @@ public class SendTestSmsActivity extends AppCompatActivity
             public void onClick(View v) {
                 String mobile_phone = phoneNumber.getText().toString();
                 String text = message.getText().toString();
-                API.getApiInterface(SendTestSmsActivity.this).sendTestSms((String) DataSaver.getInstance(SendTestSmsActivity.this).load("api_key"), Lang.getCurrentLanguage(),
+                API.getApiInterface(SendTestSmsActivity.this).sendTestSms((String) DataSaver.getInstance(SendTestSmsActivity.this).load("api_key"), getResources().getString(R.string.lang),
                         params.request_method, params.authentication, params.username, params.password, params.encoding, params.auth_id, params.auth_token, params.senders_phone, params.sms_gateway_url, mobile_phone, text, new Callback<ApiInterface.SendTestSmsResult>() {
                             @Override
                             public void success(ApiInterface.SendTestSmsResult sendTestSmsResult, Response response) {

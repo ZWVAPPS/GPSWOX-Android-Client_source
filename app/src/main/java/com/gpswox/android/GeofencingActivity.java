@@ -16,7 +16,6 @@ import com.gpswox.android.api.API;
 import com.gpswox.android.api.ApiInterface;
 import com.gpswox.android.models.Geofence;
 import com.gpswox.android.utils.DataSaver;
-import com.gpswox.android.utils.Lang;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -76,7 +75,7 @@ public class GeofencingActivity extends AppCompatActivity
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
                     {
-                        API.getApiInterface(GeofencingActivity.this).setGeofenceActive(api_key, Lang.getCurrentLanguage(), item.id, isChecked, new Callback<ApiInterface.SetGeofenceActiveResult>()
+                        API.getApiInterface(GeofencingActivity.this).setGeofenceActive(api_key, getResources().getString(R.string.lang), item.id, isChecked, new Callback<ApiInterface.SetGeofenceActiveResult>()
                         {
                             @Override
                             public void success(ApiInterface.SetGeofenceActiveResult setGeofenceActiveResult, Response response)
@@ -98,7 +97,7 @@ public class GeofencingActivity extends AppCompatActivity
                     @Override
                     public void onClick(View v)
                     {
-                        API.getApiInterface(GeofencingActivity.this).destroyGeofence(api_key, Lang.getCurrentLanguage(), item.id, new Callback<ApiInterface.DestroyGeofenceResult>()
+                        API.getApiInterface(GeofencingActivity.this).destroyGeofence(api_key, getResources().getString(R.string.lang), item.id, new Callback<ApiInterface.DestroyGeofenceResult>()
                         {
                             @Override
                             public void success(ApiInterface.DestroyGeofenceResult destroyGeofenceResult, Response response)
@@ -153,7 +152,7 @@ public class GeofencingActivity extends AppCompatActivity
         content_layout.setVisibility(View.GONE);
         nodata_layout.setVisibility(View.GONE);
         loading_layout.setVisibility(View.VISIBLE);
-        API.getApiInterface(this).getGeofences((String) DataSaver.getInstance(this).load("api_key"), Lang.getCurrentLanguage(), new Callback<ApiInterface.GetGeofencesResult>()
+        API.getApiInterface(this).getGeofences((String) DataSaver.getInstance(this).load("api_key"), getResources().getString(R.string.lang), new Callback<ApiInterface.GetGeofencesResult>()
         {
             @Override
             public void success(ApiInterface.GetGeofencesResult getGeofencesResult, Response response)

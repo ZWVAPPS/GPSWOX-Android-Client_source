@@ -14,7 +14,6 @@ import com.gpswox.android.api.API;
 import com.gpswox.android.api.ApiInterface;
 import com.gpswox.android.models.Device;
 import com.gpswox.android.utils.DataSaver;
-import com.gpswox.android.utils.Lang;
 import com.gpswox.android.utils.Utils;
 
 import java.util.ArrayList;
@@ -54,7 +53,7 @@ public class AddDriverActivity extends AppCompatActivity
 
         loading_layout.setVisibility(View.VISIBLE);
         final String api_key = (String) DataSaver.getInstance(this).load("api_key");
-        API.getApiInterface(this).getDevices(api_key, Lang.getCurrentLanguage(), new Callback<ArrayList<ApiInterface.GetDevicesItem>>() {
+        API.getApiInterface(this).getDevices(api_key, getResources().getString(R.string.lang), new Callback<ArrayList<ApiInterface.GetDevicesItem>>() {
             @Override
             public void success(ArrayList<ApiInterface.GetDevicesItem> getDevicesItems, Response response)
             {
@@ -86,7 +85,7 @@ public class AddDriverActivity extends AppCompatActivity
                 if(!emailStr.equals("") && !Utils.isValidEmail(emailStr))
                     Toast.makeText(AddDriverActivity.this, R.string.invalidEmail, Toast.LENGTH_SHORT).show();
                 else
-                    API.getApiInterface(AddDriverActivity.this).addUserDriver(api_key, Lang.getCurrentLanguage(), nameStr, device_id, rfidStr, phoneStr, emailStr, descriptionStr, new Callback<ApiInterface.AddUserDriverResult>() {
+                    API.getApiInterface(AddDriverActivity.this).addUserDriver(api_key, getResources().getString(R.string.lang), nameStr, device_id, rfidStr, phoneStr, emailStr, descriptionStr, new Callback<ApiInterface.AddUserDriverResult>() {
                         @Override
                         public void success(ApiInterface.AddUserDriverResult addUserDriverResult, Response response) {
                             Toast.makeText(AddDriverActivity.this, R.string.userDriverAdded, Toast.LENGTH_SHORT).show();

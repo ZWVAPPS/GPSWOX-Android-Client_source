@@ -324,7 +324,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         isRefreshLoced = true;
         lastRefreshTime = System.currentTimeMillis();
         final String api_key = (String) DataSaver.getInstance(this).load("api_key");
-        API.getApiInterface(this).getDevices(api_key, Lang.getCurrentLanguage(), new Callback<ArrayList<ApiInterface.GetDevicesItem>>()
+        API.getApiInterface(this).getDevices(api_key, getResources().getString(R.string.lang), new Callback<ArrayList<ApiInterface.GetDevicesItem>>()
         {
             @Override
             public void success(final ArrayList<ApiInterface.GetDevicesItem> getDevicesItems, Response response)
@@ -334,7 +334,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 if (getDevicesItems != null)
                     for (ApiInterface.GetDevicesItem item : getDevicesItems)
                         allDevices.addAll(item.items);
-                API.getApiInterface(MapActivity.this).getFieldsDataForEditing(api_key, Lang.getCurrentLanguage(), 1, new Callback<ApiInterface.GetFieldsDataForEditingResult>()
+                API.getApiInterface(MapActivity.this).getFieldsDataForEditing(api_key, getResources().getString(R.string.lang), 1, new Callback<ApiInterface.GetFieldsDataForEditingResult>()
                 {
                     @Override
                     public void success(final ApiInterface.GetFieldsDataForEditingResult getFieldsDataForEditingResult, Response response)
@@ -702,7 +702,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         map = googleMap;
         refresh();
 
-        API.getApiInterface(this).getGeofences((String) DataSaver.getInstance(this).load("api_key"), Lang.getCurrentLanguage(), new Callback<ApiInterface.GetGeofencesResult>()
+        API.getApiInterface(this).getGeofences((String) DataSaver.getInstance(this).load("api_key"), getResources().getString(R.string.lang), new Callback<ApiInterface.GetGeofencesResult>()
         {
             @Override
             public void success(ApiInterface.GetGeofencesResult getGeofencesResult, Response response)

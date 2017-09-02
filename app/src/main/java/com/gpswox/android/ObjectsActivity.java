@@ -100,7 +100,7 @@ public class ObjectsActivity extends AppCompatActivity
         nodata_layout.setVisibility(View.GONE);
         loading_layout.setVisibility(View.VISIBLE);
         String api_key = (String) DataSaver.getInstance(this).load("api_key");
-        API.getApiInterface(this).getDevices(api_key, Lang.getCurrentLanguage(), new Callback<ArrayList<ApiInterface.GetDevicesItem>>() {
+        API.getApiInterface(this).getDevices(api_key, getResources().getString(R.string.lang), new Callback<ArrayList<ApiInterface.GetDevicesItem>>() {
             @Override
             public void success(ArrayList<ApiInterface.GetDevicesItem> getDevicesItems, Response response) {
                 adapter = new ObjectsAdapter(ObjectsActivity.this, getDevicesItems);

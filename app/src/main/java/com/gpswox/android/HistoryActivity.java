@@ -50,7 +50,6 @@ import com.gpswox.android.models.HistorySensor;
 import com.gpswox.android.models.HistorySensorData;
 import com.gpswox.android.models.PrecalculatedGraphData;
 import com.gpswox.android.utils.DataSaver;
-import com.gpswox.android.utils.Lang;
 import com.gpswox.android.utils.Utils;
 import com.squareup.picasso.Picasso;
 
@@ -65,6 +64,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -237,7 +237,7 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
             }
         });
 
-        API.getApiInterface(this).getDevices((String) DataSaver.getInstance(HistoryActivity.this).load("api_key"), Lang.getCurrentLanguage(), new Callback<ArrayList<ApiInterface.GetDevicesItem>>()
+        API.getApiInterface(this).getDevices((String) DataSaver.getInstance(HistoryActivity.this).load("api_key"), getResources().getString(R.string.lang), new Callback<ArrayList<ApiInterface.GetDevicesItem>>()
         {
             @Override
             public void success(ArrayList<ApiInterface.GetDevicesItem> getDevicesItems, Response response)
@@ -263,13 +263,6 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
             {
                 try
                 {
-                    nodata_layout.setVisibility(View.GONE);
-                    list_layout.setVisibility(View.GONE);
-                    map_layout.setVisibility(View.GONE);
-                    stats_layout.setVisibility(View.GONE);
-                    loading_layout.setVisibility(View.VISIBLE);
-                    int device_id = ((Device) deviceSpinner.getSelectedItem()).id;
-
                     Date fromDate = dateFormat.parse(fromDateTextView.getText().toString());
                     String from_date = new SimpleDateFormat("yyyy-MM-dd").format(fromDate);
                     String from_time = new SimpleDateFormat("HH:mm").format(fromDate);
@@ -278,13 +271,35 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
                     String to_date = new SimpleDateFormat("yyyy-MM-dd").format(toDate);
                     String to_time = new SimpleDateFormat("HH:mm").format(toDate);
 
-                    API.getApiInterface(HistoryActivity.this).getHistory((String) DataSaver.getInstance(HistoryActivity.this).load("api_key"), Lang.getCurrentLanguage(),
+                    long diffInMillies = toDate.getTime() - fromDate.getTime();
+                    long days = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+
+                    if (days > 31)
+                    {
+                        Toast.makeText(HistoryActivity.this, "Maximum interval is one month.", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+
+                    nodata_layout.setVisibility(View.GONE);
+                    list_layout.setVisibility(View.GONE);
+                    map_layout.setVisibility(View.GONE);
+                    stats_layout.setVisibility(View.GONE);
+                    loading_layout.setVisibility(View.VISIBLE);
+                    int device_id = ((Device) deviceSpinner.getSelectedItem()).id;
+
+                    API.getApiInterface(HistoryActivity.this).getHistory((String) DataSaver.getInstance(HistoryActivity.this).load("api_key"), getResources().getString(R.string.lang),
                             device_id, from_date, from_time, to_date, to_time, false,
                             new Callback<ApiInterface.GetHistoryResult>()
                             {
                                 @Override
                                 public void success(ApiInterface.GetHistoryResult result, Response response)
                                 {
+                                    if (result.items == null)
+                                    {
+                                        loading_layout.setVisibility(View.INVISIBLE);
+                                        nodata_layout.setVisibility(View.VISIBLE);
+                                        return;
+                                    }
                                     if (result.items.size() != 0)
                                     {
                                         loading_layout.setVisibility(View.INVISIBLE);
@@ -304,7 +319,7 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
                                     if (getHistoryResult.sensors == null)
                                         getHistoryResult.sensors = new ArrayList<HistorySensor>();
 
-                                    getHistoryResult.sensors.add(0, new HistorySensor("speed", "Speed", " " + DataSaver.getInstance(HistoryActivity.this).load("unit_of_distance_hour")));
+                                    getHistoryResult.sensors.add(0, new HistorySensor("speed", "Speed", " " + DataSaver.getInstance(HistoryActivity.this).load("unit_of_distance")));
                                     getHistoryResult.sensors.add(1, new HistorySensor("altitude", "Altitude", " " + DataSaver.getInstance(HistoryActivity.this).load("unit_of_altitude")));
 
                                     historyItemCoords = new ArrayList<>();
@@ -372,7 +387,12 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
                                     if (retrofitError.getKind() == RetrofitError.Kind.UNEXPECTED)
                                     {
                                         Toast.makeText(HistoryActivity.this, R.string.tooMuchData, Toast.LENGTH_LONG).show();
-                                    } else if (retrofitError.getResponse().getStatus() == 403)
+                                    }
+                                    else if(retrofitError.getKind() == RetrofitError.Kind.NETWORK)
+                                    {
+                                        Toast.makeText(HistoryActivity.this, R.string.networkError, Toast.LENGTH_LONG).show();
+                                    }
+                                    else if (retrofitError.getResponse() != null && retrofitError.getResponse().getStatus() == 403)
                                     {
                                         Toast.makeText(HistoryActivity.this, R.string.dontHavePermission, Toast.LENGTH_SHORT).show();
                                     } else
@@ -402,12 +422,34 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
                 TextView date = (TextView) convertView.findViewById(R.id.date);
 
                 String dateText = item.raw_time;
-                if (item.getHint(getHistoryResult.item_class).equals("Driving")
-                        || item.getHint(getHistoryResult.item_class).equals("Parked"))
-                    dateText += " (" + item.show + ")";
+                TextView hint = (TextView) convertView.findViewById(R.id.hint);
+                String hintString = item.getHint(getHistoryResult.item_class);
+                switch (hintString){
+                    case "Driving":
+                        dateText += " (" + item.show + ")";
+                        hint.setText(R.string.driving);
+                        break;
+                    case "stop":
+                        dateText += " (" + item.show + ")";
+                        hint.setText(R.string.stopped);
+                        break;
+                    case "start":
+                        dateText += " (" + item.show + ")";
+                        hint.setText(R.string.route_begin);
+                        break;
+                    case "end":
+                        dateText += " (" + item.show + ")";
+                        hint.setText(R.string.route_end);
+                        break;
+                    case "event":
+                        dateText += " (" + item.show + ")";
+                        hint.setText(R.string.event);
+                        break;
+                }
+
                 date.setText(dateText);
 
-                TextView hint = (TextView) convertView.findViewById(R.id.hint);
+
                 hint.setText(item.getHint(getHistoryResult.item_class));
                 ImageView icon = (ImageView) convertView.findViewById(R.id.icon);
                 Picasso.with(HistoryActivity.this).load(item.getImageUrl(getHistoryResult.images)).into(icon);

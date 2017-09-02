@@ -36,7 +36,7 @@ public class MyAccountActivity extends AppCompatActivity
 
 
         loading_layout.setVisibility(View.VISIBLE);
-        API.getApiInterface(this).getMyAccountData((String) DataSaver.getInstance(this).load("api_key"), Lang.getCurrentLanguage(), new Callback<ApiInterface.GetMyAccountDataResult>() {
+        API.getApiInterface(this).getMyAccountData((String) DataSaver.getInstance(this).load("api_key"), getResources().getString(R.string.lang), new Callback<ApiInterface.GetMyAccountDataResult>() {
             @Override
             public void success(ApiInterface.GetMyAccountDataResult dataResult, Response response)
             {

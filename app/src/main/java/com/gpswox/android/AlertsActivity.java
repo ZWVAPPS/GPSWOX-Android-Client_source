@@ -17,7 +17,6 @@ import com.gpswox.android.api.API;
 import com.gpswox.android.api.ApiInterface;
 import com.gpswox.android.models.Alert;
 import com.gpswox.android.utils.DataSaver;
-import com.gpswox.android.utils.Lang;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -70,7 +69,7 @@ public class AlertsActivity extends AppCompatActivity
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
                     {
-                        API.getApiInterface(AlertsActivity.this).changeAlertActive(api_key, Lang.getCurrentLanguage(), item.id, checkBox.isChecked(), new Callback<ApiInterface.ChangeAlertActiveResult>() {
+                        API.getApiInterface(AlertsActivity.this).changeAlertActive(api_key, getResources().getString(R.string.lang), item.id, checkBox.isChecked(), new Callback<ApiInterface.ChangeAlertActiveResult>() {
                             @Override
                             public void success(ApiInterface.ChangeAlertActiveResult changeAlertActiveResult, Response response) {
                                 item.active = item.active == 1 ? 0 : 1;
@@ -99,7 +98,7 @@ public class AlertsActivity extends AppCompatActivity
                     @Override
                     public void onClick(View v)
                     {
-                        API.getApiInterface(AlertsActivity.this).destroyAlert(api_key, Lang.getCurrentLanguage(), item.id, new Callback<ApiInterface.DestroyAlertResult>() {
+                        API.getApiInterface(AlertsActivity.this).destroyAlert(api_key, getResources().getString(R.string.lang), item.id, new Callback<ApiInterface.DestroyAlertResult>() {
                             @Override
                             public void success(ApiInterface.DestroyAlertResult destroyAlertResult, Response response)
                             {
@@ -140,7 +139,7 @@ public class AlertsActivity extends AppCompatActivity
         content_layout.setVisibility(View.GONE);
         nodata_layout.setVisibility(View.GONE);
         loading_layout.setVisibility(View.VISIBLE);
-        API.getApiInterface(this).getAlerts((String) DataSaver.getInstance(this).load("api_key"), Lang.getCurrentLanguage(), new Callback<ApiInterface.GetAlertsResult>() {
+        API.getApiInterface(this).getAlerts((String) DataSaver.getInstance(this).load("api_key"), getResources().getString(R.string.lang), new Callback<ApiInterface.GetAlertsResult>() {
             @Override
             public void success(ApiInterface.GetAlertsResult getAlertsResult, Response response)
             {
