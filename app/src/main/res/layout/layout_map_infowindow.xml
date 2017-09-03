@@ -115,7 +115,7 @@
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:text="Stop duration"
+                    android:text="@string/stop_duration"
                     android:textColor="#646464"
                     android:textStyle="bold"/>
 

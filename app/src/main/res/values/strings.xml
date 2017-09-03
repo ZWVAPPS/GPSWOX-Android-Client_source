@@ -243,5 +243,5 @@ SMS gateway URL example: http://SMS_GATEWAY/sendsms.php?username=USER&password=P
     <string name="route_end">Route end</string>
     <string name="event">Event</string>
     <string name="lang">en</string>
-
+    <string name="stop_duration">Stop duration</string>
 </resources>

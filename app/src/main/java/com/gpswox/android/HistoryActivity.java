@@ -425,7 +425,7 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
                 TextView hint = (TextView) convertView.findViewById(R.id.hint);
                 String hintString = item.getHint(getHistoryResult.item_class);
                 switch (hintString){
-                    case "Driving":
+                    case "drive":
                         dateText += " (" + item.show + ")";
                         hint.setText(R.string.driving);
                         break;
@@ -449,8 +449,6 @@ public class HistoryActivity extends AppCompatActivity implements OnMapReadyCall
 
                 date.setText(dateText);
 
-
-                hint.setText(item.getHint(getHistoryResult.item_class));
                 ImageView icon = (ImageView) convertView.findViewById(R.id.icon);
                 Picasso.with(HistoryActivity.this).load(item.getImageUrl(getHistoryResult.images)).into(icon);
                 return convertView;

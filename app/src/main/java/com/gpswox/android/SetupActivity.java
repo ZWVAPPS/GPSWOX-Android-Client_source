@@ -17,7 +17,6 @@ import com.gpswox.android.models.SetupData;
 import com.gpswox.android.models.UserGprsTemplate;
 import com.gpswox.android.models.UserSmsTemplate;
 import com.gpswox.android.utils.DataSaver;
-import com.gpswox.android.utils.Lang;
 import com.gpswox.android.utils.Utils;
 
 import butterknife.Bind;
@@ -181,7 +180,7 @@ public class SetupActivity extends AppCompatActivity
                                 dataSaver.save("unit_of_distance_hour", "mph");
                                 if(data.unit_of_distance.equals("km"))
                                 {
-                                    dataSaver.save("unit_of_distance_hour", "kph");
+                                    dataSaver.save("unit_of_distance_hour", "km/h");
                                 }
                                 dataSaver.save("unit_of_altitude", data.unit_of_altitude);
                                 dataSaver.save("unit_of_capacity", data.unit_of_capacity);
