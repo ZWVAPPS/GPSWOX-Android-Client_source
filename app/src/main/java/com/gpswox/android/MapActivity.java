@@ -46,7 +46,6 @@ import com.gpswox.android.models.PolygonWithName;
 import com.gpswox.android.models.Sensor;
 import com.gpswox.android.models.TailItem;
 import com.gpswox.android.utils.DataSaver;
-import com.gpswox.android.utils.Lang;
 import com.gpswox.android.utils.Utils;
 
 import org.json.JSONArray;
@@ -88,7 +87,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     ImageView showtails;
     @Bind(R.id.geofences)
     ImageView showGeofences;
-    //@Bind(R.id.map) MapView map;
+    @Bind(R.id.map_layer)
+    ImageView map_layer_icon;
     private GoogleMap map;
 
     @Bind(R.id.content_layout)
@@ -224,6 +224,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 }
             }
         });
+
+
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -750,6 +752,22 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                 previousZoomLevel = map.getCameraPosition().zoom;
                 //Toast.makeText(MapActivity.this, "zoome level is: " + map.getCameraPosition().zoom, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        map_layer_icon.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if(map.getMapType() == GoogleMap.MAP_TYPE_NORMAL){
+                    map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+                    map_layer_icon.setImageResource(R.drawable.map_layer_change_icon_active);
+                }
+                else {
+                    map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                    map_layer_icon.setImageResource(R.drawable.map_layer_change_icon_inactive);
+                }
             }
         });
     }
