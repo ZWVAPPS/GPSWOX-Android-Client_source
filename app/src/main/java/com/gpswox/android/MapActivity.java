@@ -761,7 +761,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             public void onClick(View v)
             {
                 if(map.getMapType() == GoogleMap.MAP_TYPE_NORMAL){
-                    map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+                    map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
                     map_layer_icon.setImageResource(R.drawable.map_layer_change_icon_active);
                 }
                 else {
