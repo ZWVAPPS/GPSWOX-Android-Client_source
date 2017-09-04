@@ -93,29 +93,31 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/lbl_time"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:id="@+id/lbl_time"
                     android:text="@string/time"
                     android:textColor="#646464"
                     android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/time"
-                    android:layout_toRightOf="@id/lbl_time"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/lbl_time"
+                    android:layout_toRightOf="@id/lbl_time"/>
             </RelativeLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/lbl_stop_time"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:text="@string/stop_duration"
@@ -125,8 +127,12 @@
                 <TextView
                     android:id="@+id/stopTime"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/lbl_stop_time"
+                    android:layout_toRightOf="@id/lbl_stop_time"
+                    android:paddingLeft="10dp"
+                    android:paddingStart="10dp"/>
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -572,8 +572,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                             altitude.setText(String.valueOf(device.altitude) + " " + device.unit_of_altitude);
                                             TextView time = (TextView) view.findViewById(R.id.time);
                                             time.setText(device.time);
-                                            TextView stopTimev = (TextView) view.findViewById(R.id.stopTime);
-                                            stopTimev.setText(stopTime);
+                                            TextView stopTimeView = (TextView) view.findViewById(R.id.stopTime);
+                                            stopTimeView.setText(stopTime);
                                             TextView speed = (TextView) view.findViewById(R.id.speed);
                                             speed.setText(device.speed + " " + device.distance_unit_hour);
                                             TextView address = (TextView) view.findViewById(R.id.address);
