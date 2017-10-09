@@ -26,8 +26,8 @@ android {
         applicationId "com.gpswox.android"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 55
-        versionName "1.6.14"
+        versionCode 58
+        versionName "1.6.16"
     }
     signingConfigs {
         release {
@@ -58,8 +58,8 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.5.2@aar') {
         transitive = true;
     }
-    compile 'com.android.support:appcompat-v7:25.3.0'
-    compile 'com.android.support:design:25.3.0'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
     compile 'org.osmdroid:osmdroid-android:5.1@aar'
     compile(name:'osmbonuspack_v5.5', ext:'aar')
     compile project(':slideDateTimePicker')
@@ -68,7 +68,7 @@ dependencies {
     compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:3.1.0@aar'){
         transitive=true
     }
-    compile 'com.google.android.gms:play-services-maps:10.2.1'
-    compile 'com.google.maps.android:android-maps-utils:0.4+'
+    compile 'com.google.android.gms:play-services-maps:11.0.4'
+    compile 'com.google.maps.android:android-maps-utils:0.5+'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
 }

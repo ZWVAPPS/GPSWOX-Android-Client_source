@@ -1,5 +1,6 @@
 package com.gpswox.android;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -7,6 +8,8 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseExpandableListAdapter;
@@ -52,7 +55,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import retrofit.mime.TypedInput;
 
-public class InputAlertActivity extends AppCompatActivity
+public class InputAlertActivity extends AppCompatActivity implements AbsListView.OnScrollListener
 {
     @Bind(R.id.back)
     View back;
@@ -174,6 +177,11 @@ public class InputAlertActivity extends AppCompatActivity
             @Override
             public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent)
             {
+                View view = InputAlertActivity.this.getCurrentFocus();
+                if (view != null) {
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
                 if (groupPosition == 0)
                 {
                     convertView = getLayoutInflater().inflate(R.layout.adapter_inputalert_expandable_userinfo, null);
@@ -695,5 +703,22 @@ public class InputAlertActivity extends AppCompatActivity
                 Toast.makeText(InputAlertActivity.this, R.string.errorHappened, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState)
+    {
+        if (SCROLL_STATE_TOUCH_SCROLL == scrollState) {
+            View currentFocus = getCurrentFocus();
+            if (currentFocus != null) {
+                currentFocus.clearFocus();
+            }
+        }
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
+    {
+
     }
 }
